@@ -40,13 +40,16 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
 3. Run the MO extension generator and answer questions as appropriate 
     * We're using `~/cl_cosh` as the target extension path<br><br>
     ```
-    python3 /opt/intel/computer_vision_sdk/deployment_tools/extension_generator/extgen.py new mo-op output_dir=~/cl_cosh
+    python3 /opt/intel/openvino/deployment_tools/extension_generator/extgen.py new mo-op ie-cpu-ext output_dir=~/cl_cosh
     ```
     * Answer questions as follows:
     ```
-    1.  Is your layer Pythonic (y/n)?       True
+    1.  Is your layer Pythonic (y/n)?       <b>y</b>
     2.  Please enter operation name:        cosh
     3.  Does your operation change shape? (y/n)        False
+    Please enter operation name:            cosh
+    Please enter all parameters in format
+    <param1> <type>                        q
     ```
 
 4. Add Custom (cosh) Python Layers
