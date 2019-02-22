@@ -44,12 +44,12 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```
     * Answer questions as follows:
     ```
-    1.  Is your layer Pythonic (y/n)?       <b>y</b>
+    1.  Is your layer Pythonic (y/n)?       y
     2.  Please enter operation name:        cosh
-    3.  Does your operation change shape? (y/n)        False
+    3.  Does your operation change shape?   n
     Please enter operation name:            cosh
     Please enter all parameters in format
-    <param1> <type>                        q
+    <param1> <type>                         q
     ```
 
 4. Add Custom (cosh) Python Layers
