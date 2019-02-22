@@ -8,63 +8,80 @@ Sample code, specifically the `classification_sample`, is located at:<br>
 
 The Model Optimizer is abbreviated `MO` for the remainder of this document.
 
+There are 2 directories with C++ and Python source code for the cosh layer. When `r_XX` is used below, substitute 2018.r4 or 2018.r5 as appropriate.
+
 ---
 
-1. Setup your environment for OpenVINO.<br><br>
+1. Prep and git clone this repository.<br><br>
+    ```
+    cd ~
+    ```
+    ```
+    mkdir cl_tutorial
+    ```
+    ```
+    cd cl_tutorial
+    ```
+    ```
+    git clone https://github.com/david-drew/OpenVINO-Custom-Layers.git
+    ```
+2. 
+
+2. Setup your environment for OpenVINO.<br><br>
     ```
     source /opt/intel/computer_vision_sdk/bin/setupvars.sh 
     ```
 
-2. Run the MO extension generator and answer questions as appropriate 
+3. Run the MO extension generator and answer questions as appropriate 
     * We're using `/home/user/cl_cosh` as the target extension path<br><br>
     ```
     /opt/intel/computer_vision_sdk/deployment_tools/extension_generator/extgen.py new mo-op ie-cpu-ext output_dir=~/cl_cosh
     ```
 
-3. Add Custom (cosh) Python Layers
+4. Add Custom (cosh) Python Layers
     1. Copy to the Model Optimizer Ops Directory<br><br>
     ```
-    cp ~/CustomLayers/S_Code/Misc/cosh.py /opt/intel/computer_vision_sdk/deployment_tools/model_optimizer/mo/ops/
+    cp ~/cl_tutorial/r_XX/cosh.py /opt/intel/computer_vision_sdk/deployment_tools/model_optimizer/mo/ops/
     ```
 
     2. Copy to Extension Generation Python Target Dir<br><br>
     ```
-    cp ~/CustomLayers/S_Code/Misc/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
+    cp ~/cl_tutorial/r_XX/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
     ```
 
-4. Copy CPU and GPU source code to the M.O. extensions directory<br><br>
+5. Copy CPU and GPU source code to the M.O. extensions directory<br><br>
     ```
-    cp ext_cosh.cpp /home/user/cl_cosh/user_ie_extensions/cpu/
-    cp cosh.cl /home/user/cl_cosh/user_ie_extensions/gpu/New_cosh.cl
+    cp ~/cl_tutorial/r_XX/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
+    cp ~/cl_tutorial/r_XX/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
     ```
 
-5. Fix the ie_parallel header file<br><br>
+6. Fix the ie_parallel header file<br><br>
     ```
     sudo vi /opt/intel/computer_vision_sdk/deployment_tools/inference_engine/include/ie_parallel.hpp
     ```
 
-6. Copy the cosh.py algorithm file to the M.O. ops library path.<br><br>
-    ```
-    sudo cp cosh.py /opt/intel/computer_vision_sdk/deployment_tools/model_optimizer/mo/ops/
-    ```
-
 7. Create the TensorFlow graph files (weights, graphs, checkpoints)<br><br>
+    ```
+    cd ~/cl_tutorial/create_tf_model
+    ```
     ```
     ./build_cosh_model.py
     ```
 
 8. Convert the TensorFlow model to Intel IR format<br><br>
     ```
-    mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions
+    mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions --output_dir ~/cl_ext_cosh
     ```
 
 9. Compile the C++ extension library<br><br>
+    ```cd ~/cl_tutorial/r_XX```<br>
+    ```mkdir build && cd build```<br>
     ```cmake ..```<br>
     ```make -j$(nproc)```<br>
-    ```cp libuser_cpu_extension.so ~/cl_cosh/```<br>
+    ```cp libuser_cpu_extension.so ~/cl_ext_cosh/```<br>
 
 10. Test your results<br><br>
     ```
-    ~/inference_engine_samples/intel64/Release/classification_sample -i pics/dog.bmp -m model.ckpt.xml -d CPU -l libuser_cpu_extension.so 
+    ~/inference_engine_samples/intel64/Release/classification_sample -i pics/dog.bmp -m model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so 
     ```
 
