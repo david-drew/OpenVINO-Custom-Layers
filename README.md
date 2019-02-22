@@ -36,11 +36,19 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```
     source /opt/intel/openvino/bin/setupvars.sh 
     ```
+3. Install prerequisites.
+    `sudo pip3 install cogapp`
 
 3. Run the MO extension generator and answer questions as appropriate 
-    * We're using `/home/user/cl_cosh` as the target extension path<br><br>
+    * We're using `~/cl_cosh` as the target extension path<br><br>
     ```
-    /opt/intel/computer_vision_sdk/deployment_tools/extension_generator/extgen.py new mo-op ie-cpu-ext output_dir=~/cl_cosh
+    python3 /opt/intel/computer_vision_sdk/deployment_tools/extension_generator/extgen.py new mo-op output_dir=~/cl_cosh
+    ```
+    * Answer questions as follows:
+    ```
+    1.  Is your layer Pythonic (y/n)?       True
+    2.  Please enter operation name:        cosh
+    3.  Does your operation change shape? (y/n)        False
     ```
 
 4. Add Custom (cosh) Python Layers
