@@ -8,7 +8,7 @@ Sample code, specifically the `classification_sample`, is located at:<br>
 
 The Model Optimizer is abbreviated `MO` for the remainder of this document.
 
-There are 2 directories with C++ and Python source code for the cosh layer. When <b>`r_XX`</b> is used below, substitute `2018.r4` or `2018.r5` as appropriate.
+There are 2 directories with C++ and Python source code for the cosh layer. When <b>`r_XX`</b> is used below, substitute `2018.r4` or `2018.r5` as appropriate.  If using 2019.r1, use the 2018.r5 code.
 
 ---
 
@@ -84,6 +84,8 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
 
 9. Compile the C++ extension library<br><br>
     ```cd ~/cl_cosh/user_ie_extensions/cpu```<br>
+    * If using 2019.r1, copy the CMakeLists.txt to this directory.
+    ```cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/CMakeLists.txt .```<br>
     ```mkdir build && cd build```<br>
     ```cmake ..```<br>
     ```make -j$(nproc)```<br>
