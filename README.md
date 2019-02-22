@@ -25,39 +25,48 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```
     git clone https://github.com/david-drew/OpenVINO-Custom-Layers.git
     ```
-2. 
-
 2. Setup your environment for OpenVINO.<br><br>
+    * For 2018.r4 and 2018.r5, use this:
     ```
     source /opt/intel/computer_vision_sdk/bin/setupvars.sh 
     ```
+    * For 2019.r1 and later, use this:
+    ```
+    source /opt/intel/openvino/bin/setupvars.sh 
+    ```
+3. Install prerequisites.
+    `sudo pip3 install cogapp`
 
 3. Run the MO extension generator and answer questions as appropriate 
-    * We're using `/home/user/cl_cosh` as the target extension path<br><br>
+    * We're using `~/cl_cosh` as the target extension path<br><br>
     ```
-    /opt/intel/computer_vision_sdk/deployment_tools/extension_generator/extgen.py new mo-op ie-cpu-ext output_dir=~/cl_cosh
+    python3 /opt/intel/openvino/deployment_tools/extension_generator/extgen.py new mo-op ie-cpu-ext output_dir=~/cl_cosh
+    ```
+    * Answer questions as follows:
+    ```
+    1.  Is your layer Pythonic (y/n)?       y
+    2.  Please enter operation name:        cosh
+    3.  Does your operation change shape?   n
+    Please enter operation name:            cosh
+    Please enter all parameters in format
+    <param1> <type>                         q
     ```
 
 4. Add Custom (cosh) Python Layers
     1. Copy to the Model Optimizer Ops Directory<br><br>
     ```
-    cp ~/cl_tutorial/r_XX/cosh.py /opt/intel/computer_vision_sdk/deployment_tools/model_optimizer/mo/ops/
+    sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.py /opt/intel/computer_vision_sdk/deployment_tools/model_optimizer/mo/ops/
     ```
 
     2. Copy to Extension Generation Python Target Dir<br><br>
     ```
-    cp ~/cl_tutorial/r_XX/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
     ```
 
 5. Copy CPU and GPU source code to the M.O. extensions directory<br><br>
     ```
-    cp ~/cl_tutorial/r_XX/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
-    cp ~/cl_tutorial/r_XX/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
-    ```
-
-6. Fix the ie_parallel header file<br><br>
-    ```
-    sudo vi /opt/intel/computer_vision_sdk/deployment_tools/inference_engine/include/ie_parallel.hpp
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
     ```
 
 7. Create the TensorFlow graph files (weights, graphs, checkpoints)<br><br>
@@ -74,7 +83,7 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```
 
 9. Compile the C++ extension library<br><br>
-    ```cd ~/cl_tutorial/r_XX```<br>
+    ```cd ~/cl_cosh/user_ie_extensions/cpu```<br>
     ```mkdir build && cd build```<br>
     ```cmake ..```<br>
     ```make -j$(nproc)```<br>
