@@ -56,7 +56,6 @@ The Model Optimizer is abbreviated `MO` for the remainder of this document.
 8. Convert the TensorFlow model to Intel IR format<br><br>
     ```
     mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions
-~/inference_engine_samples/intel64/Release/classification_sample -i pics/dog.bmp -m model.ckpt.xml -d CPU -l libuser_cpu_extension.so 
     ```
 
 9. Compile the C++ extension library<br><br>
