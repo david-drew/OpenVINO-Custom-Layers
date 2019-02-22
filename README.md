@@ -28,8 +28,13 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
 2. 
 
 2. Setup your environment for OpenVINO.<br><br>
+    * For 2018.r4 and 2018.r5, use this:
     ```
     source /opt/intel/computer_vision_sdk/bin/setupvars.sh 
+    ```
+    * For 2019.r1 and later, use this:
+    ```
+    source /opt/intel/openvino/bin/setupvars.sh 
     ```
 
 3. Run the MO extension generator and answer questions as appropriate 
