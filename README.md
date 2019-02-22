@@ -8,7 +8,7 @@ Sample code, specifically the `classification_sample`, is located at:<br>
 
 The Model Optimizer is abbreviated `MO` for the remainder of this document.
 
-There are 2 directories with C++ and Python source code for the cosh layer. When <b>`r_XX`</b> is used below, substitute `2018.r4` or `2018.r5` as appropriate.  If using 2019.r1, use the 2018.r5 code.
+There are 2 directories with C++ and Python source code for the cosh layer. When <b>`r_XX`</b> is used below, substitute `2018.r4`, `2018.r5`, or `2019.r1` as appropriate.
 
 ---
 
@@ -93,6 +93,6 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
 
 10. Test your results<br><br>
     ```
-    ~/inference_engine_samples/intel64/Release/classification_sample -i pics/dog.bmp -m model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so 
+    ~/inference_engine_samples/intel64/Release/classification_sample -i pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so 
     ```
 
