@@ -25,8 +25,6 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```
     git clone https://github.com/david-drew/OpenVINO-Custom-Layers.git
     ```
-2. 
-
 2. Setup your environment for OpenVINO.<br><br>
     * For 2018.r4 and 2018.r5, use this:
     ```
@@ -66,11 +64,6 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
-    ```
-
-6. Fix the ie_parallel header file<br><br>
-    ```
-    sudo vi /opt/intel/computer_vision_sdk/deployment_tools/inference_engine/include/ie_parallel.hpp
     ```
 
 7. Create the TensorFlow graph files (weights, graphs, checkpoints)<br><br>
