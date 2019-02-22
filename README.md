@@ -24,23 +24,23 @@ The Model Optimizer is abbreviated `MO` for the remainder of this document.
 3. Add Custom (cosh) Python Layers
     1. Copy to the Model Optimizer Ops Directory<br><br>
     ```
-    cp ~/CustomLayers/Shubha_Code/Misc/cosh.py /opt/intel/computer_vision_sdk_2018.5.455/deployment_tools/model_optimizer/mo/ops/
+    cp ~/CustomLayers/S_Code/Misc/cosh.py /opt/intel/computer_vision_sdk/deployment_tools/model_optimizer/mo/ops/
     ```
 
     2. Copy to Extension Generation Python Target Dir<br><br>
     ```
-    cp ~/CustomLayers/Shubha_Code/Misc/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
+    cp ~/CustomLayers/S_Code/Misc/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
     ```
 
 4. Copy CPU and GPU source code to the M.O. extensions directory<br><br>
     ```
-    cp ext_cosh.cpp /home/vino/cl_cosh/user_ie_extensions/cpu/
-    cp cosh.cl /home/vino/cl_cosh/user_ie_extensions/gpu/New_cosh.cl
+    cp ext_cosh.cpp /home/user/cl_cosh/user_ie_extensions/cpu/
+    cp cosh.cl /home/user/cl_cosh/user_ie_extensions/gpu/New_cosh.cl
     ```
 
 5. Fix the ie_parallel header file<br><br>
     ```
-    sudo vi /opt/intel/computer_vision_sdk_2018.5.455/deployment_tools/inference_engine/include/ie_parallel.hpp
+    sudo vi /opt/intel/computer_vision_sdk/deployment_tools/inference_engine/include/ie_parallel.hpp
     ```
 
 6. Copy the cosh.py algorithm file to the M.O. ops library path.<br><br>
