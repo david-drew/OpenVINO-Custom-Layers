@@ -70,12 +70,10 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     `cd ~/cl_tutorial/create_tf_model`
     `./build_cosh_model.py`
 
-<br>
 
 7. Convert the TensorFlow model to Intel IR format<br>
     ```mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions --output_dir ~/cl_ext_cosh```
 
-<br>
 
 8. Compile the C++ extension library<br>
     ```cd ~/cl_cosh/user_ie_extensions/cpu```<br>
@@ -85,7 +83,6 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```make -j$(nproc)```<br>
     ```cp libuser_cpu_extension.so ~/cl_ext_cosh/```<br>
 
-<br>
 
 9. Test your results<br>
     ```~/inference_engine_samples/intel64/Release/classification_sample -i pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so```
