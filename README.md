@@ -49,7 +49,7 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     <param1> <type>                         q
     ```
 
-5. Add Custom (cosh) Python Layers
+5. Add Custom (cosh) Python Layers<br>
     1. Copy to the Model Optimizer Ops Directory<br><br>
     ```
     sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.py /opt/intel/computer_vision_sdk/deployment_tools/model_optimizer/mo/ops/
@@ -60,13 +60,15 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
     ```
 
-6. Copy CPU and GPU source code to the M.O. extensions directory<br><br>
+
+6. Copy CPU and GPU source code to the M.O. extensions directory<br>
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
     ```
 
-7. Create the TensorFlow graph files (weights, graphs, checkpoints)<br><br>
+
+7. Create the TensorFlow graph files (weights, graphs, checkpoints)<br>
     ```
     cd ~/cl_tutorial/create_tf_model
     ```
@@ -74,19 +76,22 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ./build_cosh_model.py
     ```
 
-8. Convert the TensorFlow model to Intel IR format<br><br>
+
+8. Convert the TensorFlow model to Intel IR format<br>
     ```
     mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions --output_dir ~/cl_ext_cosh
     ```
 
-9. Compile the C++ extension library<br><br>
+
+9. Compile the C++ extension library<br>
     ```cd ~/cl_cosh/user_ie_extensions/cpu```<br>
     ```mkdir build && cd build```<br>
     ```cmake ..```<br>
     ```make -j$(nproc)```<br>
     ```cp libuser_cpu_extension.so ~/cl_ext_cosh/```<br>
 
-10. Test your results<br><br>
+
+10. Test your results<br>
     ```
     ~/inference_engine_samples/intel64/Release/classification_sample -i pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so 
     ```
