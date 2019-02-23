@@ -85,7 +85,7 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```make -j$(nproc)```<br>
     ```cp libuser_cpu_extension.so ~/cl_ext_cosh/```<br>
 
-10. Test your results<br><br>
+10. Test your results<br>
     ```
     ~/inference_engine_samples/intel64/Release/classification_sample -i pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so 
     ```
