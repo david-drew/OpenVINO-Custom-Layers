@@ -1,7 +1,7 @@
 
 
 ## Before You Start
-It's assumed that you've installed `OpenVINO r4 or r5`, including the Model Optimizer.  For 2019.r1, see the other document.
+It's assumed that you've installed `OpenVINO 2019.r1`, including the Model Optimizer.  If you're using an earlier version, refer to the other document.
 
 Sample code, specifically the `classification_sample`, is located at:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`~/inference_engine_samples/intel64/Release`<br>
@@ -26,15 +26,13 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     git clone https://github.com/david-drew/OpenVINO-Custom-Layers.git
     ```
 2. Setup your environment for OpenVINO.<br><br>
-    * For 2018.r4 and 2018.r5, use this:
     ```
-    source /opt/intel/computer_vision_sdk/bin/setupvars.sh 
+    source /opt/intel/openvino/bin/setupvars.sh 
     ```
-
 3. Install prerequisites.
     `sudo pip3 install cogapp`
 
-4. Run the MO extension generator and answer questions as appropriate 
+3. Run the MO extension generator and answer questions as appropriate 
     * We're using `~/cl_cosh` as the target extension path<br><br>
     ```
     python3 /opt/intel/openvino/deployment_tools/extension_generator/extgen.py new mo-op ie-cpu-ext output_dir=~/cl_cosh
@@ -49,10 +47,10 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     <param1> <type>                         q
     ```
 
-5. Add Custom (cosh) Python Layers
+4. Add Custom (cosh) Python Layers
     1. Copy to the Model Optimizer Ops Directory<br><br>
     ```
-    sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.py /opt/intel/computer_vision_sdk/deployment_tools/model_optimizer/mo/ops/
+    sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
     ```
 
     2. Copy to Extension Generation Python Target Dir<br><br>
@@ -60,7 +58,7 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
     ```
 
-6. Copy CPU and GPU source code to the M.O. extensions directory<br><br>
+5. Copy CPU and GPU source code to the M.O. extensions directory<br><br>
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
@@ -83,6 +81,7 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```cd ~/cl_cosh/user_ie_extensions/cpu```<br>
     * If using 2019.r1, copy the CMakeLists.txt to this directory.<br>
     ```cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/CMakeLists.txt .```<br>
+
     ```mkdir build && cd build```<br>
     ```cmake ..```<br>
     ```make -j$(nproc)```<br>
