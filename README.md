@@ -84,7 +84,7 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
 
 9. Compile the C++ extension library<br><br>
     ```cd ~/cl_cosh/user_ie_extensions/cpu```<br>
-    * If using 2019.r1, copy the CMakeLists.txt to this directory.
+    * If using 2019.r1, copy the CMakeLists.txt to this directory.<br>
     ```cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/CMakeLists.txt .```<br>
     ```mkdir build && cd build```<br>
     ```cmake ..```<br>
