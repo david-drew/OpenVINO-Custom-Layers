@@ -66,8 +66,6 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
     ```
 
-<br>
-
 6. Create the TensorFlow graph files (weights, graphs, checkpoints)<br>
     `cd ~/cl_tutorial/create_tf_model`
     `./build_cosh_model.py`
