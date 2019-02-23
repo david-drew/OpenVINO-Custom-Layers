@@ -80,7 +80,7 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
     ```
 
 9. Compile the C++ extension library<br><br>
-    ```cd ~/cl_cosh/user_ie_extensions/cpu```<br><br>
+    ```cd ~/cl_cosh/user_ie_extensions/cpu```<br>
     ```mkdir build && cd build```<br>
     ```cmake ..```<br>
     ```make -j$(nproc)```<br>
