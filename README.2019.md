@@ -1,7 +1,7 @@
 
 
 ## Before You Start
-It's assumed that you've installed `OpenVINO 2019.r1`, including the Model Optimizer.  If you're using an earlier version, refer to the other [document] (./README.md).
+It's assumed that you've installed `OpenVINO 2019.r1`, including the Model Optimizer.  If you're using an earlier version, refer to the other [document](./README.md).
 
 ---
 
