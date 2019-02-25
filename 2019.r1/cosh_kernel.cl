@@ -14,26 +14,24 @@
  limitations under the License.
 */
 
-// ===============================================================================
-// Generated file for Inference Engine extension for GPU plugin
-//
-// IMPLEMENT YOUR KERNEL HERE.
-//
-// Refer to the section "Adding Your Own Kernels to the Inference Engine" in
-// OpenVINO* documentation (either online or offline in
-// <INSTALL_DIR>/deployment_tools/documentation/docs/index.html an then navigate
-// to the corresponding section).
-// ===============================================================================
+/* ===============================================================================
+ * Generated file for Inference Engine extension for GPU plugin
+ *
+ * IMPLEMENT YOUR KERNEL HERE.
+ *
+ * Refer to the section "Adding Your Own Kernels to the Inference Engine" in 
+ * OpenVINO documentation 
+ * ===============================================================================*/
 
 #pragma OPENCL EXTENSION cl_khr_fp16 : enable
 
 __kernel void cosh_kernel(
-     // insert pointers to inputs, outputs as arguments here
-     // if your layer have one input and one output, argumants will be:
+     // Insert pointers to inputs, outputs as arguments here
+     // If your layer has one input and one output, arguments will be:
           const __global INPUT0_TYPE*  input0, __global OUTPUT0_TYPE* output
      )
 {
-    // Here kernel implementation should be added!
+    // Add the kernel implementation here: 
 	 const int dims = sizeof(INPUT0_DIMS) / sizeof(INPUT0_DIMS[0]);
     int T_ = INPUT0_DIMS[0];
     int N_ = INPUT0_DIMS[1];
