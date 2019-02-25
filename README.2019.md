@@ -67,18 +67,18 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 4. Add Custom (cosh) Python Layers
     1. Copy to the Model Optimizer Ops Directory<br><br>
     ```
-    sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/<b>`r_XX`</b>/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
+    sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
     ```
 
     2. Copy to Extension Generation Python Target Dir<br><br>
     ```
-    cp ~/cl_tutorial/OpenVINO-Custom-Layers/<b>`r_XX`</b>/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
     ```
 
 5. Copy CPU and GPU source code to the M.O. extensions directory<br>
     ```
-    cp ~/cl_tutorial/OpenVINO-Custom-Layers/<b>`r_XX`</b>/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
-    cp ~/cl_tutorial/OpenVINO-Custom-Layers/<b>`r_XX`</b>/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
     ```
 
 6. Create the TensorFlow graph files (weights, graphs, checkpoints)<br>
@@ -93,7 +93,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 8. Compile the C++ extension library<br>
     ```cd ~/cl_cosh/user_ie_extensions/cpu```<br>
-    ```cp ~/cl_tutorial/OpenVINO-Custom-Layers/<b>`r_XX`</b>/CMakeLists.txt .```<br>
+    ```cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/CMakeLists.txt .```<br>
     ```mkdir build && cd build```<br>
     ```cmake ..```<br>
     ```make -j$(nproc)```<br>
