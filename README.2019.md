@@ -15,7 +15,7 @@ There are 2 directories with C++ and Python source code for the cosh layer. When
 ### Custom Layers
 Custom layers are NN layers that are not explictly supported by a given framework.  This tutorial demonstrates how to run inference on the topologies featuring custom layers. This way you can plug in your own implementation for existing or completely new layers.
 
-The list of known layers is different for any particular framework. To see the layers supported by your framework, refer to the [OpenVINO MO Documentation] (https://software.intel.com/en-us/articles/OpenVINO-ModelOptimizer#intermediate-representation-notation-catalog).  If your topology contains any layers that are not in the list of known layers, the Model Optimizer classifies them as custom.
+The list of known layers is different for any particular framework. To see the layers supported by your framework, refer to the [OpenVINO MO Documentation]: https://software.intel.com/en-us/articles/OpenVINO-ModelOptimizer#intermediate-representation-notation-catalog.  If your topology contains any layers that are not in the list of known layers, the Model Optimizer classifies them as custom.
 
 Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model, and producing the Intermediate Representation.
 
