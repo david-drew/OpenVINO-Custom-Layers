@@ -72,7 +72,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
     2. Copy to Extension Generation Python Target Dir<br><br>
     ```
-    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/
     ```
 
 5. Copy CPU and GPU source code to the M.O. extensions directory<br>
