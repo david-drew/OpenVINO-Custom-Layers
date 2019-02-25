@@ -67,12 +67,12 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 4. Add Custom (cosh) Python Layers
     1. Copy to the Model Optimizer Ops Directory<br><br>
     ```
-    sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
+    sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/<r_XX>/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
     ```
 
     2. Copy to Extension Generation Python Target Dir<br><br>
     ```
-    cp ~/cl_tutorial/OpenVINO-Custom-Layers/r_XX/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/<r_XX>/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
     ```
 
 5. Copy CPU and GPU source code to the M.O. extensions directory<br>
