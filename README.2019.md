@@ -46,7 +46,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     source /opt/intel/openvino/bin/setupvars.sh 
     ```
 
-3. Install prerequisites.
+3. Install prerequisites (code generator for running Python snippets).
     `sudo pip3 install cogapp`
 
 3. Run the MO extension generator and answer questions as appropriate 
