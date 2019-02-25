@@ -78,7 +78,6 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 5. Copy CPU and GPU source code to the M.O. extensions directory<br>
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
-    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh_kernel.cl ~/cl_cosh/user_ie_extensions/gpu/
     ```
 
 6. Create the TensorFlow graph files (weights, graphs, checkpoints)<br>
@@ -103,22 +102,4 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 9. Test your results<br>
     ```~/inference_engine_samples/intel64/Release/classification_sample -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so```
 
-10. Programming<br>
-    Here are the input dimensions needed for the cosh layer:<br>
-
-    | Dim | Val | Element | Definition         |
-    |-----|-----|---------|--------------------|
-    | N   | 1   |  0      | Number of Images   |
-    | H   | 1   |  2      | Height of Image    |
-    | W   | 1   |  3      | Width of Image     |
-    | C   | 4   |  1      | Number of Channels |
-
-    <br>
-
-    ```
-    N: Number of images
-    H: Height of image
-    W: Width of image
-    C: Number of channels
-    ```
-    <br>
+10. If you have time, try to use the above steps as a guide to make the cosh layer work on the GPU.  The required code is an OpenCL kernel.
