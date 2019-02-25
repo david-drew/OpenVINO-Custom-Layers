@@ -45,24 +45,27 @@ class CoshImpl: public ExtLayerBase {
 public:
     explicit CoshImpl(const CNNLayer* layer) {
         try {
-            // LayerSetUp
-            // Read parameters from IR and/or initialise them here.
-            // Implemented functions for reading parameters are:
-            // for single value:
-            //     getParamAsFloat, getParamAsInt, getParamsAsBool, getParamAsString
-            // for array
-            //     getParamAsFloats, getParamAsInts
-            // Functions are declared in Inference Engine folder include/ie_layers.h
-            //Example of parameters reading is:
-            //   scale_=layer->GetParamAsFloat("scale")
-
+            /* Layer SetUp
+            *  Read parameters from IR and/or initialise them here.
+            *
+            *  Implemented functions for reading parameters are:
+            *  for single value:
+            *     getParamAsFloat, getParamAsInt, getParamsAsBool, getParamAsString
+            *  for array
+            *     getParamAsFloats, getParamAsInts
+            *
+            * Functions are declared in Inference Engine folder include/ie_layers.h
+            *--------------------------------------------------------------------------------
+            * Example of parameters reading is:
+            *   scale_=layer->GetParamAsFloat("scale")
+            *-------------------------------------------------------------------------------*/
             
-            // set configuration: specify data format for layer
-            // more information about data formats you can find in "Inference Engine Memory primitives" in OpenVINO* documentation
-            // (either online or offline in <INSTALL_DIR>/deployment_tools/documentation/docs/index.html an then navigate
-            // to the corresponding section). 
+            /* Set configuration: specify data format for layer
+             *   For more information about data formats see: 
+             *   "Inference Engine Memory primitives" in OpenVINO documentation
+             *------------------------------------------------------------------------------*/
+
 			addConfig(layer, { DataConfigurator(ConfLayout::PLN) }, { DataConfigurator(ConfLayout::PLN) });
-            //addConfig({DataConfigurator(ConfLayout::PLN), DataConfigurator(ConfLayout::PLN)}, {DataConfigurator(ConfLayout::PLN)});
         } catch (InferenceEngine::details::InferenceEngineException &ex) {
             errorMsg = ex.what();
         }
@@ -70,8 +73,8 @@ public:
 
     StatusCode execute(std::vector<Blob::Ptr>& inputs, std::vector<Blob::Ptr>& outputs,
                        ResponseDesc *resp) noexcept override {
-        // Add here implementation for layer inference
-        // Examples of implementations you can find in Inerence Engine tool samples/extenstions folder
+        // Add implementation for layer inference here
+        // Examples of implementations are in OpenVINO samples/extensions folder
 		float* src_data = inputs[0]->buffer();
         float* dst_data = outputs[0]->buffer();
 
@@ -82,16 +85,14 @@ public:
         int H = static_cast<int>((dims.size() > 2) ? dims[2] : 1);
         int W = static_cast<int>((dims.size() > 3) ? dims[3] : 1);
 
-		//hyperbolic cosine is given by :
-		// (e^x + e^-x)/2
+		//hyperbolic cosine is given by : (e^x + e^-x)/2
 		parallel_for3d(N, C, H, [&](int b, int c, int h) {
-        			// Fill output_sequences with -1
+            // Fill output_sequences with -1
 			for (size_t ii = 0; ii < b*c; ii++) {
 				dst_data[ii] = (exp(src_data[ii]) + exp(-src_data[ii]))/2;
 			}
         });
         return OK;
-        //return NOT_IMPLEMENTED;
     }
 
 private:
