@@ -78,7 +78,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 5. Copy CPU and GPU source code to the M.O. extensions directory<br>
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
-    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh.cl ~/cl_cosh/user_ie_extensions/gpu/
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh_kernel.cl ~/cl_cosh/user_ie_extensions/gpu/
     ```
 
 6. Create the TensorFlow graph files (weights, graphs, checkpoints)<br>
