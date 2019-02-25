@@ -1,7 +1,7 @@
 
 
 ## Before You Start
-It's assumed that you've installed `OpenVINO 2019.r1`, including the Model Optimizer.  If you're using an earlier version, refer to the other document.
+It's assumed that you've installed `OpenVINO 2019.r1`, including the Model Optimizer.  If you're using an earlier version, refer to the other [document] (./README.md).
 
 ---
 
@@ -12,20 +12,12 @@ The Model Optimizer is abbreviated `MO` for the remainder of this document.
 
 There are 2 directories with C++ and Python source code for the cosh layer. When <b>`r_XX`</b> is used below, substitute `2018.r4`, `2018.r5`, or `2019.r1` as appropriate.
 
-Sample code, specifically the `classification_sample`, is located at:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`~/inference_engine_samples/intel64/Release`<br>
-
-The Model Optimizer is abbreviated `MO` for the remainder of this document.
-
-There are 2 directories with C++ and Python source code for the cosh layer. When <b>`r_XX`</b> is used below, substitute `2018.r4`, `2018.r5`, or `2019.r1` as appropriate.
-
 ### Custom Layers
+Custom layers are NN layers that are not explictly supported by a given framework.  This tutorial demonstrates how to run inference on the topologies featuring custom layers. This way you can plug in your own implementation for existing or completely new layers.
+
+The list of known layers is different for any particular framework. To see the layers supported by your framework, refer to the [OpenVINO MO Documentation] (https://software.intel.com/en-us/articles/OpenVINO-ModelOptimizer#intermediate-representation-notation-catalog).  If your topology contains any layers that are not in the list of known layers, the Model Optimizer classifies them as custom.
+
 Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model, and producing the Intermediate Representation.
-
-The list of known layers is different for each of supported frameworks. To see the layers supported by your framework, refer to the OpenVINO website.
-Custom layers are layers that are not included into a list of known layers. If your topology contains any layers that are not in the list of known layers, the Model Optimizer classifies them as custom.
-
-This tutorial demonstrates how to run the inference on the topologies featuring custom layers. This way you can plug your own implementation for existing or completely new layers.
 
 ### Example custom layer- Hyperbolic Cosine (cosh) function 
 We showcase custom layer implementation using a simple function, hyperbolic cosine (cosh). Mathematically, it is represented as:
