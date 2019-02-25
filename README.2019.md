@@ -82,7 +82,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
 
 6. Create the TensorFlow graph files (weights, graphs, checkpoints)<br>
-    `cd ~/cl_tutorial/create_tf_model`
+    `cd ~/cl_tutorial/create_tf_model`<br>
     `./build_cosh_model.py`
 
 
