@@ -87,7 +87,8 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 
 7. Convert the TensorFlow model to Intel IR format<br>
-    ```mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions --output_dir ~/cl_ext_cosh```
+    `cd ~/cl_new`<br>
+    `mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions --output_dir ~/cl_ext_cosh`<br>
 
 
 8. Compile the C++ extension library<br>
