@@ -24,5 +24,5 @@ class CoshFrontExtractor(FrontExtractorOp):
 
     @staticmethod
     def extract(node):
-        cosh.update_node_stat(node)
+        Cosh.update_node_stat(node)
         return __class__.enabled
