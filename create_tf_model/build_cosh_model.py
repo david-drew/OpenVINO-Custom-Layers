@@ -5,7 +5,7 @@ from tensorflow.python.framework import graph_io
 from NetworkBuilder import NetworkBuilder
 import datetime
 import numpy as np
-import os
+import os, os.path
 
 def getLayerNames():
     ##namegraph = get_names()
@@ -73,7 +73,8 @@ with tf.name_scope('accuracy') as scope:
 
 
 with tf.Session() as sess:
-    savedir = "/home/vino/cl_new"
+    hm_dir = os.path.expanduser('~')
+    savedir = "{}/{}".format(hm_dir, "cl_new")
     #output_layer = "ModCosh/Activation_8/softmax_output:0"
     #output_layer = "ModCosh/Merge/MergeSummary:0"
     #output_layer = "ModCosh/Activation_8/softmax_output:0"
