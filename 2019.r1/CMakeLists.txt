@@ -66,7 +66,7 @@ include_directories (PRIVATE
 #enable_omp()
 
 add_library(${TARGET_NAME} SHARED ${SRC} ${HDR})
-target_link_libraries(${TARGET_NAME} ${InferenceEngine_LIBRARIES} ${intel_omp_lib})
+target_link_libraries(${TARGET_NAME} ${InferenceEngine_LIBRARIES} ${intel_omp_lib} /opt/intel/openvino/openvx/lib/libiomp5.so)
 target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(${TARGET_NAME} PROPERTIES COMPILE_PDB_NAME ${TARGET_NAME})
 
