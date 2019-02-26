@@ -102,4 +102,4 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 9. Test your results<br>
     ```~/inference_engine_samples/intel64/Release/classification_sample -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so```
 
-10. If you have time, try to use the above steps as a guide to make the cosh layer work on the GPU.  The required code is an OpenCL kernel.
+
