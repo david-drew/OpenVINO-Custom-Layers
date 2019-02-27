@@ -63,11 +63,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     Please enter operation name:            cosh
     ```
     * Answer the remaining questions as appropriate, and enter 'q' when prompted for parameters<br>
-    ```
-    Please enter all parameters in format
-    <param1> <type>                         
-    ```
-    <b>`q`</b><br>
+
 
 5. Add Custom (cosh) Python Layers:
     1. Copy to the Model Optimizer Ops Directory:<br>
