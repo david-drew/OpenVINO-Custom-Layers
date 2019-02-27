@@ -60,9 +60,13 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     2.  Please enter operation name:        cosh
     3.  Does your operation change shape?   n
     Please enter operation name:            cosh
-    Please enter all parameters in format
-    <param1> <type>                         q
     ```
+    * Answer the remaining questions as appropriate, and enter 'q' when prompted for parameters<br>
+    ```
+    Please enter all parameters in format
+    <param1> <type>                         
+    ```
+    <b>`q`</b><br>
 
 5. Add Custom (cosh) Python Layers:
     1. Copy to the Model Optimizer Ops Directory:<br><br>
@@ -91,7 +95,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 
 8. Convert the TensorFlow model to Intel IR format:<br>
-    * We run MO for TensorFlow to convert and optimize the new model for OpenVINO. We explicitly set the batch to 1 because the model has an input dim of "-1".   TensorFLow allows "-1" as a "to be filled in later" variable, but MO requires explicit information for the optimization process.  The output is the full name of the final output layer.
+    * We run MO for TensorFlow to convert and optimize the new model for OpenVINO. We explicitly set the batch to 1 because the model has an input dim of "-1".   TensorFLow allows "-1" as a "to be filled in later" variable, but MO requires explicit information for the optimization process.  The output is the full name of the final output layer.<br>
 	```
     cd ~/cl_new
 	```
@@ -101,7 +105,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 
 9. Compile the C++ extension library:<br>
-    * We're building the back-end C++ library to be used by the Inference Engine for executing the cosh layer.
+    * We're building the back-end C++ library to be used by the Inference Engine for executing the cosh layer.<br>
     ```
 	cd ~/cl_cosh/user_ie_extensions/cpu
     ```
