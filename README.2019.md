@@ -51,6 +51,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 4. Run the MO extension generator and answer questions as appropriate: 
     * We're using `~/cl_cosh` as the target extension path:<br><br>
+    * This will create templates that will be partially replaced by Python and C++ code for executing the layer.
     ```
     python3 /opt/intel/openvino/deployment_tools/extension_generator/extgen.py new mo-op ie-cpu-ext output_dir=~/cl_cosh
     ```
@@ -69,7 +70,8 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     <b>`q`</b><br>
 
 5. Add Custom (cosh) Python Layers:
-    1. Copy to the Model Optimizer Ops Directory:<br><br>
+    1. Copy to the Model Optimizer Ops Directory:<br>
+    * This allows MO to find the Python implementation of cosh.<br><br>
     ```
     sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
     ```
@@ -80,6 +82,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
 
 6. Copy CPU and GPU source code to the M.O. extensions directory:<br>
+    * This will be used for building a back-end library for applications that implement cosh.<br><br>
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
     ```
