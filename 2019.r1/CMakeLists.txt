@@ -25,7 +25,8 @@
 # ===============================================================================
 cmake_minimum_required(VERSION 3.5)
 
-set(TARGET_NAME "user_cpu_extension")
+set(TARGET_NAME "cosh_cpu_extension")
+set(OVPATH $ENV{INTEL_CVSDK_DIR} )
 
 get_filename_component(CMAKE_PREFIX_PATH "${InferenceEngine_DIR}" ABSOLUTE)
 
@@ -60,13 +61,13 @@ endif()
 include_directories (PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/common
     ${InferenceEngine_INCLUDE_DIRS}
-    /opt/intel/openvino/deployment_tools/inference_engine/external/tbb/include
+    ${OVPATH}/deployment_tools/inference_engine/external/tbb/include
 )
 
 #enable_omp()
 
 add_library(${TARGET_NAME} SHARED ${SRC} ${HDR})
-target_link_libraries(${TARGET_NAME} ${InferenceEngine_LIBRARIES} ${intel_omp_lib} /opt/intel/openvino/openvx/lib/libiomp5.so)
+target_link_libraries(${TARGET_NAME} ${InferenceEngine_LIBRARIES} ${intel_omp_lib} ${OVPATH}/openvx/lib/libiomp5.so)
 target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(${TARGET_NAME} PROPERTIES COMPILE_PDB_NAME ${TARGET_NAME})
 

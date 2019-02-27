@@ -1,7 +1,7 @@
-
+# OpenVINO Custom Layer Tutorial
 
 ## Before You Start
-It's assumed that you've installed `OpenVINO 2019.r1`, including the Model Optimizer.  If you're using an earlier version, refer to this [document](./README.md).
+It's assumed that you've installed `OpenVINO 2019.r1`, including the Model Optimizer, in the default /opt/intel directory,.  If you're using an earlier version, refer to this [document](./README.md).  If you've installed to another directory, you may have to make changes to some of the commands.
 
 ---
 
@@ -13,9 +13,9 @@ The Model Optimizer is abbreviated `MO` for the remainder of this document.
 There are 2 directories with C++ and Python source code for the cosh layer. 
 
 ### Custom Layers
-Custom layers are NN (Neural Network) layers that are not explictly supported by a given framework.  This tutorial demonstrates how to run inference on the topologies featuring custom layers. This way you can plug in your own implementation for existing or completely new layers.
+Custom layers are NN (Neural Network) layers that are not explictly supported by a given framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers. This way you can plug in your own implementation for existing or completely new layers.
 
-The list of known layers is different for any particular framework. To see the layers supported by your framework, refer to the [OpenVINO MO Documentation](https://software.intel.com/en-us/articles/OpenVINO-ModelOptimizer#intermediate-representation-notation-catalog).  If your topology contains any layers that are not in the list of known layers, the Model Optimizer classifies them as custom.
+The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the [OpenVINO MO Documentation](https://software.intel.com/en-us/articles/OpenVINO-ModelOptimizer#intermediate-representation-notation-catalog).  If your topology contains any layers that are not in the list of known layers, the Model Optimizer considers them to be custom.
 
 Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
 
@@ -81,25 +81,47 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
 
 7. Create the TensorFlow graph files (weights, graphs, checkpoints):<br>
-    `cd ~/cl_tutorial/OpenVINO-Custom-Layers/create_tf_model`<br>
-    `./build_cosh_model.py`
+    ```
+	cd ~/cl_tutorial/OpenVINO-Custom-Layers/create_tf_model
+	```
+	```
+    ./build_cosh_model.py
+	```
 
 
 8. Convert the TensorFlow model to Intel IR format:<br>
-    `cd ~/cl_new`<br>
-    `mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions --output_dir ~/cl_ext_cosh`<br>
+	```
+    cd ~/cl_new>
+	```
+	```
+    mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions --output_dir ~/cl_ext_cosh
+	```
 
 
 9. Compile the C++ extension library:<br>
-    ```cd ~/cl_cosh/user_ie_extensions/cpu```<br>
-    ```cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/CMakeLists.txt .```<br>
-    ```mkdir build && cd build```<br>
-    ```cmake ..```<br>
-    ```make -j$(nproc)```<br>
-    ```cp libuser_cpu_extension.so ~/cl_ext_cosh/```<br>
+    ```
+	cd ~/cl_cosh/user_ie_extensions/cpu
+	```
+    ```
+	cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/CMakeLists.txt .
+	```
+    ```
+	mkdir build && cd build
+	```
+    ```
+	cmake ..
+	```
+    ```
+	make -j$(nproc)
+	```
+    ```
+	cp libcosh_cpu_extension.so ~/cl_ext_cosh/
+	```
 
 
 10. Test your results:<br>
-    ```~/inference_engine_samples/intel64/Release/classification_sample -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so```
+    ```
+	~/inference_engine_samples/intel64/Release/classification_sample -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libcosh_cpu_extension.so
+	```
 
 
