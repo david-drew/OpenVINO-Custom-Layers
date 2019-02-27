@@ -85,7 +85,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
 
 7. Create the TensorFlow model (weights, graphs, checkpoints):<br>
-    * We create a simple model.  The weights are random, and untrained, but this is acceptable for demonstrating Custom Layer conversion.
+    * We create a simple model.  The weights are random, and untrained, but this is acceptable for demonstrating Custom Layer conversion.<br><br>
     ```
     cd ~/cl_tutorial/OpenVINO-Custom-Layers/create_tf_model
     ```
@@ -95,7 +95,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 
 8. Convert the TensorFlow model to Intel IR format:<br>
-    * We run MO for TensorFlow to convert and optimize the new model for OpenVINO. We explicitly set the batch to 1 because the model has an input dim of "-1".   TensorFLow allows "-1" as a "to be filled in later" variable, but MO requires explicit information for the optimization process.  The output is the full name of the final output layer.<br>
+    * We run MO for TensorFlow to convert and optimize the new model for OpenVINO. We explicitly set the batch to 1 because the model has an input dim of "-1".   TensorFLow allows "-1" as a "to be filled in later" variable, but MO requires explicit information for the optimization process.  The output is the full name of the final output layer.<br><br>
 	```
     cd ~/cl_new
 	```
@@ -105,7 +105,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 
 9. Compile the C++ extension library:<br>
-    * We're building the back-end C++ library to be used by the Inference Engine for executing the cosh layer.<br>
+    * We're building the back-end C++ library to be used by the Inference Engine for executing the cosh layer.<br><br>
     ```
 	cd ~/cl_cosh/user_ie_extensions/cpu
     ```
