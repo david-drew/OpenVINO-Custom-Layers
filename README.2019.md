@@ -121,6 +121,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 	make -j$(nproc)
     ```
     <br>
+    
     ```
 	cp libcosh_cpu_extension.so ~/cl_ext_cosh/
     ```
