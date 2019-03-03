@@ -12,6 +12,16 @@ The Model Optimizer is abbreviated `MO` for the remainder of this document.
 
 There are 2 directories with C++ and Python source code for the cosh layer. 
 
+### This Tutoral
+In this tutorial, we're going to:
+<ol>
+	<li>Build a TensorFlow model with a custom (cosh) layer.</li>
+	<li>Convert and optimize the model to Intel's IR format using MO</li>
+	<li>Create Python bindings and a C++ library</li>
+</ol>
+		
+This will allow the OpenVINO Inference Engine to run the custom layer.  The cosh function has been chosen because it allows a simple example of the process.
+
 ### Custom Layers
 Custom layers are NN (Neural Network) layers that are not explictly supported by a given framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers. This way you can plug in your own implementation for existing or completely new layers.
 
@@ -84,7 +94,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
 
 7. Create the TensorFlow model (weights, graphs, checkpoints):<br>
-    * We create a simple model.  The weights are random, and untrained, but this is acceptable for demonstrating Custom Layer conversion.<br><br>
+    * We create a simple model.  The weights are random and untrained, but this is sufficient for demonstrating Custom Layer conversion.<br><br>
     ```
     cd ~/cl_tutorial/OpenVINO-Custom-Layers/create_tf_model
     ```
