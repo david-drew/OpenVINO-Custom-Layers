@@ -128,8 +128,22 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 
 10. Test your results:<br>
+    Using the C++ Sample
     ```
-	~/inference_engine_samples/intel64/Release/classification_sample -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libcosh_cpu_extension.so
-	```
-
-
+    ~/inference_engine_samples/intel64/Release/classification_sample -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libcosh_cpu_extension.so
+    ```
+    <br>
+    Using a Python Sample
+    ```
+    cp /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample.py .
+    ```
+    <br>
+    Try running the Python Sample without including the cosh extension library.
+    ```
+    python3 -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU
+    ```
+    <br>
+    Now run the command with the cosh extension library.
+    ```
+    python3 -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -l ~/cl_ext_cosh/libcosh_cpu_extension.so -d CPU
+    ```
