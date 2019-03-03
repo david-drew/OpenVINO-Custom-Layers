@@ -12,7 +12,7 @@ The Model Optimizer is abbreviated `MO` for the remainder of this document.
 
 There are 2 directories with C++ and Python source code for the cosh layer. 
 
-### This Tutoral
+### This Tutorial
 In this tutorial, we're going to:
 <ol>
 	<li>Build a TensorFlow model with a custom (cosh) layer.</li>
