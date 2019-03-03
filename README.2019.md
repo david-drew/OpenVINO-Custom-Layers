@@ -145,7 +145,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
     <br><b>Using a Python Sample</b><br>
     
-    Prep: Install library and copy sample for ease of use.<br>
+    Prep: Install the OpenCV library and copy an appropriate sample to our home directory for ease of use.<br>
     ```
     sudo pip3 install opencv-python
     ```
