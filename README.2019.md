@@ -72,7 +72,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     3.  Does your operation change shape?   n
     Please enter operation name:            cosh
     ```
-    * Answer the remaining questions as appropriate, and enter 'q' when prompted for parameters<br>
+    * Answer the remaining questions as appropriate, and enter <b>`q`</b> when prompted for parameters<br>
 
 
 5. Add Custom (cosh) Python Layers:
