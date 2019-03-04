@@ -155,10 +155,10 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
    
     <br>Try running the Python Sample without including the cosh extension library.<br>
     ```
-    python3 -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU
+    python3 classification_sample.py -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU
     ```
     
     <br>Now run the command with the cosh extension library.<br>
     ```
-    python3 -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -l ~/cl_ext_cosh/libcosh_cpu_extension.so -d CPU
+    python3 classification_sample.py -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -l ~/cl_ext_cosh/libcosh_cpu_extension.so -d CPU
     ```
