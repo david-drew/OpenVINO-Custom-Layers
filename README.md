@@ -23,19 +23,17 @@ This tutorial demonstrates how to run the inference on the topologies featuring 
  
 1. Have your trained model ready.
 2. Requirements:
- * OpenVINO
- * cogapp (python lib, install via pip3)
- * The trained model you want to convert to OpenVINO
- 
-5. Setup OpenVINO environment
-6. Run Model Extension Generator (tool for Model Optimizer)
-a. This creates “code stubs” that will be edited in steps 7 and 8 with the custom algorithm.
+   * OpenVINO
+   * cogapp (python lib, install via pip3)
+   * The trained model you want to convert to OpenVINO 
+3. Setup OpenVINO environment
+4. Run Model Extension Generator (tool for Model Optimizer)
+   * This creates “code stubs” that will be edited in steps 7 and 8 with the custom algorithm.
 7. Edit C++ Code (produced by MEG)
 8. Edit Python Scripts (produced by MEG)
 9. Workaround for Linux
        * Move a python custom layer script to the Model Optimizer operations directory:
        * ''/opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/''
- 
 10. Run the Model Optimizer
 11. Compile your C++ code.
 12. Test with Python and/or C++ sample apps.
