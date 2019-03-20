@@ -21,8 +21,8 @@ This tutorial demonstrates how to run the inference on the topologies featuring 
 the basic steps are as follows
 ##Custom Layer Outline
  
-1.      Have your trained model ready.
-2.      Git clone tutorial
+1. Have your trained model ready.
+2. Git clone tutorial
 3.      Setup environment
  
 4.      Requirements:
