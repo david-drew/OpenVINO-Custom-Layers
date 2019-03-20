@@ -18,8 +18,8 @@ Custom layers are layers that are not included into a list of known layers. If y
 
 This tutorial demonstrates how to run the inference on the topologies featuring custom layers. This way you can plug your own implementation for existing or completely new layers.
 
-the basic steps are:
-Custom Layer Outline
+the basic steps are as follows
+##Custom Layer Outline
  
 1.      Have your trained model ready.
 2.      Git clone tutorial
@@ -35,9 +35,9 @@ c.      The trained model you want to convert to OpenVINO
 a.      This creates “code stubs” that will be edited in steps 7 and 8 with the custom algorithm.
 7.      Edit C++ Code (produced by MEG)
 8.      Edit Python Scripts (produced by MEG)
-9.      Workaround for Linux:
-a.      Move a python custom layer script to the Model Optimizer operations directory:
-b.  /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
+9.      Workaround for Linux
+       a.      Move a python custom layer script to the Model Optimizer operations directory:
+       b.  /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
  
 10.   Run the Model Optimizer
 11.   Compile your C++ code.
