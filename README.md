@@ -19,7 +19,7 @@ Custom layers are layers that are not included into a list of known layers. If y
 This tutorial demonstrates how to run the inference on the topologies featuring custom layers. This way you can plug your own implementation for existing or completely new layers.
 
 
-###Custom Layer Outline
+### Custom Layer Outline
  
 1. Have your trained model ready.
 2. Git clone tutorial
@@ -39,9 +39,9 @@ a. This creates “code stubs” that will be edited in steps 7 and 8 with the c
        a.Move a python custom layer script to the Model Optimizer operations directory:
        b.  ''/opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/''
  
-10.Run the Model Optimizer
-11.Compile your C++ code.
-12.Test with Python and/or C++ sample apps.
+10. Run the Model Optimizer
+11. Compile your C++ code.
+12. Test with Python and/or C++ sample apps.
 
 ### Example custom layer- Hyperbolic Cosine (cosh) function 
 We showcase custom layer implementation using a simple function, hyperbolic cosine (cosh). Mathematically, it is represented as: 
