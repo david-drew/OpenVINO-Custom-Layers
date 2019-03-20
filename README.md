@@ -33,7 +33,7 @@ This tutorial demonstrates how to run the inference on the topologies featuring 
 6. Edit Python Scripts (produced by MEG)
 7. Workaround for Linux
    * Move a python custom layer script to the Model Optimizer operations directory:
-   * ''/opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/''
+   * '/opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/'
 10. Run the Model Optimizer
 11. Compile your C++ code.
 12. Test with Python and/or C++ sample apps.
