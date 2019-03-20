@@ -22,10 +22,7 @@ This tutorial demonstrates how to run the inference on the topologies featuring 
 ### Custom Layer Outline
  
 1. Have your trained model ready.
-2. Git clone tutorial
-3. Setup environment
- 
-4. Requirements:
+2. Requirements:
 a. OpenVINO
 b. cogapp (python lib, install via pip3)
 c. The trained model you want to convert to OpenVINO
@@ -36,8 +33,8 @@ a. This creates “code stubs” that will be edited in steps 7 and 8 with the c
 7. Edit C++ Code (produced by MEG)
 8. Edit Python Scripts (produced by MEG)
 9. Workaround for Linux
-       a.Move a python custom layer script to the Model Optimizer operations directory:
-       b.  ''/opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/''
+       a. Move a python custom layer script to the Model Optimizer operations directory:
+       b. ''/opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/''
  
 10. Run the Model Optimizer
 11. Compile your C++ code.
