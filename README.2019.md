@@ -25,7 +25,8 @@ This will allow the OpenVINO Inference Engine to run the custom layer.  The cosh
 ### Custom Layers
 Custom layers are NN (Neural Network) layers that are not explictly supported by a given framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers. This way you can plug in your own implementation for existing or completely new layers.
 
-The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the [OpenVINO MO Documentation](https://software.intel.com/en-us/articles/OpenVINO-ModelOptimizer#intermediate-representation-notation-catalog).  If your topology contains any layers that are not in the list of known layers, the Model Optimizer considers them to be custom.
+The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the OpenVINO Documentation https://docs.openvinotoolkit.org/latest/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#intermediate-representation-notation-catalog 
+If your topology contains and layers that are not in the list of known layers, the Model Optimizer considers them to be custom.
 
 Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
 
@@ -164,3 +165,6 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
     python3 classification_sample.py -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -l ~/cl_ext_cosh/libcosh_cpu_extension.so -d CPU
     ```
+
+Thank you for going through the tutorial. We would appreciate you answering this survey in order for us to improve it: https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX
+
