@@ -166,5 +166,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     python3 classification_sample.py -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -l ~/cl_ext_cosh/libcosh_cpu_extension.so -d CPU
     ```
 
-Thank you for going through the tutorial. We would appreciate you answering this survey in order for us to improve it: https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX
+Thank you for going through the tutorial. We would appreciate you answering this survey in order for us to improve it:
+[Intel Custom Layer Survey](https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX)
+
 
