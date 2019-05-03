@@ -77,10 +77,10 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     * We're using `~/cl_cosh` as the target extension path:<br><br>
     * This will create templates that will be partially replaced by Python and C++ code for executing the layer.
     ```
-    mkdir ~/cl_cosh
+    mkdir /tmp/cl_cosh
     ```
     ```
-    python3 /opt/intel/openvino/deployment_tools/tools/extension_generator/extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --output_dir=~/cl_cosh
+    python3 /opt/intel/openvino/deployment_tools/tools/extension_generator/extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --output_dir=/tmp/cl_cosh
     ```
     * Answer questions as follows:
     ```
@@ -92,7 +92,10 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
     ```
     * Answer the remaining questions as appropriate, and enter <b>`q`</b> when prompted for parameters<br>
-
+    * Move the cl_cosh directory to home.
+    ```
+    mv /tmp/cl_cosh ~
+    ```
 
 5. Add Custom (cosh) Python Layers:
     1. Copy to the Model Optimizer Ops Directory:<br>
