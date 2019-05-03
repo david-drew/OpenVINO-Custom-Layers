@@ -87,7 +87,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     1.  Please enter layer name:     cosh
     2.  Do you want to automatically parse all parameters from model file
     (parameters will be automatically parsed during Model Optimizer work as is,
-     without renaming or omitting) (y/n)       True
+     without renaming or omitting) (y/n)       y
     3. Do you want to change any answer (y/n) ? Default 'no'   no
 
     ```
