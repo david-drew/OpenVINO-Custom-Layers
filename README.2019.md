@@ -235,7 +235,8 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     sudo pip3 install opencv-python
     ```
     ```
-    cp /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py .
+    cp 
+    /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py .
     ```
    
     <br>Try running the Python Sample without including the cosh extension library.<br>
