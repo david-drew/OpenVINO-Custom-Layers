@@ -82,6 +82,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
     python3 /opt/intel/openvino/deployment_tools/tools/extension_generator/extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --output_dir=/tmp/cl_cosh
     ```
+
     * Answer questions as follows:
     ```
     
@@ -155,9 +156,6 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     Stub files for Inference Engine CPU extension are in /tmp/cosh/./user_ie_extensions/cpu folder
     '''
 
-    ```
-    * Answer the remaining questions as appropriate, and enter <b>`q`</b> when prompted for parameters<br>
-    * Move the cl_cosh directory to home.
     ```
 
     ```
