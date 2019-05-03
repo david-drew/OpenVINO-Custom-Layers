@@ -159,6 +159,8 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     * Answer the remaining questions as appropriate, and enter <b>`q`</b> when prompted for parameters<br>
     * Move the cl_cosh directory to home.
     ```
+
+    ```
     mv /tmp/cl_cosh ~
     ```
 
