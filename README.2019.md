@@ -84,7 +84,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
     * Answer questions as follows:
     ```
-    ```
+    
     Please enter layer name:   
     [cosh]
 
