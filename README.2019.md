@@ -85,7 +85,6 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
     * Answer questions as follows:
     ```
-    
     Please enter layer name:   
     [cosh]
 
@@ -150,11 +149,12 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
 
     * The output should be something like:
-    '''
+    
+    ```
     Stub file for TensorFlow Model Optimizer extractor is in /tmp/cl_cosh/user_mo_extensions/front/tf folder
     Stub file for Model Optimizer operation is in /tmp/cl_cosh/./user_mo_extensions/ops folder
     Stub files for Inference Engine CPU extension are in /tmp/cosh/./user_ie_extensions/cpu folder
-    '''
+    ```
 
     ```
     mv /tmp/cl_cosh ~
