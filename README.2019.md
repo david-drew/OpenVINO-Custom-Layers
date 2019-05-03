@@ -41,6 +41,14 @@ If your topology contains and layers that are not in the list of known layers, t
 
 Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
 
+### Custom Layers implementaion workflow in OpenVINO
+When implementing the custom layer in OpenVINO toolkit for your pre-trained model, you will need to implment it in both Model Optimizer and Inference Engine. Following figure shows the worksflow for the custom layer implementation. 
+<br>
+
+![image of CL workflow](https://github.com/intel-iot-devkit/smart-video-workshop/blob/master/images/Movidius.png "connected NCS")
+
+<br>
+
 ### Example custom layer- Hyperbolic Cosine (cosh) function 
 We showcase custom layer implementation using a simple function, hyperbolic cosine (cosh). Mathematically, it is represented as:
 
