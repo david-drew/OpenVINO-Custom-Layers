@@ -55,7 +55,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 ![](https://latex.codecogs.com/gif.latex?cosh%28x%29%3D%5Cfrac%7Be%5E%7Bx%7D&plus;e%5E%7B-x%7D%7D%7B2%7D)
 
 ### Extension Generator
-
+This tool generates extension source files with stubs for the core functions. To get the workable extension, you should only add your implementation of these functions to the generated files.
 
 ### Steps to implement custom layers on Ubuntu 16.04
 
