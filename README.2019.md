@@ -157,8 +157,6 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     '''
 
     ```
-
-    ```
     mv /tmp/cl_cosh ~
     ```
 
