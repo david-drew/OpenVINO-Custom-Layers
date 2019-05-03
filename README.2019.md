@@ -84,11 +84,76 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
     * Answer questions as follows:
     ```
-    1.  Please enter layer name:     cosh
-    2.  Do you want to automatically parse all parameters from model file
-    (parameters will be automatically parsed during Model Optimizer work as is,
-     without renaming or omitting) (y/n)       y
-    3. Do you want to change any answer (y/n) ? Default 'no'   no
+    ```
+    Please enter layer name:   
+    [cosh]
+
+    Do you want to automatically parse all parameters from model file
+    [n]
+
+    Please enter all parameters in format
+    [q]
+
+    1.  Please enter layer name:       
+    [cosh]
+
+    2.  Do you want to automatically parse all parameters from model file...
+    [n]
+	 
+    3.  Please enter all parameters in format...
+    [q]
+
+    Do you want to change any answer (y/n) ? Default 'no'
+    [n]
+
+    Please enter operation name:   
+    [cosh]
+
+    Please input all attributes that should be output in IR or needed for shape calculation in format:
+    [q]
+
+    Please input all internal attributes for your operation (which should be omitted in IR) in format:
+    [q]
+
+    Does your operation change shape? (y/n)
+    [n]
+
+    1.  Please input all attributes that should be output in IR or needed for shape calculation in format:
+    [q]
+
+    2.  Please input all internal attributes for your operation (which should be omitted in IR) in format:
+    [q]
+
+    3.  Does your operation change shape? (y/n)
+    [n]
+
+    Do you want to change any answer (y/n) ? Default 'no'
+    [n]
+
+    Please enter operation name:    
+    [cosh]
+
+    Please enter all parameters in format
+    [q]
+
+    Please check your answers for extractor generation:
+
+    1.  Please enter operation name:        
+    [cosh]
+
+    2.  Please enter all parameters in format
+    [n]
+
+    Do you want to change any answer (y/n) ? Default 'no'
+    [n]
+    ```
+
+    * The output should be something like:
+    '''
+    Stub file for TensorFlow Model Optimizer extractor is in /tmp/cl_cosh/user_mo_extensions/front/tf folder
+    Stub file for Model Optimizer operation is in /tmp/cl_cosh/./user_mo_extensions/ops folder
+    Stub files for Inference Engine CPU extension are in /tmp/cosh/./user_ie_extensions/cpu folder
+    '''
 
     ```
     * Answer the remaining questions as appropriate, and enter <b>`q`</b> when prompted for parameters<br>
