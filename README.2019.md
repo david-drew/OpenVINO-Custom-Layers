@@ -155,7 +155,7 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     
     <b>Using a C++ Sample</b><br>
     ```
-    ~/inference_engine_samples/intel64/Release/classification_sample -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libcosh_cpu_extension.so
+    ~/inference_engine_samples_build/intel64/Release/classification_sample -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libcosh_cpu_extension.so
     ```
     <br><b>Using a Python Sample</b><br>
     
