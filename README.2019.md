@@ -12,13 +12,24 @@ The Model Optimizer is abbreviated `MO` for the remainder of this document.
 
 There are 2 directories with C++ and Python source code for the cosh layer. 
 
-### This Tutorial
-In this tutorial, we're going to:
-<ol>
-	<li>Build a TensorFlow model with a custom (cosh) layer.</li>
-	<li>Convert and optimize the model to Intel's IR format using MO</li>
-	<li>Create Python bindings and a C++ library</li>
-</ol>
+### Custom Layer Outline
+ 
+1. Have your trained model ready.
+2. Requirements:
+   * OpenVINO
+   * cogapp (python lib, install via pip3)
+   * The trained model you want to convert to OpenVINO 
+3. Setup OpenVINO environment
+4. Run Model Extension Generator (tool for Model Optimizer)
+   * This creates “code stubs” that will be edited in steps 7 and 8 with the custom algorithm.
+5. Edit C++ Code (produced by MEG)
+6. Edit Python Scripts (produced by MEG)
+7. Workaround for Linux
+   * Move a python custom layer script to the Model Optimizer operations directory:
+   * `/opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/`
+10. Run the Model Optimizer
+11. Compile your C++ code.
+12. Test with Python and/or C++ sample apps.
 		
 This will allow the OpenVINO Inference Engine to run the custom layer.  The cosh function has been chosen because it allows a simple example of the process.
 
