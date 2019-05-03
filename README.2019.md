@@ -42,7 +42,7 @@ If your topology contains and layers that are not in the list of known layers, t
 Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
 
 ### Custom Layers implementaion workflow in OpenVINO
-When implementing the custom layer in OpenVINO toolkit for your pre-trained model, you will need to implment it in both Model Optimizer and Inference Engine. Following figure shows the worksflow for the custom layer implementation. 
+When implementing the custom layer in OpenVINO toolkit for your pre-trained model, you will need to extensions in both Model Optimizer and Inference Engine. Following figure shows the worksflow for the custom layer implementation. 
 <br>
 
 ![image of CL workflow](https://github.com/david-drew/OpenVINO-Custom-Layers/blob/master/2019.r1/workflow.png "CL Workflow")
@@ -54,8 +54,10 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 ![](https://latex.codecogs.com/gif.latex?cosh%28x%29%3D%5Cfrac%7Be%5E%7Bx%7D&plus;e%5E%7B-x%7D%7D%7B2%7D)
 
+### Extension Generator
 
----
+
+### Steps to implement custom layers on Ubuntu 16.04
 
 1. Prep and git clone this repository:<br>
     ```
