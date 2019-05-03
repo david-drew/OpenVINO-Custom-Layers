@@ -62,6 +62,7 @@ include_directories (PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/common
     ${InferenceEngine_INCLUDE_DIRS}
     ${OVPATH}/deployment_tools/inference_engine/external/tbb/include
+    ${OVPATH}/deployment_tools/inference_engine/include/
 )
 
 #enable_omp()
