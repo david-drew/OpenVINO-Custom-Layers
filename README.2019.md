@@ -45,7 +45,7 @@ Model Optimizer searches for each layer of the input model in the list of known 
 When implementing the custom layer in OpenVINO toolkit for your pre-trained model, you will need to implment it in both Model Optimizer and Inference Engine. Following figure shows the worksflow for the custom layer implementation. 
 <br>
 
-![image of CL workflow](https://github.com/intel-iot-devkit/smart-video-workshop/blob/master/images/Movidius.png "connected NCS")
+![image of CL workflow](https://github.com/david-drew/OpenVINO-Custom-Layers/blob/master/2019.r1/workflow.png "CL Workflow")
 
 <br>
 
