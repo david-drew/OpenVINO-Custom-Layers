@@ -77,6 +77,9 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     * We're using `~/cl_cosh` as the target extension path:<br><br>
     * This will create templates that will be partially replaced by Python and C++ code for executing the layer.
     ```
+    mkdir ~/cl_cosh
+    ```
+    ```
     python3 /opt/intel/openvino/deployment_tools/tools/extension_generator/extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --output_dir=~/cl_cosh
     ```
     * Answer questions as follows:
