@@ -126,6 +126,6 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
 
 10. Test your results<br>
     ```
-    ~/inference_engine_samples_build/intel64/Release/classification_sample -i pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so 
+    ~/inference_engine_samples/intel64/Release/classification_sample -i pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU -l ~/cl_ext_cosh/libuser_cpu_extension.so 
     ```
 
