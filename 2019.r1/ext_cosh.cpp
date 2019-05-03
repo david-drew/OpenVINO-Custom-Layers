@@ -29,7 +29,7 @@
 // to the corresponding section).
 // ===============================================================================
 
-#define IE_THREAD 1
+//#define IE_THREAD 1
 
 #include "ext_list.hpp"
 #include "ext_base.hpp"

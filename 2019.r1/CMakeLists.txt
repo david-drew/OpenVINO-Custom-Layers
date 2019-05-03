@@ -1,17 +1,6 @@
 #
-# Copyright (c) 2018 Intel Corporation
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Copyright (C) 2018-2019 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
 
 # ===============================================================================
 # Generated file for building library with user generated CPU extensions
@@ -23,10 +12,8 @@
 # <INSTALL_DIR>/deployment_tools/documentation/docs/index.html an then navigate
 # to the corresponding section).
 # ===============================================================================
-cmake_minimum_required(VERSION 3.5)
 
 set(TARGET_NAME "cosh_cpu_extension")
-set(OVPATH $ENV{INTEL_CVSDK_DIR} )
 
 get_filename_component(CMAKE_PREFIX_PATH "${InferenceEngine_DIR}" ABSOLUTE)
 
@@ -36,10 +23,6 @@ find_package(InferenceEngine 1.0)
 if (NOT InferenceEngine_FOUND)
     message(FATAL_ERROR "Inference Engine was not found")
 endif()
-
-if(COMMAND cmake_policy)
-  cmake_policy(SET CMP0003 NEW)
-endif(COMMAND cmake_policy)
 
 file(GLOB_RECURSE SRC *.cpp)
 file(GLOB_RECURSE HDR *.hpp)
@@ -61,14 +44,14 @@ endif()
 include_directories (PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/common
     ${InferenceEngine_INCLUDE_DIRS}
-    ${OVPATH}/deployment_tools/inference_engine/external/tbb/include
-    ${OVPATH}/deployment_tools/inference_engine/include/
+    "/opt/intel/openvino/deployment_tools/inference_engine/include"
+    "/opt/intel/openvino_2019.1.094/deployment_tools/inference_engine/external/tbb/include"
 )
 
 #enable_omp()
 
 add_library(${TARGET_NAME} SHARED ${SRC} ${HDR})
-target_link_libraries(${TARGET_NAME} ${InferenceEngine_LIBRARIES} ${intel_omp_lib} ${OVPATH}/openvx/lib/libiomp5.so)
+target_link_libraries(${TARGET_NAME} ${InferenceEngine_LIBRARIES} ${intel_omp_lib})
 target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(${TARGET_NAME} PROPERTIES COMPILE_PDB_NAME ${TARGET_NAME})
 
