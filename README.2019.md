@@ -84,10 +84,12 @@ We showcase custom layer implementation using a simple function, hyperbolic cosi
     ```
     * Answer questions as follows:
     ```
-    1.  Is your layer Pythonic (y/n)?       y
-    2.  Please enter operation name:        cosh
-    3.  Does your operation change shape?   n
-    Please enter operation name:            cosh
+    1.  Please enter layer name:     cosh
+    2.  Do you want to automatically parse all parameters from model file
+    (parameters will be automatically parsed during Model Optimizer work as is,
+     without renaming or omitting) (y/n)       True
+    3. Do you want to change any answer (y/n) ? Default 'no'   no
+
     ```
     * Answer the remaining questions as appropriate, and enter <b>`q`</b> when prompted for parameters<br>
 
