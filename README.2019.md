@@ -8,20 +8,20 @@ If you haven't already, download the Intel® Distribution of OpenVINO™ 2019 R1
 
 ---
 
-The `classification_sample` code, is located here:<br>
+The `classification_sample` code is located here:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`~/inference_engine_samples/intel64/Release`<br>
 
 There are 2 directories with C++ and Python source code for the cosh layer. 
 
 ### Custom Layer Outline
  
-1. Have your trained model ready.
+1. Have your trained model ready. (KAT: Redundant to #2 below?)
 2. Requirements:
    * OpenVINO
    * cogapp (python lib, install via pip3)
-   * The trained model you want to convert to OpenVINO 
-3. Setup OpenVINO environment.
-4. Run Model Extension Generator (tool for Model Optimizer).
+   * Your trained model 
+3. Setup the OpenVINO environment.
+4. Run the Model Extension Generator.
    * This creates “code stubs” that will be edited in steps 7 and 8 with the custom algorithm.
 5. Edit C++ Code (produced by MEG).
 6. Edit Python Scripts (produced by MEG).
@@ -32,13 +32,14 @@ There are 2 directories with C++ and Python source code for the cosh layer.
 11. Compile your C++ code.
 12. Test with Python and/or C++ sample apps.
 		
-This will allow the OpenVINO Inference Engine to run the custom layer. The cosh function used in this tutorial allows a simple example of the process.
+These steps allow the OpenVINO Inference Engine to run the custom layer. The cosh function used in this tutorial allows a simple example of the process.
 
 ### Custom Layers
-Custom layers are NN (Neural Network) layers that are not explictly supported by a given framework. This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you can plug in your own implementation for existing or completely new layers.
+Custom layers are NN (Neural Network) layers that are not explictly supported by a given framework. This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you to plug in your own implementation for existing or completely new layers.
 
-The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the OpenVINO Documentation https://docs.openvinotoolkit.org/latest/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#intermediate-representation-notation-catalog 
-If your topology contains and layers that are not in the list of known layers, the Model Optimizer considers them to be custom.
+The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the OpenVINO Documentation: https://docs.openvinotoolkit.org/latest/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#intermediate-representation-notation-catalog 
+<br><br>
+##If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.##
 
 The Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
 
@@ -250,7 +251,7 @@ This tool generates extension source files with stubs for the core functions. To
     /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py .
     ```
    
-    <br>Try running the Python Sample without including the cosh extension library. (This will generate an error!)<br>
+    <br>Try running the Python Sample without including the cosh extension library:<br>
     ```
     python3 classification_sample.py -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU
     ```
