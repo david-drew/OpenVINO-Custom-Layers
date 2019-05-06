@@ -39,7 +39,7 @@ Custom layers are NN (Neural Network) layers that are not explictly supported by
 
 The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the OpenVINO Documentation: https://docs.openvinotoolkit.org/latest/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#intermediate-representation-notation-catalog 
 <br><br>
-##If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.##
+If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.
 
 The Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
 
