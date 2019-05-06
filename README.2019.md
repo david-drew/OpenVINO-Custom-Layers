@@ -1,5 +1,5 @@
-# OpenVINO Custom Layer Tutorial for Linux
-(KAT: What version of OpenVINO?  2019 R1? Generic Linux, or just Ubuntu 16.04?)
+# OpenVINO 2019 R1 Custom Layer Tutorial for Linux
+This tutorial has been tested and confirmed on Ubuntu 16.04.
 
 ## Before You Start
 It's assumed that you've installed `OpenVINO 2019.r1 for Linux`, including the Model Optimizer, in the default /opt/intel directory. If you're using an earlier version, refer to this [document](./README.md). If you've installed to a different directory you may need to change the directory pathways in the commands below.
@@ -15,22 +15,21 @@ There are 2 directories with C++ and Python source code for the cosh layer.
 
 ### Custom Layer Outline
  
-1. Have your trained model ready. (KAT: Redundant to #2 below?)
-2. Requirements:
+1. Requirements:
    * OpenVINO
    * cogapp (python lib, install via pip3)
    * Your trained model 
-3. Setup the OpenVINO environment.
-4. Run the Model Extension Generator (MEG).
+2. Setup the OpenVINO environment.
+3. Run the Model Extension Generator (MEG).
    * This creates “code stubs” that will be edited in steps 7 and 8 with the custom algorithm.
-5. Edit C++ Code (produced by MEG).
-6. Edit Python Scripts (produced by MEG).
-7. Workaround for Linux:
+4. Edit C++ Code (produced by MEG).
+5. Edit Python Scripts (produced by MEG).
+6. Workaround for Linux:
    * Move a python custom layer script to the Model Optimizer operations directory:
    * `/opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/`
-10. Run the Model Optimizer.
-11. Compile your C++ code.
-12. Test with Python and/or C++ sample apps.
+7. Run the Model Optimizer.
+8. Compile your C++ code.
+9. Test with Python and/or C++ sample apps.
 		
 These steps allow the OpenVINO Inference Engine to run the custom layer. The cosh function used in this tutorial allows a simple example of the process.
 
@@ -39,7 +38,7 @@ Custom layers are NN (Neural Network) layers that are not explictly supported by
 
 The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the OpenVINO Documentation: https://docs.openvinotoolkit.org/latest/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#intermediate-representation-notation-catalog 
 <br><br>
-##If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.##
+If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.
 
 The Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
 
@@ -57,9 +56,9 @@ We showcase custom layer implementation using a simple function; hyperbolic cosi
 ![](https://latex.codecogs.com/gif.latex?cosh%28x%29%3D%5Cfrac%7Be%5E%7Bx%7D&plus;e%5E%7B-x%7D%7D%7B2%7D)
 
 ### Extension Generator (MEG)
-This tool generates extension source files with stubs for the core functions. To get the workable extension, you will add your implementation of these functions to the generated files.  (KAT: How do we do that?  Is that outlined in the steps below?  This isn't totally clear...)
+This tool generates extension source files with stubs for the core functions. To get the workable extension, you will add your implementation of these functions to the generated files.  
 
-### Steps to implement custom layers on Ubuntu 16.04  (KAT:  Only Ubuntu 10.04? Or could this be a generic Linux tutorial?)
+### Steps to implement custom layers on Ubuntu 16.04
 
 1. Prep and git clone this repository:<br>
     ```
@@ -85,9 +84,9 @@ This tool generates extension source files with stubs for the core functions. To
     sudo pip3 install cogapp
     ```
 
-4. Run the Model Optimizer extension generator and answer questions as appropriate: (KAT: "As appropriate"?  Or "As follows" below?)
-    * We're using `~/cl_cosh` as the target extension path:<br><br>
-    * This will create templates that will be partially replaced by Python and C++ code for executing the layer.
+4. Run the Model Optimizer extension generator:
+   We're using `~/cl_cosh` as the target extension path:<br><br>
+   This will create templates that will be partially replaced by Python and C++ code for executing the layer.
     ```
     mkdir /tmp/cl_cosh
     ```
