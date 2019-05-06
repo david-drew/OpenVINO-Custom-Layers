@@ -161,12 +161,13 @@ This tool generates extension source files with stubs for the core functions. To
     ```
 
     * The output will be similar to the following:
-    
-    ```
-    Stub file for TensorFlow Model Optimizer extractor is in /tmp/cl_cosh/user_mo_extensions/front/tf folder
-    Stub file for Model Optimizer operation is in /tmp/cl_cosh/./user_mo_extensions/ops folder
-    Stub files for Inference Engine CPU extension are in /tmp/cosh/./user_ie_extensions/cpu folder
-    ```
+     
+<br>
+
+![image of extgen output](https://github.com/david-drew/OpenVINO-Custom-Layers/blob/master/2019.r1/extgen_output.png "extge output")
+
+<br>
+
 
     ```
     mv /tmp/cl_cosh ~
