@@ -220,7 +220,7 @@ This tool generates extension source files with stubs for the core functions. To
 	cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/CMakeLists.txt .
     ```
     ```
-	mkdir build && cd build
+	mkdir -p build && cd build
     ```
     ```
 	cmake ..
