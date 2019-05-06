@@ -1,5 +1,5 @@
 # OpenVINO Custom Layer Tutorial for Linux
-(KAT: What version of OpenVINO?  2019 R1?)
+(KAT: What version of OpenVINO?  2019 R1? Generic Linux, or just Ubuntu 16.04?)
 
 ## Before You Start
 It's assumed that you've installed `OpenVINO 2019.r1 for Linux`, including the Model Optimizer, in the default /opt/intel directory. If you're using an earlier version, refer to this [document](./README.md). If you've installed to a different directory you may need to change the directory pathways in the commands below.
