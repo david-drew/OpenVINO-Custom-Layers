@@ -1,7 +1,9 @@
 # OpenVINO Custom Layer Tutorial
 
 ## Before You Start
-It's assumed that you've installed `OpenVINO 2019.r1`, including the Model Optimizer, in the default /opt/intel directory,.  If you're using an earlier version, refer to this [document](./README.md).  If you've installed to another directory, you may have to make changes to some of the commands.
+It's assumed that you've installed `OpenVINO 2019.r1 for Linux`, including the Model Optimizer, in the default /opt/intel directory,.  If you're using an earlier version, refer to this [document](./README.md).  If you've installed to another directory, you may have to make changes to some of the commands.
+
+If you haven't already, download the Intel® Distribution of OpenVINO™ 2019 R1 toolkit package file from  [Intel® Distribution of OpenVINO™ toolkit for Linux*](https://software.intel.com/en-us/openvino-toolkit/choose-download). Select the Intel® Distribution of OpenVINO™ toolkit for Linux package from the dropdown menu.
 
 ---
 
