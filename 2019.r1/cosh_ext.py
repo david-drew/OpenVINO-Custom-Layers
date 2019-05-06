@@ -18,7 +18,7 @@ from mo.front.extractor import FrontExtractorOp
 from mo.ops.cosh import Cosh
 
 
-class CoshFrontExtractor(FrontExtractorOp):
+class coshFrontExtractor(FrontExtractorOp):
     op = 'Cosh'
     enabled = True
 
