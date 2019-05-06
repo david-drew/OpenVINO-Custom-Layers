@@ -21,7 +21,7 @@ There are 2 directories with C++ and Python source code for the cosh layer.
    * cogapp (python lib, install via pip3)
    * Your trained model 
 3. Setup the OpenVINO environment.
-4. Run the Model Extension Generator.
+4. Run the Model Extension Generator (MEG).
    * This creates “code stubs” that will be edited in steps 7 and 8 with the custom algorithm.
 5. Edit C++ Code (produced by MEG).
 6. Edit Python Scripts (produced by MEG).
@@ -39,7 +39,7 @@ Custom layers are NN (Neural Network) layers that are not explictly supported by
 
 The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the OpenVINO Documentation: https://docs.openvinotoolkit.org/latest/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#intermediate-representation-notation-catalog 
 <br><br>
-If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.
+##If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.##
 
 The Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
 
@@ -56,7 +56,7 @@ We showcase custom layer implementation using a simple function; hyperbolic cosi
 
 ![](https://latex.codecogs.com/gif.latex?cosh%28x%29%3D%5Cfrac%7Be%5E%7Bx%7D&plus;e%5E%7B-x%7D%7D%7B2%7D)
 
-### Extension Generator
+### Extension Generator (MEG)
 This tool generates extension source files with stubs for the core functions. To get the workable extension, you will add your implementation of these functions to the generated files.  (KAT: How do we do that?  Is that outlined in the steps below?  This isn't totally clear...)
 
 ### Steps to implement custom layers on Ubuntu 16.04  (KAT:  Only Ubuntu 10.04? Or could this be a generic Linux tutorial?)
