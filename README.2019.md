@@ -37,7 +37,7 @@ These steps allow the OpenVINO Inference Engine to run the custom layer. The cos
 Custom layers are NN (Neural Network) layers that are not explictly supported by a given framework. This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you to plug in your own implementation for existing or completely new layers.
 
 The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the OpenVINO Documentation: https://docs.openvinotoolkit.org/latest/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#intermediate-representation-notation-catalog 
-<br><br>
+<br>
 If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.
 
 The Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
@@ -94,7 +94,7 @@ This tool generates extension source files with stubs for the core functions. To
     python3 /opt/intel/openvino/deployment_tools/tools/extension_generator/extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --output_dir=/tmp/cl_cosh
     ```
 
-    * Answer the Model Optimizer extension generator questions as follows:
+   Answer the Model Optimizer extension generator questions as follows:
     ```
     Please enter layer name:   
     [cosh]
@@ -159,7 +159,7 @@ This tool generates extension source files with stubs for the core functions. To
     [n]
     ```
 
-    * The output will be similar to the following:
+   The output will be similar to the following:
      
 <br>
 
@@ -173,25 +173,25 @@ This tool generates extension source files with stubs for the core functions. To
     ```
 
 5. Add Custom (cosh) Python Layers:
-    1. Copy to the Model Optimizer Ops Directory:<br>
-    * This allows the Model Optimizer to find the Python implementation of cosh.<br><br>
+   Copy to the Model Optimizer Ops Directory:<br>
+   This allows the Model Optimizer to find the Python implementation of cosh.<br><br>
     ```
     sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
     ```
 
-    2. Copy to the Extension Generation Python Target Dir:<br><br>
+   Copy to the Extension Generation Python Target Dir:<br><br>
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/
     ```
 
 6. Copy CPU and GPU source code to the Model Optimizer extensions directory:<br>
-    * This will be used for building a back-end library for applications that implement cosh.<br><br>
+   This will be used for building a back-end library for applications that implement cosh.<br><br>
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
     ```
 
 7. Create the TensorFlow model (weights, graphs, checkpoints):<br>
-    * We create a simple model. The weights are random and untrained, but sufficient for demonstrating Custom Layer conversion.<br><br>
+   We create a simple model. The weights are random and untrained, but sufficient for demonstrating Custom Layer conversion.<br><br>
     ```
     cd ~/cl_tutorial/OpenVINO-Custom-Layers/create_tf_model
     ```
@@ -201,7 +201,7 @@ This tool generates extension source files with stubs for the core functions. To
 
 
 8. Convert the TensorFlow model to Intel IR format:<br>
-    * We run the Model Optimizer for TensorFlow to convert and optimize the new model for OpenVINO. We explicitly set the batch to 1 because the model has an input dim of "-1". TensorFLow allows "-1" as a variable indicating "to be filled in later", but the Model Optimizer requires explicit information for the optimization process. The output is the full name of the final output layer.<br><br>
+   We run the Model Optimizer for TensorFlow to convert and optimize the new model for OpenVINO. We explicitly set the batch to 1 because the model has an input dim of "-1". TensorFLow allows "-1" as a variable indicating "to be filled in later", but the Model Optimizer requires explicit information for the optimization process. The output is the full name of the final output layer.<br><br>
 	```
     cd ~/cl_new
 	```
@@ -211,7 +211,7 @@ This tool generates extension source files with stubs for the core functions. To
 
 
 9. Compile the C++ extension library:<br>
-    * We're building the back-end C++ library to be used by the Inference Engine for executing the cosh layer.<br><br>
+   Here we're building the back-end C++ library to be used by the Inference Engine for executing the cosh layer.<br><br>
     ```
 	cd ~/cl_cosh/user_ie_extensions/cpu
     ```
