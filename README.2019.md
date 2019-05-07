@@ -182,7 +182,7 @@ This tool generates extension source files with stubs for the core functions. To
 
    Copy to the Extension Generation Python Target Dir:<br><br>
     ```
-    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/
+    <del>cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh_ext.py ~/cl_cosh/user_mo_extensions/ops/</del>
     ```
 
 7. Copy CPU and GPU source code to the Model Optimizer extensions directory:<br>
