@@ -1,35 +1,54 @@
-"""
- Copyright (c) 2018 Intel Corporation
+# Copyright (C) 2018-2019 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
 
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
+# ===============================================================================
+# Generated file for Model Optimizer Operation extension for a layer
+#
+# You need to modify this file if you need to
+#   1. set default values for several attributes of the layer
+#      (do it in __init__() method)
+#   2. lessen number of attributes to appear in the IR
+#      (specify such a list in backend_attrs() method)
+#   3. handle the layer which output blob is different to the input one
+#      (implement your own static method infer() and set it as attribute in
+#      __init__() dictionary)
+#
+# Refer to the section "Extending Model Optimizer with New Primitives" in
+# OpenVINO* documentation (either online or offline in
+# <INSTALL_DIR>/deployment_tools/documentation/docs/index.html an then navigate
+# to the corresponding section).
+# ===============================================================================
 
-      http://www.apache.org/licenses/LICENSE-2.0
 
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-"""
 
-from mo.front.common.partial_infer.elemental import copy_shape_infer
 from mo.ops.op import Op
+from mo.front.common.partial_infer.elemental import copy_shape_infer
 from mo.graph.graph import Node
 
-class Cosh(Op):
+
+class coshOp(Op):
     op = 'Cosh'
-    enabled = True
-
-    def __init__(self, graph, attrs: dict):
-        super().__init__(graph, {
-            'type': __class__.op,
-            'op': __class__.op,
-            'infer': Cosh.infer,
-        }, attrs)
-
+    
+    def __init__(self, graph, attrs):
+        mandatory_props = dict(
+            type=__class__.op,
+            op=__class__.op,
+            
+            infer=coshOp.infer            
+        )
+        super().__init__(graph, mandatory_props, attrs)
+    
+    
+    
+    
     @staticmethod
     def infer(node: Node):
-        # we just set the same shape to the output
-        copy_shape_infer(node)
+        # ==========================================================
+        # You should add your shape calculation implementation here
+        # If a layer input shape is different to the output one
+        # it means that it changes shape and you need to implement
+        # it on your own. Otherwise, use copy_shape_infer(node).
+        # ==========================================================
+        return copy_shape_infer(node)
+
+
