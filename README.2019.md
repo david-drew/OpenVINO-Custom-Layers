@@ -38,7 +38,8 @@ Custom layers are NN (Neural Network) layers that are not explicitly supported b
 
 The list of known layers is different for any particular framework. To see the layers supported by OpenVINO, refer to the OpenVINO Documentation: https://docs.openvinotoolkit.org/latest/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#intermediate-representation-notation-catalog 
 <br><br>
-If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.
+
+*If your topology contains layers that are not in the list of known layers, the Model Optimizer considers them to be custom.*
 
 The Model Optimizer searches for each layer of the input model in the list of known layers before building the model's internal representation, optimizing the model and producing the Intermediate Representation.
 
@@ -167,7 +168,7 @@ This tool generates extension source files with stubs for the core functions. To
 
 <br>
 
-5. Move `~/cl_cosh`:<br><br>
+5. Move *~/cl_cosh*:<br><br>
 
     ```
     mv /tmp/cl_cosh ~
@@ -200,7 +201,6 @@ This tool generates extension source files with stubs for the core functions. To
     ./build_cosh_model.py
 	```
 
-
 9. Convert the TensorFlow model to Intel IR format:<br>
    We run the Model Optimizer for TensorFlow to convert and optimize the new model for OpenVINO. We explicitly set the batch to 1 because the model has an input dim of "-1". TensorFLow allows "-1" as a variable indicating "to be filled in later", but the Model Optimizer requires explicit information for the optimization process. The output is the full name of the final output layer.<br><br>
 	```
@@ -209,7 +209,6 @@ This tool generates extension source files with stubs for the core functions. To
 	```
     mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions ~/cl_cosh/user_mo_extensions --output_dir ~/cl_ext_cosh
 	```
-
 
 10. Compile the C++ extension library:<br>
    Here we're building the back-end C++ library to be used by the Inference Engine for executing the cosh layer.<br><br>
@@ -233,7 +232,6 @@ This tool generates extension source files with stubs for the core functions. To
     ```
 	cp libcosh_cpu_extension.so ~/cl_ext_cosh/
     ```
-
 
 11. Test your results:<br>
     
