@@ -181,9 +181,9 @@ This tool generates extension source files with stubs for the core functions. To
     sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
     ```
 
-   REMOVE: Copy to the Extension Generation Python Target Dir:<br><br>
+    Rejmove an erroneous cosh extension file:<br><br>
     ```
-    David: TO BE REMOVED
+    rm ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
     ```
 
 7. Copy CPU and GPU source code to the Model Optimizer extensions directory:<br>
