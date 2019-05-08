@@ -149,7 +149,7 @@ This tool generates extension source files with stubs for the core functions. To
 
 <br>
 
-5. Move *~/cl_cosh*:<br><br>
+5. Move the cl_cosh directory:<br><br>
 
     ```
     mv /tmp/cl_cosh ~
