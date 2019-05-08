@@ -97,66 +97,47 @@ This tool generates extension source files with stubs for the core functions. To
 
    Answer the Model Optimizer extension generator questions as follows:
     ```
-    Please enter layer name:   
-    [cosh]
+    Please enter layer name: 
+    [Cosh]
 
-    Do you want to automatically parse all parameters from model file
+    Do you want to automatically parse all parameters from model file...
     [n]
 
-    Please enter all parameters in format
+    Please enter all parameters in format...
+    When you finish please enter 'q'  
     [q]
 
-    1.  Please enter layer name:       
-    [cosh]
-
-    2.  Do you want to automatically parse all parameters from model file...
-    [n]
-	 
-    3.  Please enter all parameters in format...
-    [q]
-
-    Do you want to change any answer (y/n) ? Default 'no'
+    Do you want to change any answer (y/n) ?
     [n]
 
-    Please enter operation name:   
-    [cosh]
+    Please enter operation name:
+    [Cosh]
 
-    Please input all attributes that should be output in IR or needed for shape calculation in format:
+    Please input all attributes that should be output in IR...
+    ...
+    When you finish enter 'q'
     [q]
 
-    Please input all internal attributes for your operation (which should be omitted in IR) in format:
+    Please input all internal attributes for your operation...
+    ...
+    When you finish enter 'q'
     [q]
 
-    Does your operation change shape? (y/n)
+    Does your operation change shape? (y/n)  
     [n]
 
-    1.  Please input all attributes that should be output in IR or needed for shape calculation in format:
-    [q]
-
-    2.  Please input all internal attributes for your operation (which should be omitted in IR) in format:
-    [q]
-
-    3.  Does your operation change shape? (y/n)
-    [n]
-
-    Do you want to change any answer (y/n) ? Default 'no'
+    Do you want to change any answer (y/n) ?
     [n]
 
     Please enter operation name:    
-    [cosh]
+    [Cosh]
 
-    Please enter all parameters in format
+    Please enter all parameters in format...
+    ...
+    When you finish please enter 'q'
     [q]
 
-    Please check your answers for extractor generation:
-
-    1.  Please enter operation name:        
-    [cosh]
-
-    2.  Please enter all parameters in format
-    [n]
-
-    Do you want to change any answer (y/n) ? Default 'no'
+    Do you want to change any answer (y/n) ?
     [n]
     ```
 
