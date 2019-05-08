@@ -231,7 +231,7 @@ This tool generates extension source files with stubs for the core functions. To
     /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py .
     ```
    
-    <br>Try running the Python Sample without including the cosh extension library:<br>
+    <br>Try running the Python Sample without including the cosh extension library. You should see the error describing unsupported Cosh operation. 
     ```
     python3 classification_sample.py -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d CPU
     ```
