@@ -5,7 +5,7 @@ from tensorflow.python.framework import graph_io
 from NetworkBuilder import NetworkBuilder
 import datetime
 import numpy as np
-import os, os.path
+import os, os.path, sys
 
 def getLayerNames():
     ##namegraph = get_names()
@@ -71,10 +71,22 @@ with tf.name_scope('accuracy') as scope:
     correct_pred = tf.equal(tf.argmax(prediction, 1), tf.argmax(target_labels, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 
+savedir = ""
+
+if len(sys.argv) > 1:
+  hm_dir = sys.argv[1]
+
+  if os.path.isdir(hm_dir):
+    savedir = hm_dir
+  else:
+    print("\nError: Directory ({}) doesn't exist.  Exiting.".format(hm_dir))
+    sys.exit(1)
+
+if not savedir: 
+  hm_dir = os.path.expanduser('~')
+  savedir = "{}/{}".format(hm_dir, "cl_new")
 
 with tf.Session() as sess:
-    hm_dir = os.path.expanduser('~')
-    savedir = "{}/{}".format(hm_dir, "cl_new")
     #output_layer = "ModCosh/Activation_8/softmax_output:0"
     #output_layer = "ModCosh/Merge/MergeSummary:0"
     #output_layer = "ModCosh/Activation_8/softmax_output:0"
