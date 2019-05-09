@@ -241,6 +241,18 @@ This tool generates extension source files with stubs for the core functions. To
     python3 classification_sample.py -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -l ~/cl_ext_cosh/libcosh_cpu_extension.so -d CPU
     ```
 
+12. Copy GPU source code for cosh custom kernel .cl and .xml files to the cldnn library folder.<br>
+    ```
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh_kernel* /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/cldnn_global_custom_kernels/
+    ```
+13. Test your results
+
+  <b>Using a C++ Sample:</b><br>
+  ```
+  ~/inference_engine_samples_build/intel64/Release/classification_sample -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -d GPU -c /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/cldnn_global_custom_kernels/cosh_kernel.xml
+  ```
+
+
 Thank you for following this tutorial. Your feedback answering this brief survey will help us to improve it:
 [Intel Custom Layer Survey](https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX)
 
