@@ -167,7 +167,7 @@ This tool generates extension source files with stubs for the core functions. To
     rm ~/cl_cosh/user_mo_extensions/ops/cosh_ext.py
     ```
 
-7. Copy CPU and GPU source code to the Model Optimizer extensions directory:<br>
+7. Copy CPU source code to the Model Optimizer extensions directory:<br>
    This will be used for building a back-end library for applications that implement cosh.<br><br>
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
