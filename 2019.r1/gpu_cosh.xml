@@ -1,5 +1,5 @@
 <CustomLayer name="Cosh" type="SimpleGPU" version="1">
-	<Kernel entry="cosh">
+	<Kernel entry="Cosh">
 		<Source filename="cosh_kernel.cl"/>
 	</Kernel>
 	<Buffers>
