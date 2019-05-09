@@ -25,7 +25,7 @@
 
 #pragma OPENCL EXTENSION cl_khr_fp16 : enable
 
-__kernel void cosh_kernel(
+__kernel void Cosh(
      // Insert pointers to inputs, outputs as arguments here
      // If your layer has one input and one output, arguments will be:
           const __global INPUT0_TYPE*  input0, __global OUTPUT0_TYPE* output
