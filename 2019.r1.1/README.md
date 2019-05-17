@@ -136,6 +136,7 @@ This tool generates extension source files with stubs for the core functions. To
     mv /tmp/cl_cosh ~
     ```
 
+
 6. Add Custom (cosh) Python Layers:
    Copy to the Model Optimizer Ops Directory:<br>
    This allows the Model Optimizer to find the Python implementation of cosh.<br><br>
@@ -143,11 +144,13 @@ This tool generates extension source files with stubs for the core functions. To
     sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1.1/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
     ```
 
+
 7. Copy CPU and GPU source code to the Model Optimizer extensions directory:<br>
    This will be used for building a back-end library for applications that implement cosh.<br><br>
     ```
     cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1.1/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
     ```
+
 
 8. Create the TensorFlow model (weights, graphs, checkpoints):<br>
    We create a simple model. The weights are random and untrained, but sufficient for demonstrating Custom Layer conversion.<br><br>
@@ -157,6 +160,7 @@ This tool generates extension source files with stubs for the core functions. To
     ```
     ./build_cosh_model.py
 	```
+
 
 9. Convert the TensorFlow model to Intel IR format:<br>
    We run the Model Optimizer for TensorFlow to convert and optimize the new model for OpenVINO. We explicitly set the batch to 1 because the model has an input dim of "-1". TensorFLow allows "-1" as a variable indicating "to be filled in later", but the Model Optimizer requires explicit information for the optimization process. The output is the full name of the final output layer.<br><br>
