@@ -8,11 +8,13 @@ If you're using an earlier version, refer to this [document](./README.md).
 
 Use the appropriate directory and tutorial for the version of OpenVINO you've installed.
 
-[OpenVINO 2018.r4](https://github.com/david-drew/OpenVINO-Custom-Layers/2018.r4/README.md)
-
-[OpenVINO 2018.r5](https://github.com/david-drew/OpenVINO-Custom-Layers/2018.r5/README.md)
+[Latest - OpenVINO 2019.r1.1](https://github.com/david-drew/OpenVINO-Custom-Layers/2019.r1.1/README.md)
 
 [OpenVINO 2019.r1.0](https://github.com/david-drew/OpenVINO-Custom-Layers/2019.r1.0/README.md)
 
-[OpenVINO 2019.r1.1](https://github.com/david-drew/OpenVINO-Custom-Layers/2019.r1.1/README.md)
+[OpenVINO 2018.r5](https://github.com/david-drew/OpenVINO-Custom-Layers/2018.r5/README.md)
+
+[OpenVINO 2018.r4](https://github.com/david-drew/OpenVINO-Custom-Layers/2018.r4/README.md)
+
+
 
