@@ -47,7 +47,7 @@ The Model Optimizer searches for each layer of the input model in the list of kn
 When implementing the custom layer in OpenVINO toolkit for your pre-trained model, you will need to add extensions in both the Model Optimizer and the Inference Engine. The following figure shows the work flow for the custom layer implementation. 
 <br>
 
-![image of CL workflow](https://github.com/david-drew/OpenVINO-Custom-Layers/tree/master/pics/workflow.png "CL Workflow")
+![image of CL workflow](https://raw.githubusercontent.com/david-drew/OpenVINO-Custom-Layers/tree/master/pics/workflow.png "CL Workflow")
 
 <br>
 
