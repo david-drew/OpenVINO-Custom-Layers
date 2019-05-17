@@ -56,6 +56,15 @@ We showcase custom layer implementation using a simple function; hyperbolic cosi
 
 ![](https://latex.codecogs.com/gif.latex?cosh%28x%29%3D%5Cfrac%7Be%5E%7Bx%7D&plus;e%5E%7B-x%7D%7D%7B2%7D)
 
+### Code Examples
+There are 2 source files where cosh is implemented: `ext_cosh.cpp` (C++ for CPU), and `cosh_kernel.cl` (OpenCL for GPU).  
+
+If you want to look at more advanced, real-world examples, look at the source in:<br>
+  `/opt/intel/openvino/deployment_tools/inference_engine/src/extension`
+  
+ This shows custom layer extensions that are currently used by OpenVINO.  The `ext_argmax.cpp` code is a good example to start.
+  
+
 ### Extension Generator (MEG)
 This tool generates extension source files with stubs for the core functions. To get the workable extension, you will add your implementation of these functions to the generated files.  
 
