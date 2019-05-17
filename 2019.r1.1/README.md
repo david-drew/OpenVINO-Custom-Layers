@@ -2,7 +2,7 @@
 This tutorial has been tested and confirmed on Ubuntu 16.04.
 
 ## Before You Start
-It's assumed that you've installed `OpenVINO 2019.R1.1 for Linux`, including the Model Optimizer, in the default /opt/intel directory. If you're using an earlier version, refer to this [document](./README.md). If you've installed to a different directory you may need to change the directory pathways in the commands below.
+It's assumed that you've installed `OpenVINO 2019 R1.1 for Linux`, including the Model Optimizer, in the default /opt/intel directory. If you're using an earlier version, refer to this [document](./README.md). If you've installed to a different directory you may need to change the directory pathways in the commands below.
 
 If you haven't already, download the Intel® Distribution of OpenVINO™ 2019 R1 toolkit package file from  [Intel® Distribution of OpenVINO™ toolkit for Linux*](https://software.intel.com/en-us/openvino-toolkit/choose-download). Select the Intel® Distribution of OpenVINO™ toolkit for Linux package from the dropdown menu.
 
