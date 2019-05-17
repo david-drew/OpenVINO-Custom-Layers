@@ -47,7 +47,7 @@ The Model Optimizer searches for each layer of the input model in the list of kn
 When implementing the custom layer in OpenVINO toolkit for your pre-trained model, you will need to add extensions in both the Model Optimizer and the Inference Engine. The following figure shows the work flow for the custom layer implementation. 
 <br>
 
-![image of CL workflow](https://github.com/david-drew/OpenVINO-Custom-Layers/blob/master/2019.r1/workflow.png "CL Workflow")
+![image of CL workflow](https://github.com/david-drew/OpenVINO-Custom-Layers/tree/master/pics/workflow.png "CL Workflow")
 
 <br>
 
@@ -97,49 +97,27 @@ This tool generates extension source files with stubs for the core functions. To
 
    Answer the Model Optimizer extension generator questions as follows:
     ```
-    Please enter layer name: 
+    Enter layer name:
     [Cosh]
 
-    Do you want to automatically parse all parameters from model file...
-    [n]
+    Do you want to automatically parse all parameters from the model file? (y/n)
+    [y]
 
-    Please enter all parameters in format...
-    When you finish please enter 'q'  
-    [q]
-
-    Answer Check-
     Do you want to change any answer (y/n) ?
     [n]
 
-    Please enter operation name:
-    [Cosh]
+    Do you want to use the layer name as the operation name? (y/n)
+    [y]
 
-    Please input all attributes that should be output in IR...
-    ...
-    When you finish enter 'q'
+    Input all attributes that should be output in IR or needed for shape calculation in format:
     [q]
 
-    Please input all internal attributes for your operation...
-    ...
-    When you finish enter 'q'
+    Input all internal operation attributes, which will be omitted in IR, in format:
     [q]
 
-    Does your operation change shape? (y/n)  
+    Does your operation change shape? (y/n)
     [n]
 
-    Answer Check-
-    Do you want to change any answer (y/n) ?
-    [n]
-
-    Please enter operation name:    
-    [Cosh]
-
-    Please enter all parameters in format...
-    ...
-    When you finish please enter 'q'
-    [q]
-
-    Answer Check-
     Do you want to change any answer (y/n) ?
     [n]
     ```
@@ -148,7 +126,7 @@ This tool generates extension source files with stubs for the core functions. To
      
 <br>
 
-![image of extgen output](https://github.com/david-drew/OpenVINO-Custom-Layers/blob/master/2019.r1/extgen_output.png "extge output")
+![image of extgen output](https://github.com/david-drew/OpenVINO-Custom-Layers/tree/master/pics/extgen_output.png "extgen output")
 
 <br>
 
