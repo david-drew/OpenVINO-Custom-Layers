@@ -140,7 +140,7 @@ This tool generates extension source files with stubs for the core functions. To
    Copy to the Model Optimizer Ops Directory:<br>
    This allows the Model Optimizer to find the Python implementation of cosh.<br><br>
     ```
-    sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
+    sudo cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1.1/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops/
     ```
 
     Rejmove an erroneous cosh extension file:<br><br>
@@ -151,7 +151,7 @@ This tool generates extension source files with stubs for the core functions. To
 7. Copy CPU and GPU source code to the Model Optimizer extensions directory:<br>
    This will be used for building a back-end library for applications that implement cosh.<br><br>
     ```
-    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
+    cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1.1/ext_cosh.cpp ~/cl_cosh/user_ie_extensions/cpu/
     ```
 
 8. Create the TensorFlow model (weights, graphs, checkpoints):<br>
@@ -178,7 +178,7 @@ This tool generates extension source files with stubs for the core functions. To
 	cd ~/cl_cosh/user_ie_extensions/cpu
     ```
     ```
-	cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1/CMakeLists.txt .
+	cp ~/cl_tutorial/OpenVINO-Custom-Layers/2019.r1.1/CMakeLists.txt .
     ```
     ```
 	mkdir -p build && cd build
