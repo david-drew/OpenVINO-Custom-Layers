@@ -1,5 +1,5 @@
 # Custom Layer Implementation Tutorial for Linux* 
-**Note:** This tutorial has been tested and confirmed on Ubuntu 16.04 using the Intel® Distribution of OpenVINO™ toolkit 2019 R1.  Using this tutorial with any other version may not work correctly.
+**Note:** This tutorial has been tested and confirmed on Ubuntu 16.04 LTS using the Intel® Distribution of OpenVINO™ toolkit 2019 R1.  Using this tutorial with any other versions may not work correctly.
 
 # Introduction
 
@@ -109,7 +109,7 @@ Model saved in path: /home/<user>/cl_tutorial/tf_model/model.ckpt
 
 ## Generate the Template Files Using the Model Extension Generator:
 
-We will use the Model Extension Generator tool to automatically create templates for all the various files that will be needed by the Model Optimizer and Inference Engine to execute the custom layer.  The template files will be partially replaced by Python and C++ code as needed to implement the functionality of *cosh* as needed by the different tools.  To do this for the *cosh* custom layer, we run the Model Extension Generator with the following options:
+We will use the Model Extension Generator tool to automatically create templates for all the various files that will be needed by the Model Optimizer to convert and the Inference Engine to execute the custom layer.  The template files will be partially replaced by Python and C++ code as necessary to implement the functionality of *cosh* as needed by the different tools.  To do this for the *cosh* custom layer, we run the Model Extension Generator with the following options:
 
 - --mo-tf-ext = Generate a template for a Model Optimizer TensorFlow extractor
 - --mo-op = Generate a template for a Model Optimizer custom layer operation
@@ -126,60 +126,47 @@ python3 /opt/intel/openvino/deployment_tools/tools/extension_generator/extgen.py
 The Model Extension Generator will start in interactive mode and prompt the user with questions about the custom layer to be generated.  Use the text between the []'s to answer each of the Model Extension Generator questions as follows:
 
 ```
- Please enter layer name: 
- [Cosh]
+Enter layer name: 
+[Cosh]
 
- Do you want to automatically parse all parameters from model file...
- [n]
+Do you want to automatically parse all parameters from model file...(y/n)
+[n]
 
- Please enter all parameters in format
- ...
- When you finish please enter 'q'  
- [q]
+Please enter all parameters in format
+...
+   Enter 'q' when finished:
+[q]
 
- Do you want to change any answer (y/n) ?
- [n]
+Do you want to change any answer (y/n) ?
+[n]
 
- Please enter operation name:
- [Cosh]
+Do you want to use layer name as operation name? (y/n)
+[y]
 
- Please input all attributes that should be output in IR...
- ...
- When you finish enter 'q'
- [q]
+Does your operation change shape? (y/n)  
+[n]
 
- Please input all internal attributes for your operation...
- ...
- When you finish enter 'q'
- [q]
+Do you want to change any answer (y/n) ?
+[n]
 
- Does your operation change shape? (y/n)  
- [n]
+Enter type and default value for parameters that will be read in IR in format
+    ...
+   Enter 'q' when finished:   
+[q]
 
- Do you want to change any answer (y/n) ?
- [n]
-
- Please enter operation name:    
- [Cosh]
-
- Please enter all parameters in format
- ...
- When you finish please enter 'q'
- [q]
-
- Do you want to change any answer (y/n) ?
- [n]
+Do you want to change any answer (y/n) ?
+[n]
 ```
 
  When complete, the outputted text will appear similar to the following:
 ```
 Stub file for TensorFlow Model Optimizer extractor is in /home/<user>/cl_tutorial/cl_cosh/user_mo_extensions/front/tf folder
-Stub file for Model Optimizer operation is in /home/<user>/cl_tutorial/cl_cosh/./user_mo_extensions/ops folder
-Stub files for Inference Engine CPU extension are in /home/<user>/cl_tutorial/cl_cosh/./user_ie_extensions/cpu folder
-Stub files for Inference Engine GPU extension are in /home/<user>/cl_tutorial/cl_cosh/./user_ie_extensions/gpu folder
+Stub file for Model Optimizer operation is in /home/<user>/cl_tutorial/cl_cosh/user_mo_extensions/ops folder
+Stub files for Inference Engine CPU extension are in /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/cpu folder
+Stub files for Inference Engine GPU extension are in /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/gpu folder
 ```
 
-Stubs (template) files that may need to be edited have just been created in the following locations:
+Stub (template) files that may need to be edited have just been created in the following locations:
 
 - $CLWS/cl_cos/user_mo_extensions/ops
 
@@ -266,7 +253,8 @@ To run the custom layer on the CPU during inference, the extension C++ source co
       -- Generating done
       -- Build files have been written to: /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/cpu/build
       ```
-      The CPU extension library is now ready to be compiled.  Compile the library using the command:
+3. The CPU extension library is now ready to be compiled.  Compile the library using the command:
+
       ```bash
       make -j $(nproc)
       ```
@@ -275,7 +263,8 @@ To run the custom layer on the CPU during inference, the extension C++ source co
       [100%] Linking CXX shared library libcosh_cpu_extension.so
       [100%] Built target cosh_cpu_extension
       ```
-      We now copy the compiled library *libcosh_cpu_extension.so* to the "$CLWS/cl_ext_cosh" directory, where the model's IR files are located, using the command: 
+4. We now copy the compiled library *libcosh_cpu_extension.so* to the "$CLWS/cl_ext_cosh" directory, where the model's IR files are located, using the command: 
+
       ```bash
       cp libcosh_cpu_extension.so $CLWS/cl_ext_cosh/
       ```
