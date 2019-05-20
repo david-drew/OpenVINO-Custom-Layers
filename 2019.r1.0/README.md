@@ -6,9 +6,9 @@
 The purpose of this tutorial is to outline and show by example the necessary steps for implementing custom layers when using the Intel® Distribution of OpenVINO™ toolkit.  To show the base steps that apply to all custom layers, a simple custom layer performing the hyperbolic cosine function (*cosh*) will be used to show the following:
 
 - Setting up and installing prerequisites
-- Using the Model Extension Generator to generate the extension libraries and function stubs for CPU and GPU
-- Compiling the CPU extension library
-- Running the example model using the CPU and GPU extensions
+- Using the Model Extension Generator to generate the extension libraries and function stubs 
+- Using Model Optimizer to generate the example model IR files 
+- Implementing the Inference Engine extension for the example model to run on CPU and GPU 
 
 # Before You Start
 
@@ -23,7 +23,7 @@ If you need to install the Intel® Distribution of OpenVINO™ toolkit, the Linu
 After installing the Intel® Distribution of OpenVINO™ toolkit, the *classification_sample* executable binary will be located in the directory *~/inference_engine_samples_build/intel64/Release*.  This tutorial will use the *classification_sample* executable to run the example model.
 
 # Custom Layers
-Custom layers are Neural Network layers that are not natively supported by a given model framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you to plug in your own implementation for existing or completely new layers.
+Custom layers are neural network model layers that are not natively supported by a given model framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you to plug in your own implementation for existing or completely new layers.
 
 Additional information on custom layers with the Intel® Distribution of OpenVINO™ toolkit can be found in the [Customize Model Optimizer](https://docs.openvinotoolkit.org/2019_R1/_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html) documentation.
 
@@ -31,10 +31,10 @@ The list of known layers is different for each particular model framework.  To s
 
 *If your topology contains layers that are not in the list of known layers, the Model Optimizer considers the layers to be custom.*
 
-The Model Optimizer searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model and producing the Intermediate Representation files.
+The Model Optimizer searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model, and producing the Intermediate Representation files.
 
 ## Custom Layers Implementation Workflow
-When implementing a custom layer for your pre-trained model in the Intel® Distribution of OpenVINO™ toolkit, you will need to add extensions in both the Model Optimizer and the Inference Engine.  The following figure shows the workflow for the custom layer implementation. 
+When implementing a custom layer for your pre-trained model in the Intel® Distribution of OpenVINO™ toolkit, you will need to add extensions in both the Model Optimizer and the Inference Engine.  The following figure shows the workflow for the custom layer implementation with arrows pointing to what the Model Extension Generator tool will create stubs to aid implementation.
 
 ![image of CL workflow](../pics/workflow.png "CL Workflow")
 
@@ -44,7 +44,7 @@ We showcase custom layer implementation using the simple function hyperbolic cos
 ![](../pics/cosh_equation.gif)
 
 ## Model Extension Generator
-The Model Extension Generator tool generates template extension source files with stubs for the core functions.  To complete the implementation of an extension that supplies the custom layer functionality, the stub functions must be edited to fill in the actual implementation of the custom layer.  
+The Model Extension Generator tool generates template extension source files with stubs for each of the core functions needed by the Model Optimizer and the Inference Engine.  To complete the implementation of an extension, the stub functions must be edited to fill-in the actual custom layer functionality.
 
 # Getting Started
 
@@ -64,7 +64,7 @@ source /opt/intel/openvino/bin/setupvars.sh
    sudo pip3 install cogapp
    ```
    
-2. This tutorial will be running a Python sample from the Intel® Distribution of OpenVINO™ toolkit which needs the OpenCV library for Python installed.  Install the OpenCV library using the command:
+2. This tutorial will be running a Python sample from the Intel® Distribution of OpenVINO™ toolkit which needs the OpenCV library for Python to be installed.  Install the OpenCV library using the command:
 
    ```bash
    sudo pip3 install opencv-python
@@ -80,9 +80,9 @@ The first things we need to do are to create a place for the tutorial and then d
     mkdir cl_tutorial
     cd cl_tutorial
     ```
-2. Clone the repository:
+2. Download the tutorial by cloning the repository:
     ```bash
-    git clone https://github.com/david-drew/OpenVINO-Custom-Layers.git    
+    git clone https://github.com/david-drew/OpenVINO-Custom-Layers.git
     ```
 3. Create some convenience environment variables:
     ```bash
@@ -227,8 +227,8 @@ sudo cp $CLT/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops
    To create the model IR files which will include the *cosh* custom layer, we run the commands:
   
    ```bash
-   cd $CLWS/tf_model
-   mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions $CLWS/cl_cosh/user_mo_extensions --output_dir $CLWS/cl_ext_cosh
+  cd $CLWS/tf_model
+  mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions $CLWS/cl_cosh/user_mo_extensions --output_dir $CLWS/cl_ext_cosh
    ```
    On success, the output will appear similar to:
    ```
@@ -367,12 +367,25 @@ sudo cp $CLT/cosh_kernel* /opt/intel/openvino/deployment_tools/inference_engine/
 
 ### Using a C++ Sample
 
-Test your results using the C++ *classification_sample* sample specifying the GPU implementation for *cosh* using the "-c" option to point to the *cosh_kernel.xml*:
+First, we will try running the C++ sample specifying the GPU implementation without including the *cosh* kernel to see the error describing the unsupported *Cosh* operation using the command:  
+
+```bash
+~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU
+```
+
+On failure, the error will be reported similar to:
+
+```
+[ ERROR ] Unknown Layer Type: Cosh
+```
+
+We will now run the command again, this time with the *cosh* extension kernel specified using the "-c" option to point to the *cosh_kernel.xml in the command:
 
 ```bash
 ~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU -c /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/cldnn_global_custom_kernels/cosh_kernel.xml
 ```
 On success, the output will appear similar to:
+
 ```
 Image /home/<user>/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp
 
