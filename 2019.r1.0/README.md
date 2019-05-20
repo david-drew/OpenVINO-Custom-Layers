@@ -14,7 +14,7 @@ The purpose of this tutorial is to outline and show by example the necessary ste
 
 ## Installation of the Intel® Distribution of OpenVINO™ toolkit 2019 R1 for Linux* 
 
-This tutorial assumes that you have already installed the Intel® Distribution of OpenVINO™ toolkit 2019 R1 for Linux* into the default */opt/intel/openvino* directory.   If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial for your version.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory.
+This tutorial assumes that you have already installed the Intel® Distribution of OpenVINO™ toolkit 2019 R1 for Linux* into the default */opt/intel/openvino* directory.  If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial for your version.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory.
 
 The Intel® Distribution of OpenVINO™ toolkit includes the Model Optimizer which is configured for use with the different model frameworks during the "Model Optimizer Configuration Steps" installation step.  As an example, this tutorial uses a TensorFlow framework model and assumes that you have already configured the Model Optimizer for use with TensorFlow.  If during installation you had not configured the Model Optimizer for all the frameworks or not for TensorFlow explicitly, please be sure to do so following the steps for [Configuring the Model Optimizer](https://docs.openvinotoolkit.org/2019_R1/_docs_MO_DG_prepare_model_Config_Model_Optimizer.html) to configure for using the TensorFlow framework.
 
@@ -34,7 +34,7 @@ The list of known layers is different for each particular model framework.  To s
 The Model Optimizer searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model and producing the Intermediate Representation files.
 
 ## Custom Layers Implementation Workflow
-When implementing a custom layer for your pre-trained model in the Intel® Distribution of OpenVINO™ toolkit , you will need to add extensions in both the Model Optimizer and the Inference Engine.  The following figure shows the workflow for the custom layer implementation. 
+When implementing a custom layer for your pre-trained model in the Intel® Distribution of OpenVINO™ toolkit, you will need to add extensions in both the Model Optimizer and the Inference Engine.  The following figure shows the workflow for the custom layer implementation. 
 
 ![image of CL workflow](../pics/workflow.png "CL Workflow")
 
@@ -44,7 +44,7 @@ We showcase custom layer implementation using the simple function hyperbolic cos
 ![](../pics/cosh_equation.gif)
 
 ## Model Extension Generator
-The Model Extension Generator tool generates template extension source files with stubs for the core functions.  To complete the implementation of an extension that supplies the custom layer functionality,  the stub functions must be edited to fill in the actual implementation of the custom layer.  
+The Model Extension Generator tool generates template extension source files with stubs for the core functions.  To complete the implementation of an extension that supplies the custom layer functionality, the stub functions must be edited to fill in the actual implementation of the custom layer.  
 
 # Getting Started
 
@@ -64,7 +64,7 @@ source /opt/intel/openvino/bin/setupvars.sh
    sudo pip3 install cogapp
    ```
    
-2. This tutorial will be running a Python sample from the Intel® Distribution of OpenVINO™ toolkit which needs the OpenCV library for Python installed.   Install the OpenCV library using the command:
+2. This tutorial will be running a Python sample from the Intel® Distribution of OpenVINO™ toolkit which needs the OpenCV library for Python installed.  Install the OpenCV library using the command:
 
    ```bash
    sudo pip3 install opencv-python
@@ -318,8 +318,6 @@ Average running time of one iteration: xx.xxxxxxx ms
 Throughput: xx.xxxxxxx FPS
     
 [ INFO ] Execution successful
-
-[ INFO ] Execution successful
 ```
 
 ### Using a Python Sample
@@ -389,7 +387,6 @@ Average running time of one iteration: xx.xxxxxxx ms
 Throughput: xx.xxxxxxx FPS
 
 [ INFO ] Execution successful
-
 ```
 
 # Please Complete the Survey
