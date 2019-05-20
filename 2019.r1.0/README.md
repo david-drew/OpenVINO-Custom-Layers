@@ -36,14 +36,14 @@ The Model Optimizer searches the list of known layers for each layer contained i
 ## Custom Layers Implementation Workflow
 When implementing a custom layer for your pre-trained model in the Intel® Distribution of OpenVINO™ toolkit , you will need to add extensions in both the Model Optimizer and the Inference Engine.  The following figure shows the workflow for the custom layer implementation. 
 
-![image of CL workflow](../pics/workflow.png"CL Workflow")
+![image of CL workflow](../pics/workflow.png "CL Workflow")
 
 # Example custom layer: Hyperbolic Cosine (cosh) function 
 We showcase custom layer implementation using the simple function hyperbolic cosine (*cosh*).  The *cosh* fucntion is mathematically calculated as:
 
 ![](../pics/cosh_equation.gif)
 
-### Model Extension Generator
+## Model Extension Generator
 The Model Extension Generator tool generates template extension source files with stubs for the core functions.  To complete the implementation of an extension that supplies the custom layer functionality,  the stub functions must be edited to fill in the actual implementation of the custom layer.  
 
 # Getting Started
@@ -223,9 +223,9 @@ sudo cp $CLT/cosh.py /opt/intel/openvino/deployment_tools/model_optimizer/mo/ops
       - Location of the generated extension with extractor to be used by the Model Optimizer when generating the IR files.
    - --output_dir $CLWS/cl_ext_cosh
       - Location of the output IR files
-   
+  
    To create the model IR files which will include the *cosh* custom layer, we run the commands:
-   
+  
    ```bash
    cd $CLWS/tf_model
    mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions $CLWS/cl_cosh/user_mo_extensions --output_dir $CLWS/cl_ext_cosh
