@@ -39,7 +39,7 @@ When implementing a custom layer for your pre-trained model in the Intel® Distr
 ![image of CL workflow](../pics/workflow.png "CL Workflow")
 
 # Example custom layer: Hyperbolic Cosine (cosh) function 
-We showcase custom layer implementation using the simple function hyperbolic cosine (*cosh*).  The *cosh* fucntion is mathematically calculated as:
+We showcase custom layer implementation using the simple function hyperbolic cosine (*cosh*).  The *cosh* function is mathematically calculated as:
 
 ![](../pics/cosh_equation.gif)
 
