@@ -84,7 +84,7 @@ The first things we need to do are to create a place for the tutorial and then d
     ```bash
     git clone https://github.com/david-drew/OpenVINO-Custom-Layers.git
     ```
-3. Create some convenience environment variables:
+3. Create some environment variables as more convenient shorter names to the directories that will be used often:
     ```bash
     export CLWS=~/cl_tutorial
     export CLT=$CLWS/OpenVINO-Custom-Layers/2019.r1.0
@@ -105,7 +105,7 @@ On success, the output will appear similar to:
 Model saved in path: /home/<user>/cl_tutorial/tf_model/model.ckpt
    ```
 
-# Creating the Cosh Custom Layer
+# Creating the cosh Custom Layer
 
 ## Generate the Template Files Using the Model Extension Generator:
 
@@ -242,13 +242,14 @@ To run the custom layer on the CPU during inference, the extension C++ source co
       ```bash
       cd $CLWS/cl_cosh/user_ie_extensions/cpu
       cp $CLT/CMakeLists.txt .
-      mkdir -p build && cd build
+      mkdir -p build
+      cd build
       cmake ..
       ```
-      **Note:** The *$CLT/CMakeLists.txt* file is a pre-edited version of the generated file under *$CLWS/cl_cosh/user_ie_extensions/cpu/* 
-
-      On success, the output will appear similar to:
-
+**Note:** The *$CLT/CMakeLists.txt* file is a pre-edited version of the generated file under *$CLWS/cl_cosh/user_ie_extensions/cpu/* 
+      
+On success, the output will appear similar to:
+      
       ```
       -- Generating done
       -- Build files have been written to: /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/cpu/build
@@ -273,7 +274,7 @@ To run the custom layer on the CPU during inference, the extension C++ source co
 
 ### Using a C++ Sample
 
-First, we will try running the C++ sample without including the *cosh* extension library to see the error describing the unsupported *Cosh* operation using the command:  
+First, we will try running the C++ sample without including the *cosh* extension library to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
 ~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU
@@ -285,7 +286,7 @@ On failure, the error will be reported similar to:
 [ ERROR ] Unsupported primitive of type: Cosh name: ModCosh/cosh/Cosh
 ```
 
-We will now run the command again, this time with the *cosh* extension library specified using the "-l" option in the command:
+We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_ext_cosh/libcosh_cpu_extension.so*" option in the command:
 
 ```bash
 ~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU -l $CLWS/cl_ext_cosh/libcosh_cpu_extension.so
@@ -311,7 +312,7 @@ Throughput: xx.xxxxxxx FPS
 
 ### Using a Python Sample
 
-First, we will try running the Python sample without including the *cosh* extension library to see the error describing the unsupported *Cosh* operation using the command:  
+First, we will try running the Python sample without including the *cosh* extension library to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
 python3 /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU
@@ -325,7 +326,7 @@ On failure, the error will be reported similar to:
     ModCosh/cosh/Cosh, ModCosh/cosh_1/Cosh, ModCosh/cosh_2/Cosh
 [ ERROR ] Please try to specify cpu extensions library path in sample's command line parameters using -l or --cpu_extension command line argument
 ```
-We will now run the command again, this time with the *cosh* extension library specified using the "-l" option in the command:
+We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_ext_cosh/libcosh_cpu_extension.so*" option in the command:
 ```bash
 python3 /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -l $CLWS/cl_ext_cosh/libcosh_cpu_extension.so -d CPU
 ```
@@ -356,7 +357,7 @@ sudo cp $CLT/cosh_kernel* /opt/intel/openvino/deployment_tools/inference_engine/
 
 ### Using a C++ Sample
 
-First, we will try running the C++ sample specifying the GPU implementation without including the *cosh* kernel to see the error describing the unsupported *Cosh* operation using the command:  
+First, we will try running the C++ sample specifying the GPU implementation without including the *cosh* kernel to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
 ~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU
@@ -368,7 +369,7 @@ On failure, the error will be reported similar to:
 [ ERROR ] Unknown Layer Type: Cosh
 ```
 
-We will now run the command again, this time with the *cosh* extension kernel specified using the "-c" option to point to the *cosh_kernel.xml in the command:
+We will now run the command again, this time with the *cosh* extension kernel specified using the "*-c /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/cldnn_global_custom_kernels/cosh_kernel.xml*" option to point to the *cosh* kernel in the command:
 
 ```bash
 ~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU -c /opt/intel/openvino/deployment_tools/inference_engine/lib/intel64/cldnn_global_custom_kernels/cosh_kernel.xml
