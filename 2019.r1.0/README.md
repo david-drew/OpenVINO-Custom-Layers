@@ -115,7 +115,7 @@ We will use the Model Extension Generator tool to automatically create templates
 - --mo-op = Generate a template for a Model Optimizer custom layer operation
 - --ie-cpu-ext = Generate a template for an Inference Engine CPU extension
 - --ie-gpu-ext = Generate a template for an Inference Engine GPU extension 
-- --output_dir = set the output directory.  Here we are using *$CTWS/cl_cosh* as the target directory to store the output from the Model Extension Generator.
+- --output_dir = set the output directory.  Here we are using *$CLWS/cl_cosh* as the target directory to store the output from the Model Extension Generator.
 
 To create the templates for the *cosh* custom layer, we run the command:
 
@@ -168,16 +168,16 @@ Stub files for Inference Engine GPU extension are in /home/<user>/cl_tutorial/cl
 
 Stub (template) files that may need to be edited have just been created in the following locations:
 
-- $CLWS/cl_cos/user_mo_extensions/ops
+- $CLWS/cl_cosh/user_mo_extensions/ops
 
    - cosh.py
 
-- $CLWS/cl_cos/user_ie_extensions/cpu
+- $CLWS/cl_cosh/user_ie_extensions/cpu
 
    - ext_cosh.cpp
    - CMakeLists.txt
 
-- $CLWS/cl_cos/user_ie_extensions/gpu
+- $CLWS/cl_cosh/user_ie_extensions/gpu
 
    - cosh_kernel.cl
    - cosh_kernel.xml
