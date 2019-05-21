@@ -101,7 +101,7 @@ mkdir $CLWS/tf_model
 $CLT/../create_tf_model/build_cosh_model.py $CLWS/tf_model
    ```
 On success, the output will appear similar to:
-   ```bash
+   ```
 Model saved in path: /home/<user>/cl_tutorial/tf_model/model.ckpt
    ```
 
