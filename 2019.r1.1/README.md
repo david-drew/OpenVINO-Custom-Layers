@@ -232,7 +232,7 @@ This tool generates extension source files with stubs for the core functions. To
 
 Thank you for following this tutorial. Your feedback answering this brief survey will help us to improve it. 
 
-Those respondents who leave their info will be entered in a drawing for a Neural Compute Stick 2 (2 being given away) or a $25 Gift Certificate (5 being given away):
+Those respondents who leave their info will be entered in a drawing for a **Neural Compute Stick 2** (2 being given away) or a **$25 Gift Certificate** (5 being given away):
 [Intel Custom Layer Survey](https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX)
 
 
