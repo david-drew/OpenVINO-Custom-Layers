@@ -230,7 +230,9 @@ This tool generates extension source files with stubs for the core functions. To
     python3 classification_sample.py -i ~/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp -m ~/cl_ext_cosh/model.ckpt.xml -l ~/cl_ext_cosh/libcosh_cpu_extension.so -d CPU
     ```
 
-Thank you for following this tutorial. Your feedback answering this brief survey will help us to improve it:
+Thank you for following this tutorial. Your feedback answering this brief survey will help us to improve it. 
+
+Those respondents who leave their info will be entered in a drawing for a Neural Compute Stick 2 (2 being given away) or a $25 Gift Certificate (5 being given away):
 [Intel Custom Layer Survey](https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX)
 
 
