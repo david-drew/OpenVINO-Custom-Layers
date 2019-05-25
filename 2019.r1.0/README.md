@@ -34,7 +34,7 @@ The list of known layers is different for each particular model framework.  To s
 The Model Optimizer searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model, and producing the Intermediate Representation files.
 
 ## Custom Layers Implementation Workflow
-When implementing a custom layer for your pre-trained model in the Intel® Distribution of OpenVINO™ toolkit, you will need to add extensions in both the Model Optimizer and the Inference Engine.  The following figure shows the workflow for the custom layer implementation with arrows pointing to what the Model Extension Generator tool will create stubs to aid implementation.
+When implementing a custom layer for your pre-trained model in the Intel® Distribution of OpenVINO™ toolkit, you will need to add extensions in both the Model Optimizer and the Inference Engine.  The following figure shows the workflow for the custom layer implementation and the Model Extension Generator tool will be used to create stubs to aid implementation.
 
 ![image of CL workflow](../pics/workflow.png "CL Workflow")
 
@@ -247,9 +247,9 @@ To run the custom layer on the CPU during inference, the extension C++ source co
       cmake ..
       ```
 **Note:** The *$CLT/CMakeLists.txt* file is a pre-edited version of the generated file under *$CLWS/cl_cosh/user_ie_extensions/cpu/* 
-      
-On success, the output will appear similar to:
-      
+
+On success, the output will appear similar to:     
+
       ```
       -- Generating done
       -- Build files have been written to: /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/cpu/build
