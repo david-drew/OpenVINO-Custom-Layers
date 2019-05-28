@@ -446,8 +446,9 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
    ```
 
 7. The *execute* method is overridden to implement the functionality of the *cosh* custom layer.  The *inputs* and *outputs* are the data buffers passed as [Blob](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Memory_primitives.html) objects. The template file will simply return *NOT_IMPLEMENTED* by default.  To calculate the *cosh* custom layer, we will replace the *execute* method with the necessary code to efficiently calculate the *cosh* function in parallel using the [parallel_for3d](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) function.
+   
    Before:
-
+   
    ```cpp
        StatusCode execute(std::vector<Blob::Ptr>& inputs, std::vector<Blob::Ptr>& outputs,
                        ResponseDesc *resp) noexcept override {
@@ -455,7 +456,7 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
         // Examples of implementations you can find in Inerence Engine tool samples/extenstions folder
         return NOT_IMPLEMENTED;
    ```
-
+   
    After:
    ```cpp
        StatusCode execute(std::vector<Blob::Ptr>& inputs, std::vector<Blob::Ptr>& outputs,
@@ -494,18 +495,20 @@ Because the implementation of the *cosh* custom layer makes use of the parallel 
 
 1. Using your favorite text editor, open the CPU extension CMake file *$CLWS/cl_cosh/user_ie_extensions/cpu/CMakeLists.txt*
 2. At the top, rename the *TARGET_NAME* so that the compiled library will be named "libcosh_cpu_extension.so":
+
    Before:
    
    ```cmake
    set(TARGET_NAME "user_cpu_extension")
    ```
-   
+
    After:
    ```cmake
    set(TARGET_NAME "cosh_cpu_extension")
    ```
 
 3. We modify the *include_directories* to add the header include path for the Intel® Threading Building Blocks library located in the Intel® Distribution of OpenVINO™ installation at *toolkit/opt/intel/openvino/deployment_tools/inference_engine/external/tbb/include*:
+
    Before:
    
    ```cmake
@@ -524,6 +527,7 @@ Because the implementation of the *cosh* custom layer makes use of the parallel 
    )
    ```
 4. We need to add the *link_directories* with the path to the Intel® Threading Building Blocks library binaries at */opt/intel/openvino/deployment_tools/inference_engine/external/tbb/lib*
+
    Before:
    
    ```cmake
@@ -540,6 +544,7 @@ Because the implementation of the *cosh* custom layer makes use of the parallel 
    #enable_omp()
    ```
 5. Finally, we add the Intel® Threading Building Blocks library "*tbb*" to the list of link libraries in *target_link_libraries*:
+
    Before:
    
    ```cmake
