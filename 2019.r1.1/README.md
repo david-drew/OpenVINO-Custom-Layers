@@ -603,10 +603,10 @@ On failure, the error will be reported similar to:
 [ ERROR ] Unsupported primitive of type: cosh name: ModCosh/cosh/Cosh
 ```
 
-We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_cosh/user_ie_extensions/cpu/libcosh_cpu_extension.so*" option in the command:
+We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so*" option in the command:
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU -l $CLWS/cl_cosh/user_ie_extensions/cpu/libcosh_cpu_extension.so
+~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so
 ```
 
 On success, the output will appear similar to:
@@ -643,9 +643,9 @@ On failure, the error will be reported similar to:
     ModCosh/cosh/Cosh, ModCosh/cosh_1/Cosh, ModCosh/cosh_2/Cosh
 [ ERROR ] Please try to specify cpu extensions library path in sample's command line parameters using -l or --cpu_extension command line argument
 ```
-We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_cosh/user_ie_extensions/cpu/libcosh_cpu_extension.so*" option in the command:
+We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so*" option in the command:
 ```bash
-python3 /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -l $CLWS/cl_cosh/user_ie_extensions/cpu/libcosh_cpu_extension.so -d CPU
+python3 /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so -d CPU
 ```
 
 On success, the output will appear similar to:
