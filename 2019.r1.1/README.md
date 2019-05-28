@@ -423,7 +423,7 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
    
 5. The main responsibility of the *coshImpl* constructor is to configure the input and output data layout for the custom layer by calling *addConfig()*.  In the template file, the line is commented-out and we will replace it to indicate that *layer* uses *DataConfigurator(ConfLayout::PLN)* (plain, or linear) data for both input and output.
    
-Before:
+   Before:
    
    ```cpp
                ...
