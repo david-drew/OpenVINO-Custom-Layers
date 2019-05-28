@@ -413,15 +413,18 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
    class coshImpl: public ExtLayerBase {
    public:
    ```
+   
 4. The *coshImpl* constructor is passed the *layer* object that it is associated with to provide access to any layer parameters that may need to be read or set when implementing the specific instance of the custom layer.    
    ```cpp
        explicit coshImpl(const CNNLayer* layer) {
            try {
               ...
    ```
+   
 5. The main responsibility of the *coshImpl* constructor is to configure the input and output data layout for the custom layer by calling *addConfig()*.  In the template file, the line is commented-out and we will replace it to indicate that *layer* uses *DataConfigurator(ConfLayout::PLN)* (plain, or linear) data for both input and output.
-   Before:
-
+   
+Before:
+   
    ```cpp
                ...
                // addConfig({DataConfigurator(ConfLayout::PLN), DataConfigurator(ConfLayout::PLN)}, {DataConfigurator(ConfLayout::PLN)});
@@ -433,14 +436,16 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
    ```cpp
                addConfig(layer, { DataConfigurator(ConfLayout::PLN) }, { DataConfigurator(ConfLayout::PLN) });
    ```
-5. The construct is now complete, catching and reporting certain exceptions that may have been thrown before exiting.
+   
+6. The construct is now complete, catching and reporting certain exceptions that may have been thrown before exiting.
    ```cpp
            } catch (InferenceEngine::details::InferenceEngineException &ex) {
                errorMsg = ex.what();
            }
        }
    ```
-5. The *execute* method is overridden to implement the functionality of the *cosh* custom layer.  The *inputs* and *outputs* are the data buffers passed as [Blob](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Memory_primitives.html) objects. The template file will simply return *NOT_IMPLEMENTED* by default.  To calculate the *cosh* custom layer, we will replace the *execute* method with the necessary code to efficiently calculate the *cosh* function in parallel using the [parallel_for3d](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) function.
+
+7. The *execute* method is overridden to implement the functionality of the *cosh* custom layer.  The *inputs* and *outputs* are the data buffers passed as [Blob](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Memory_primitives.html) objects. The template file will simply return *NOT_IMPLEMENTED* by default.  To calculate the *cosh* custom layer, we will replace the *execute* method with the necessary code to efficiently calculate the *cosh* function in parallel using the [parallel_for3d](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) function.
    Before:
 
    ```cpp
@@ -450,7 +455,7 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
         // Examples of implementations you can find in Inerence Engine tool samples/extenstions folder
         return NOT_IMPLEMENTED;
    ```
-   
+
    After:
    ```cpp
        StatusCode execute(std::vector<Blob::Ptr>& inputs, std::vector<Blob::Ptr>& outputs,
@@ -461,7 +466,7 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
         // Get pointers to source and destination buffers
         float* src_data = inputs[0]->buffer();
         float* dst_data = outputs[0]->buffer();
-
+   
         // Get the dimensions from the input (output dimensions are the same)
         SizeVector dims = inputs[0]->getTensorDesc().getDims();
           
