@@ -213,41 +213,34 @@ The Model Extension Generator will start in interactive mode and prompt the user
 Enter layer name: 
 [cosh]
 
-Do you want to automatically parse all parameters from model file...(y/n)
+Do you want to automatically parse all parameters from the model file? (y/n)
+...
 [n]
 
-Please enter all parameters in format
+Enter all parameters in the following format:
 ...
    Enter 'q' when finished:
 [q]
 
-Do you want to change any answer (y/n) ?
+Do you want to change any answer (y/n) ? Default 'no'
 [n]
 
-Do you want to use layer name as operation name? (y/n)
+Do you want to use the layer name as the operation name? (y/n)
 [y]
 
 Does your operation change shape? (y/n)  
 [n]
 
-Do you want to change any answer (y/n) ?
-[n]
-
-Enter type and default value for parameters that will be read in IR in format
-    ...
-   Enter 'q' when finished:   
-[q]
-
-Do you want to change any answer (y/n) ?
+Do you want to change any answer (y/n) ? Default 'no'
 [n]
 ```
 
  When complete, the outputted text will appear similar to the following:
 ```
 Stub file for TensorFlow Model Optimizer extractor is in /home/<user>/cl_tutorial/cl_cosh/user_mo_extensions/front/tf folder
-Stub file for Model Optimizer operation is in /home/<user>/cl_tutorial/cl_cosh/user_mo_extensions/ops folder
-Stub files for Inference Engine CPU extension are in /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/cpu folder
-Stub files for Inference Engine GPU extension are in /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/gpu folder
+Stub file for the Model Optimizer operation is in /home/<user>/cl_tutorial/cl_cosh/user_mo_extensions/ops folder
+Stub files for the Inference Engine CPU extension are in /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/cpu folder
+Stub files for the Inference Engine GPU extension are in /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/gpu folder
 ```
 
 Template files (containing source code stubs) that may need to be edited have just been created in the following locations:
