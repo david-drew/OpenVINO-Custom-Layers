@@ -23,13 +23,9 @@
 //  1. initialize parameters (in constructor)
 //  2. implement inference logic (in execute() method)
 //
-// Refer to the section "Adding Your Own Kernels to the Inference Engine" in
-// OpenVINO* documentation (either online or offline in
-// <INSTALL_DIR>/deployment_tools/documentation/docs/index.html an then navigate
-// to the corresponding section).
+// Refer to the section "Inference Engine Kernels Extensibility" in 
+// the OpenVINO Inference Engine Developer Guide 
 // ===============================================================================
-
-//#define IE_THREAD 1
 
 #include "ext_list.hpp"
 #include "ext_base.hpp"
@@ -43,31 +39,31 @@ namespace InferenceEngine {
 namespace Extensions {
 namespace Cpu {
 
-class CoshImpl: public ExtLayerBase {
+class coshImpl: public ExtLayerBase {
 public:
-    explicit CoshImpl(const CNNLayer* layer) {
+    explicit coshImpl(const CNNLayer* layer) {
         try {
-            /* Layer SetUp
-            *  Read parameters from IR and/or initialise them here.
-            *
-            *  Implemented functions for reading parameters are:
-            *  for single value:
-            *     getParamAsFloat, getParamAsInt, getParamsAsBool, getParamAsString
-            *  for array
-            *     getParamAsFloats, getParamAsInts
-            *
-            * Functions are declared in Inference Engine folder include/ie_layers.h
-            *--------------------------------------------------------------------------------
-            * Example of parameters reading is:
-            *   scale_=layer->GetParamAsFloat("scale")
-            *-------------------------------------------------------------------------------*/
+            // LayerSetUp
+            // Read parameters from IR and/or initialise them here.
+            //
+            // Implemented functions for reading parameters are:
+            // for single value:
+            //     getParamAsFloat, getParamAsInt, getParamsAsBool, getParamAsString
+            // for array
+            //     getParamAsFloats, getParamAsInts
+            //
+            // Functions are declared in Inference Engine folder include/ie_layers.h
+            //
+            // Example of parameters reading is:
+            //   scale_=layer->GetParamAsFloat("scale")
+
             
             /* Set configuration: specify data format for layer
              *   For more information about data formats see: 
              *   "Inference Engine Memory primitives" in OpenVINO documentation
              *------------------------------------------------------------------------------*/
 
-			addConfig(layer, { DataConfigurator(ConfLayout::PLN) }, { DataConfigurator(ConfLayout::PLN) });
+            addConfig(layer, { DataConfigurator(ConfLayout::PLN) }, { DataConfigurator(ConfLayout::PLN) });
         } catch (InferenceEngine::details::InferenceEngineException &ex) {
             errorMsg = ex.what();
         }
@@ -77,22 +73,26 @@ public:
                        ResponseDesc *resp) noexcept override {
         // Add implementation for layer inference here
         // Examples of implementations are in OpenVINO samples/extensions folder
-		float* src_data = inputs[0]->buffer();
+        
+        // Get pointers to source and destination buffers 
+        float* src_data = inputs[0]->buffer();
         float* dst_data = outputs[0]->buffer();
 
+        // Get the dimensions from the input (output dimensions are the same)  
         SizeVector dims = inputs[0]->getTensorDesc().getDims();
 
+        // Get dimensions:N=Batch size, C=Number of Channels, H=Height, W=Width
         int N = static_cast<int>((dims.size() > 0) ? dims[0] : 1);
         int C = static_cast<int>((dims.size() > 1) ? dims[1] : 1);
         int H = static_cast<int>((dims.size() > 2) ? dims[2] : 1);
         int W = static_cast<int>((dims.size() > 3) ? dims[3] : 1);
 
-		//hyperbolic cosine is given by : (e^x + e^-x)/2
-		parallel_for3d(N, C, H, [&](int b, int c, int h) {
-            // Fill output_sequences with -1
-			for (size_t ii = 0; ii < b*c; ii++) {
-				dst_data[ii] = (exp(src_data[ii]) + exp(-src_data[ii]))/2;
-			}
+        // Perform (in parallel) the hyperbolic cosine given by: 
+        //    cosh(x) = (e^x + e^-x)/2
+        parallel_for3d(N, C, H, [&](int b, int c, int h) {
+            for (size_t ii = 0; ii < b*c; ii++) {
+                dst_data[ii] = (exp(src_data[ii]) + exp(-src_data[ii]))/2;
+            }
         });
         return OK;
     }
@@ -100,7 +100,7 @@ public:
 private:
 };
 
-REG_FACTORY_FOR(ImplFactory<CoshImpl>, Cosh);
+REG_FACTORY_FOR(ImplFactory<coshImpl>, cosh);
 
 }  // namespace Cpu
 }  // namespace Extensions

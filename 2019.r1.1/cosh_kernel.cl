@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2018 Intel Corporation
+ Copyright (C) 2018-2019 Intel Corporation
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -19,27 +19,28 @@
  *
  * IMPLEMENT YOUR KERNEL HERE.
  *
- * Refer to the section "Adding Your Own Kernels to the Inference Engine" in 
- * OpenVINO documentation 
+ * Refer to the section "Inference Engine Kernels Extensibility" in 
+ * the OpenVINO Inference Engine Developer Guide 
  * ===============================================================================*/
 
 #pragma OPENCL EXTENSION cl_khr_fp16 : enable
 
-__kernel void Cosh(
+__kernel void cosh_kernel(
      // Insert pointers to inputs, outputs as arguments here
      // If your layer has one input and one output, arguments will be:
           const __global INPUT0_TYPE*  input0, __global OUTPUT0_TYPE* output
      )
 {
-    // Add the kernel implementation here: 
-	 const int dims = sizeof(INPUT0_DIMS) / sizeof(INPUT0_DIMS[0]);
+    // Add the kernel implementation here:
+    
+    // Get data dimensions
     int T_ = INPUT0_DIMS[0];
     int N_ = INPUT0_DIMS[1];
-    int C_ = INPUT0_DIMS[2];
 
-    // Fill output_sequences with -1
+    // Perform the hyperbolic cosine given by: 
+    //    cosh(x) = (e^x + e^-x)/2
     for (int ii = 0; ii < T_*N_; ii++) 
-	{
+    {
         output[ii] = (OUTPUT0_TYPE)(exp(input0[ii]) + exp(-input0[ii]))/2;
     }
 }

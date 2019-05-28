@@ -7,10 +7,8 @@
 #
 # Contains implementation of the basic layer methods
 #
-# Refer to the section "Adding Your Own Kernels to the Inference Engine" in
-# OpenVINO* documentation (either online or offline in
-# <INSTALL_DIR>/deployment_tools/documentation/docs/index.html an then navigate
-# to the corresponding section).
+# Refer to the section "Inference Engine Kernels Extensibility" in 
+# the OpenVINO Inference Engine Developer Guide  
 # ===============================================================================
 
 set(TARGET_NAME "cosh_cpu_extension")
@@ -44,7 +42,6 @@ endif()
 include_directories (PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/common
     ${InferenceEngine_INCLUDE_DIRS}
-    "/opt/intel/openvino/deployment_tools/inference_engine/include"
     "/opt/intel/openvino/deployment_tools/inference_engine/external/tbb/include"
 )
 
@@ -55,14 +52,7 @@ link_directories(
 #enable_omp()
 
 add_library(${TARGET_NAME} SHARED ${SRC} ${HDR})
-
-target_link_libraries(
-    ${TARGET_NAME}
-    ${InferenceEngine_LIBRARIES}
-    #${intel_omp_lib} 
-    tbb
-)
-
+target_link_libraries(${TARGET_NAME} ${InferenceEngine_LIBRARIES} ${intel_omp_lib} tbb)
 target_include_directories(${TARGET_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 set_target_properties(${TARGET_NAME} PROPERTIES COMPILE_PDB_NAME ${TARGET_NAME})
 
