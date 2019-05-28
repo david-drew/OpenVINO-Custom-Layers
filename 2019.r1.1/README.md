@@ -745,6 +745,8 @@ For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more 
    
    For the *cosh* kernel, we make the changes as shown:
    
+   Before:
+   
    ```xml
        <Buffers>
            <!--Tensor arg-index="0" type="input" port-index="0"  format="BFYX"/-->
