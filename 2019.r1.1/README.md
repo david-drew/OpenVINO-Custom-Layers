@@ -768,12 +768,15 @@ For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more 
    ```
 
 6. We need to specify the worksize for the *cosh* kernel using the *WorkSizes* element which is commented-out by default.  Here we use the *global* attribute to specify the two-dimensional worksize of "*B,F*" (Batch x Frame) to be used with the *cosh* kernel:
+   
+   Before:
+   
    ```xml
        <!-- define the global worksize. The formulas can use the values of the B,F,Y,X dimensions and contain the operators: +,-,/,*,% 
-            (all evaluated in integer arithmetics). Default value: global="B*F*Y*X,1,1"/-->
+         (all evaluated in integer arithmetics). Default value: global="B*F*Y*X,1,1"/-->
        <!--WorkSizes global="X,Y,B*F"/--> 
    ```
-
+   
    After:
    ```xml
        <!-- define the global worksize. The formulas can use the values of the B,F,Y,X dimensions and contain the operators: +,-,/,*,% 
