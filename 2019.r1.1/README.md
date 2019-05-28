@@ -219,7 +219,7 @@ Do you want to automatically parse all parameters from the model file? (y/n)
 
 Enter all parameters in the following format:
 ...
-   Enter 'q' when finished:
+Enter 'q' when finished:
 [q]
 
 Do you want to change any answer (y/n) ? Default 'no'
@@ -245,10 +245,10 @@ Stub files for the Inference Engine GPU extension are in /home/<user>/cl_tutoria
 
 Template files (containing source code stubs) that may need to be edited have just been created in the following locations:
 
-- TensorFlow Model Optimizer extractor: 
+- TensorFlow Model Optimizer extractor extension: 
    - $CLWS/cl_cosh/user_mo_extensions/front/tf/
       - cosh_ext.py
-- Model Optimizer operation:
+- Model Optimizer operation extension:
    - $CLWS/cl_cosh/user_mo_extensions/ops
       - cosh.py
 - Inference Engine CPU extension:
@@ -273,7 +273,8 @@ We will now use the generated extractor and operation extensions with the Model 
 ### Edit the Extractor Extension Template File
 
 For the *cosh* custom layer, the generated extractor extension does not need to be modified because the layer parameters are used without modification.  Below is a walkthrough of the Python code for the extractor extension that appears in the file  *$CLWS/cl_cosh/user_mo_extensions/front/tf/cosh_ext.py*.
-1. The class is defined with the unique name *coshFrontExtractor* that inherits from the base extractor *FrontExtractorOp* class.  The class variable *op* is set to the name of the layer operation and *enabled* is set to whether the Model Optimizer should use (*True*) or exclude (*False*) the layer during processing.
+1. Using your favorite text editor, open the extractor extension source file *$CLWS/cl_cosh/user_mo_extensions/front/tf/cosh_ext.py*
+2. The class is defined with the unique name *coshFrontExtractor* that inherits from the base extractor *FrontExtractorOp* class.  The class variable *op* is set to the name of the layer operation and *enabled* is set to whether the Model Optimizer should use (*True*) or exclude (*False*) the layer during processing.
 ```python
 class coshFrontExtractor(FrontExtractorOp):
     op = 'cosh' 
@@ -304,7 +305,8 @@ class coshFrontExtractor(FrontExtractorOp):
 ### Edit the Operation Extension Template File
 
 For the *cosh* custom layer, the generated operation extension does not need to be modified because the shape (i.e. dimensions) of the layer output is the same as the input shape.  Below is a walkthrough of the Python code for the operation extension that appears in the file  *$CLWS/cl_cosh/user_mo_extensions/ops/cosh.py*.
-1. The class is defined with the unique name *coshOp* that inherits from the base operation *Op* class.  The class variable *op* is set to "*cosh*", the name of the layer operation
+1. Using your favorite text editor, open the operation extension source file *$CLWS/cl_cosh/user_mo_extensions/ops/cosh.py*
+2. The class is defined with the unique name *coshOp* that inherits from the base operation *Op* class.  The class variable *op* is set to "*cosh*", the name of the layer operation
 ```python
 class coshOp(Op):
     op = 'cosh'
