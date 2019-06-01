@@ -109,7 +109,7 @@ The available command-line arguments are used to specify which extension(s) to g
 
 The workflow for each generated extension follows the same basic steps:
 
-![image of generic MEG flow](../pics/MEG_generic_flow.png"Model Extraction Generator Generic Flow")
+![image of generic MEG flow](../pics/MEG_generic_flow.png "Model Extraction Generator Generic Flow")
 
 **Step 1:** Use the Model Extension Generator to generate the Custom Layer Template Files 
 
