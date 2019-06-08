@@ -130,6 +130,8 @@ We will showcase the steps involved for implementing a custom layer using the si
 
 ![](../pics/cosh_equation.gif)
 
+As a function that simply calculates a value for the given value *x*, the *cosh* function is very simple when compared to most custom layers.  Though the *cosh* function may not represent a "real" custom layer, it does serve the purpose of this tutorial as an example for working through the steps for implementing a custom layer. 
+
 # Getting Started
 
 ## Setting Up the Environment
