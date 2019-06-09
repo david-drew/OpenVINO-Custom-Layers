@@ -514,7 +514,7 @@ Because the implementation of the *cosh* custom layer makes use of the parallel 
    set(TARGET_NAME "cosh_cpu_extension")
    ```
 
-3. We modify the *include_directories* to add the header include path for the Intel® Threading Building Blocks library located in the Intel® Distribution of OpenVINO™ installation at *toolkit/opt/intel/openvino/deployment_tools/inference_engine/external/tbb/include*:
+3. We modify the *include_directories* to add the header include path for the Intel® Threading Building Blocks library located in the Intel® Distribution of OpenVINO™ toolkit installation at */opt/intel/openvino/deployment_tools/inference_engine/external/tbb/include*:
 
    Before:
    
