@@ -102,9 +102,9 @@ with tf.Session() as sess:
     tf.train.write_graph(sess.graph_def, savedir, 'graph.pb')
 
     save_path = saver.save(sess, "{}/{}".format(savedir, "model.ckpt"))
-    print("Model saved in path: %s" % save_path)
-
 
     frozen = tf.graph_util.convert_variables_to_constants(sess, sess.graph_def, [output_layer])
     graph_io.write_graph(frozen, savedir, 'frozen_inference_graph.pb', as_text=False)
+
+    print("\nModel saved in path: {}\n".format(save_path))
 
