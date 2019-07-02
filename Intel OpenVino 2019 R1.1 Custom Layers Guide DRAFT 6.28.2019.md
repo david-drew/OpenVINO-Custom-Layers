@@ -1,6 +1,7 @@
 # Custom Layers Guide
 
 The Intel® Distribution of OpenVINO™ toolkit supports neural network model layers in multiple frameworks including TensorFlow*, Caffe*, MXNet*, Calde* and ONYX*. The list of known layers is different for each of the supported frameworks. To see the layers supported by your framework, refer to [supported frameworks](./docs/MO_DG/prepare_model/Supported_Frameworks_Layers.md).
+
 [DAVID] Should the list of supported frameworks be linked to the official page? Otherwise, this copy will have to be kept up to date.
 
 Custom layers are layers that are not included in the list of known layers. If your topology contains any layers that are not in the list of known layers, the Model Optimizer classifies them as custom.
