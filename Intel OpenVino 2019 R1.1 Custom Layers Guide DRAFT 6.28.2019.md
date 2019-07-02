@@ -1,6 +1,7 @@
 # Custom Layers Guide
 
 The Intel® Distribution of OpenVINO™ toolkit supports neural network model layers in multiple frameworks including TensorFlow*, Caffe*, MXNet*, Calde* and ONYX*. The list of known layers is different for each of the supported frameworks. To see the layers supported by your framework, refer to [supported frameworks](./docs/MO_DG/prepare_model/Supported_Frameworks_Layers.md).
+[DAVID] Should the list of supported frameworks be linked to the official page? Otherwise, this copy will have to be kept up to date.
 
 Custom layers are layers that are not included in the list of known layers. If your topology contains any layers that are not in the list of known layers, the Model Optimizer classifies them as custom.
 
@@ -10,7 +11,10 @@ For a step-by-step example of creating and executing a custom layer, see the [Cu
 
 ## Custom Layer Overview
 
-The [Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html) searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model, and producing the Intermediate Representation files.  If your topology contains layers that are not in the list of known layers for the supported model framework, the Model Optimizer considers the layers to be custom.  The list of known layers is different for each specific supported model framework.  To see the framework layers that are supported by the Model Optimizer, refer to [Supported Frameworks Layers](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html).
+The [Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html) searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model, and producing the Intermediate Representation files.  
+
+[DAVID] I split the following out of the previous paragraph. It's restating what we just said a couple of paragraphs ago.  Delete?
+If your topology contains layers that are not in the list of known layers for the supported model framework, the Model Optimizer considers the layers to be custom.  The list of known layers is different for each specific supported model framework.  To see the framework layers that are supported by the Model Optimizer, refer to [Supported Frameworks Layers](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html).
 
 The [Inference Engine](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Deep_Learning_Inference_Engine_DevGuide.html) loads the layers from the input model IR files into the specified device plugin, which will search a list of known layer implementations for the device.  If your topology contains layers that are not in the list of known layers for the device, the Inference Engine considers the layer to be unsupported and reports an error.  To see the layers that are supported by each device plugin for the Inference Engine, refer to the [Supported Devices](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_supported_plugins_Supported_Devices.html) documentation.  
 **Note:** Unsupported layers for a device does not necessarily mean that a custom layer is required.  The [Heterogeneous Plugin](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_supported_plugins_HETERO.html) may be used to run an inference model on multiple devices allowing the unsupported layers on one device to "fallback" to run on another device (e.g., CPU) that does support those layers.
