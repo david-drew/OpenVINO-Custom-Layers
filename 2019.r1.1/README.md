@@ -3,36 +3,34 @@
 
 # Introduction
 
-The purpose of this tutorial is to outline and show by example the necessary steps for implementing custom layers when using the Intel® Distribution of OpenVINO™ toolkit.  To show the base steps that apply to all custom layers, a simple custom layer performing the hyperbolic cosine function (*cosh*) will be used to show the following:
+This tutorial outlines the steps for implementing custom layers and provides examples using the Intel® Distribution of OpenVINO™ toolkit.  To show the basic steps that apply to all custom layers, a simple custom layer performing the hyperbolic cosine function (*cosh*) will be used to illustrate:
 
 - Setting up and installing prerequisites
 - Using the Model Extension Generator to generate the extension libraries and function stubs 
-- Using Model Optimizer to generate the example model IR files 
+- Using the Model Optimizer to generate the example model IR files 
 - Implementing the Inference Engine extension for the example model to run on CPU and GPU 
 
-Currently, this tutorial and the Model Extension Generator tool used support creating custom layers for CPU and GPU devices.  Support for the Myriad (VPU) will be available by the end of 2019 and support for any other devices is yet to be announced.
+Currently, this tutorial and the Model Extension Generator tool support creating custom layers for CPU and GPU devices.  Support for the Myriad (VPU) will be available by the end of 2019. Support for other devices is yet to be announced.
 
 # Before You Start
 
 ## Installation of the Intel® Distribution of OpenVINO™ toolkit 2019 R1.1 for Linux* 
 
-This tutorial assumes that you have already installed the Intel® Distribution of OpenVINO™ toolkit 2019 R1.1 for Linux* into the default */opt/intel/openvino* directory.  If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial for your version.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory.
+This tutorial assumes that you have already installed the [Intel® Distribution of OpenVINO™ toolkit 2019 R1.1 for Linux*](https://software.intel.com/openvino-toolkit/choose-download/free-download-linux) into the default */opt/intel/openvino* directory.  If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory. 
 
-The Intel® Distribution of OpenVINO™ toolkit includes the [Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html) which is configured for use with the different model frameworks during the "Model Optimizer Configuration Steps" installation step.  As an example, this tutorial uses a TensorFlow framework model and assumes that you have already configured the Model Optimizer for use with TensorFlow.  If during installation you had not configured the Model Optimizer for all the frameworks or not for TensorFlow explicitly, please be sure to do so following the steps for [Configuring the Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Config_Model_Optimizer.html) to configure for using the TensorFlow framework.
-
-If you need to install the Intel® Distribution of OpenVINO™ toolkit, the Linux* package can be downloaded from [Intel® Distribution of OpenVINO™ toolkit](https://software.intel.com/openvino-toolkit/choose-download/free-download-linux).  Select the "Register and Download" button to get started and then later on the "Intel® Distribution of OpenVINO™ toolkit for Linux*" download page, select "2019 R1.1" from the "Choose a Version" drop-down menu.  The link to the [Installation Guide](https://docs.openvinotoolkit.org/2019_R1.1/_docs_install_guides_installing_openvino_linux.html#install-external-dependencies) is provided on the download page.  During installation, please be sure to follow the option to configure the Model Optimizer for all frameworks (recommended), or at least include the TensorFlow framework. 
+The Intel® Distribution of OpenVINO™ toolkit includes the [Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html).  This tutorial uses a TensorFlow framework model and assumes that you have already configured the Model Optimizer for use with TensorFlow.  If you did not configure the Model Optimizer for all the frameworks or not for TensorFlow explicitly during installation, be sure to do so following the steps for [Configuring the Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Config_Model_Optimizer.html) before proceeding.
 
 After installing the Intel® Distribution of OpenVINO™ toolkit, the *classification_sample* executable binary will be located in the directory *~/inference_engine_samples_build/intel64/Release*.  This tutorial will use the *classification_sample* executable to run the example model.
 
 # Custom Layers
 Custom layers are neural network model layers that are not natively supported by a given model framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you to plug in your own implementation for existing or completely new layers.
 
-Additional information on custom layers and the Intel® Distribution of OpenVINO™ toolkit can be found in the [Customize Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html) and [Inference Engine Kernels Extensibility](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Integrate_your_kernels_into_IE.html) documentation.
+Additional information on custom layers and the Intel® Distribution of OpenVINO™ toolkit can be found in [Customize Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html) and [Inference Engine Kernels Extensibility](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Integrate_your_kernels_into_IE.html).
 
-The [Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html) searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model, and producing the Intermediate Representation files.  If your topology contains layers that are not in the list of known layers for the supported model framework, the Model Optimizer considers the layers to be custom.  The list of known layers is different for each specific supported model framework.  To see the framework layers that are supported by the Model Optimizer, refer to the [Supported Frameworks Layers](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html) documentation.
+The [Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html) searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model, and producing the Intermediate Representation files.  If your topology contains layers that are not in the list of known layers for the supported model framework, the Model Optimizer considers the layers to be custom.  The list of known layers is different for each specific supported model framework.  To see the framework layers that are supported by the Model Optimizer, refer to [Supported Frameworks Layers](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html).
 
 The [Inference Engine](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Deep_Learning_Inference_Engine_DevGuide.html) loads the layers from the input model IR files into the specified device plugin, which will search a list of known layer implementations for the device.  If your topology contains layers that are not in the list of known layers for the device, the Inference Engine considers the layer to be unsupported and reports an error.  To see the layers that are supported by each device plugin for the Inference Engine, refer to the [Supported Devices](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_supported_plugins_Supported_Devices.html) documentation.  
-**Note:** Unsupported layers for a device does not necessarily mean that a custom layer is required.  The [Heterogeneous Plugin](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_supported_plugins_HETERO.html) may be used to run an inference model on multiple devices allowing the unsupported layers on one device to "fallback" to run on another device (e.g. CPU) that does support those layers.
+**Note:** Unsupported layers for a device does not necessarily mean that a custom layer is required.  The [Heterogeneous Plugin](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_supported_plugins_HETERO.html) may be used to run an inference model on multiple devices allowing the unsupported layers on one device to "fallback" to run on another device (e.g., CPU) that does support those layers.
 
 ## The Custom Layer Implementation Workflow
 When implementing a custom layer for your pre-trained model in the Intel® Distribution of OpenVINO™ toolkit, you will need to add extensions to both the Model Optimizer and the Inference Engine.  
@@ -45,12 +43,12 @@ The following figure shows the basic processing steps for the Model Optimizer hi
 
 
 
-The Model Optimizer must first extract the necessary information from the input model which includes the topology of the model layers along with parameters, input and output format, etc. for each layer.  The model is then optimized from the various known characteristics of the layers, interconnects, and data flow which partly comes from the layer operation providing details including the shape of the output for each layer.  Finally, the optimized model is output to the model IR files needed by the Inference Engine to run the model.  
+The Model Optimizer first extracts information from the input model which includes the topology of the model layers along with parameters, input and output format, etc., for each layer.  The model is then optimized from the various known characteristics of the layers, interconnects, and data flow which partly comes from the layer operation providing details including the shape of the output for each layer.  Finally, the optimized model is output to the model IR files needed by the Inference Engine to run the model.  
 
 The Model Optimizer starts with a library of known extractors and operations for each [supported model framework](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html) which must be extended to use each unknown custom layer.  The custom layer extensions needed by the Model Optimizer are:
 
 - Custom Layer Extractor
-   - Responsible for identifying the custom layer operation for the custom layer and extracting the parameters for each instance of the custom layer.  The layer parameters are stored per instance and used by the layer operation before finally appearing in the output IR.  Typically the input layer parameters are unchanged, which is the case covered by this tutorial. 
+   - Responsible for identifying the custom layer operation and extracting the parameters for each instance of the custom layer.  The layer parameters are stored per instance and used by the layer operation before finally appearing in the output IR.  Typically the input layer parameters are unchanged, which is the case covered by this tutorial. 
 - Custom Layer Operation
    - Responsible for specifying the attributes that are supported by the custom layer and computing the output shape for each instance of the custom layer from its parameters.  
 
@@ -65,7 +63,7 @@ Each device plugin includes a library of optimized implementations to execute kn
 - Custom Layer CPU Extension
    - A compiled shared library (.so or .dll binary) needed by the CPU Plugin for executing the custom layer on the CPU.
 - Custom Layer GPU Extension
-   - OpenCL source code (.cl) for the custom layer kernel that will be compiled to execute on the GPU along with a layer description file (.xml) needed by the GPU Plugin to be able to use the custom layer kernel.
+   - OpenCL source code (.cl) for the custom layer kernel that will be compiled to execute on the GPU along with a layer description file (.xml) needed by the GPU Plugin for the custom layer kernel.
 
 ## Model Extension Generator
 
@@ -84,7 +82,7 @@ where the output will appear similar to:
 ```
 usage: You can use any combination of the following arguments:
 
-Arguments to configure extension generation in the interactive mode
+Arguments to configure extension generation in the interactive mode:
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -116,13 +114,13 @@ The workflow for each generated extension follows the same basic steps:
 
 ![image of generic MEG flow](../pics/MEG_generic_flow.png "Model Extraction Generator Generic Flow")
 
-**Step 1:** Use the Model Extension Generator to generate the Custom Layer Template Files 
+**Step 1:** Use the Model Extension Generator to generate the Custom Layer Template Files. 
 
-**Step 2:** Edit the Custom Layer Template Files as necessary to create the specialized Custom Layer Extension Source Code
+**Step 2:** Edit the Custom Layer Template Files as necessary to create the specialized Custom Layer Extension Source Code.
 
-**Step 3:** Compile/Deploy the Custom Layer Extension Source Code as the Custom Layer Extension to be used by the Model Optimizer or Inference Engine
+**Step 3:** Compile/Deploy the Custom Layer Extension Source Code as the Custom Layer Extension to be used by the Model Optimizer or Inference Engine.
 
-Later in this tutorial, we will go through the workflow for the following four extensions needed by the example model:
+Later in this tutorial, we will go through the workflow for four extensions needed by the example model:
 
 - Custom layer TensorFlow extractor extension (--mo-tf-ext)
 - Custom layer operation extension (--mo-op)
@@ -131,11 +129,11 @@ Later in this tutorial, we will go through the workflow for the following four e
 
 # Example Custom Layer: The Hyperbolic Cosine (*cosh*) Function 
 
-We will showcase the steps involved for implementing a custom layer using the simple hyperbolic cosine (*cosh*) function.  The *cosh* function is mathematically calculated as:
+We will follow the steps involved for implementing a custom layer using the simple hyperbolic cosine (*cosh*) function.  The *cosh* function is mathematically calculated as:
 
 ![](../pics/cosh_equation.gif)
 
-As a function that simply calculates a value for the given value *x*, the *cosh* function is very simple when compared to most custom layers.  Though the *cosh* function may not represent a "real" custom layer, it does serve the purpose of this tutorial as an example for working through the steps for implementing a custom layer. 
+As a function that calculates a value for the given value *x*, the *cosh* function is very simple when compared to most custom layers.  Though the *cosh* function may not represent a "real" custom layer, it serves the purpose of this tutorial as an example for working through the steps for implementing a custom layer. 
 
 # Getting Started
 
@@ -155,7 +153,7 @@ source /opt/intel/openvino/bin/setupvars.sh
    sudo pip3 install cogapp
    ```
    
-2. This tutorial will be running a Python sample from the Intel® Distribution of OpenVINO™ toolkit which needs the OpenCV library for Python to be installed.  Install the OpenCV library using the command:
+2. This tutorial will be running a Python sample from the Intel® Distribution of OpenVINO™ toolkit which requires the OpenCV library.  Install the OpenCV library using the command:
 
    ```bash
    sudo pip3 install opencv-python
@@ -163,9 +161,9 @@ source /opt/intel/openvino/bin/setupvars.sh
 
 ## Downloading and Setting Up the Tutorial
 
-The first things we need to do are to create a place for the tutorial and then download it.  We will create the top directory "cl_tutorial" as the workspace to store the Git repository of the tutorial along with all the other files created.
+The first steps we will take are to create a place for the tutorial and then download it.  We will create the top directory "cl_tutorial" as the workspace to store the Git repository of the tutorial along with the other files created.
 
-1. Create the "cl_tutorial" top directory in the user's home directory and then change into it:
+1. Create the "cl_tutorial" top directory in our user home directory and then change into it:
     ```bash
     cd ~
     mkdir cl_tutorial
@@ -175,23 +173,23 @@ The first things we need to do are to create a place for the tutorial and then d
     ```bash
     git clone https://github.com/david-drew/OpenVINO-Custom-Layers.git
     ```
-3. Create some environment variables as more convenient shorter names to the directories that will be used often:
+3. Create environment variables as shorter, more convenient names to the directories that we will use often:
     ```bash
     export CLWS=~/cl_tutorial
     export CLT=$CLWS/OpenVINO-Custom-Layers/2019.r1.1
     ```
     
-    From here, we will now use "$CLWS" to reference the "cl_tutorial" workspace directory and "$CLT" to reference the directory containing the files for this tutorial.
+    From here on, we will use "$CLWS" to reference the "cl_tutorial" workspace directory and "$CLT" to reference the directory containing the files for this tutorial.
 
 ## Create the Example TensorFlow Model (Weights, Graphs, Checkpoints):
 
-We will use the supplied *build_cosh_model.py* script to create a simple TensorFlow model that contains the *cosh* custom layer to use with this tutorial.  The weights are random and untrained, but sufficient for demonstrating a simple custom layer implementation.  To create the model and store it in the "$CLWS/tf_model" directory, run the commands: 
+We will use the supplied *build_cosh_model.py* script to create a simple TensorFlow model that contains the *cosh* custom layer.  The weights are random and untrained, but sufficient for demonstrating a simple custom layer implementation.  To create the model and store it in the "$CLWS/tf_model" directory, run the commands: 
 
    ```bash
 mkdir $CLWS/tf_model
 $CLT/../create_tf_model/build_cosh_model.py $CLWS/tf_model
    ```
-On success, the output will appear similar to:
+The output will appear similar to:
    ```
 Model saved in path: /home/<user>/cl_tutorial/tf_model/model.ckpt
    ```
@@ -200,7 +198,7 @@ Model saved in path: /home/<user>/cl_tutorial/tf_model/model.ckpt
 
 ## Generate the Extension Template Files Using the Model Extension Generator
 
-We will use the Model Extension Generator tool to automatically create templates for all the extensions that will be needed by the Model Optimizer to convert and the Inference Engine to execute the custom layer.  The extension template files will be partially replaced by Python and C++ code to implement the functionality of *cosh* as needed by the different tools.  To create the four extensions for the *cosh* custom layer, we run the Model Extension Generator with the following options:
+We will use the Model Extension Generator tool to automatically create templates for all the extensions needed by the Model Optimizer to convert and the Inference Engine to execute the custom layer.  The extension template files will be partially replaced by Python and C++ code to implement the functionality of *cosh* as needed by the different tools.  To create the four extensions for the *cosh* custom layer, we run the Model Extension Generator with the following options:
 
 - --mo-tf-ext = Generate a template for a Model Optimizer TensorFlow extractor
 - --mo-op = Generate a template for a Model Optimizer custom layer operation
@@ -214,7 +212,7 @@ To create the four extension templates for the *cosh* custom layer, we run the c
 python3 /opt/intel/openvino/deployment_tools/tools/extension_generator/extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --ie-gpu-ext --output_dir=$CLWS/cl_cosh
 ```
 
-The Model Extension Generator will start in interactive mode and prompt the user with questions about the custom layer to be generated.  Use the text between the []'s to answer each of the Model Extension Generator questions as follows:
+The Model Extension Generator will start in interactive mode and prompt us with questions about the custom layer to be generated.  Use the text between the []'s to answer each of the Model Extension Generator questions as follows:
 
 ```
 Enter layer name: 
@@ -242,7 +240,7 @@ Do you want to change any answer (y/n) ? Default 'no'
 [n]
 ```
 
- When complete, the outputted text will appear similar to the following:
+When complete, the output text will appear similar to:
 ```
 Stub file for TensorFlow Model Optimizer extractor is in /home/<user>/cl_tutorial/cl_cosh/user_mo_extensions/front/tf folder
 Stub file for the Model Optimizer operation is in /home/<user>/cl_tutorial/cl_cosh/user_mo_extensions/ops folder
@@ -271,7 +269,7 @@ Instructions on editing the template files are provided in later parts of this t
 
 ## Using Model Optimizer to Generate IR Files Containing the Custom Layer 
 
-We will now use the generated extractor and operation extensions with the Model Optimizer to generate the model IR files needed by the Inference Engine.  The necessary steps that will be covered are:
+We will now use the generated extractor and operation extensions with the Model Optimizer to generate the model IR files needed by the Inference Engine.  The steps covered are:
 
 1. Edit the extractor extension template file
 2. Edit the operation extension template file
@@ -280,19 +278,19 @@ We will now use the generated extractor and operation extensions with the Model 
 ### Edit the Extractor Extension Template File
 
 For the *cosh* custom layer, the generated extractor extension does not need to be modified because the layer parameters are used without modification.  Below is a walkthrough of the Python code for the extractor extension that appears in the file  *$CLWS/cl_cosh/user_mo_extensions/front/tf/cosh_ext.py*.
-1. Using your favorite text editor, open the extractor extension source file *$CLWS/cl_cosh/user_mo_extensions/front/tf/cosh_ext.py*
-2. The class is defined with the unique name *coshFrontExtractor* that inherits from the base extractor *FrontExtractorOp* class.  The class variable *op* is set to the name of the layer operation and *enabled* is set to whether the Model Optimizer should use (*True*) or exclude (*False*) the layer during processing.
+1. Using your favorite text editor, open the extractor extension source file *$CLWS/cl_cosh/user_mo_extensions/front/tf/cosh_ext.py*.
+2. The class is defined with the unique name *coshFrontExtractor* that inherits from the base extractor *FrontExtractorOp* class.  The class variable *op* is set to the name of the layer operation and *enabled* is set to tell the Model Optimizer to use (*True*) or exclude (*False*) the layer during processing.
 ```python
 class coshFrontExtractor(FrontExtractorOp):
     op = 'cosh' 
     enabled = True
 ```
-2. The *extract* function is overridden to allow modifications to be made while extracting parameters from layers within the input model.
+2. The *extract* function is overridden to allow modifications while extracting parameters from layers within the input model.
 ```python
     @staticmethod
     def extract(node):
 ```
-3. The layer parameters are extracted from the input model and stored in *param*.  This is where the layer parameters in *param* may be retrieved and used as needed.  For the *cosh* custom layer, the "*op*" attribute is simply set to the name of the operation extension to use.
+3. The layer parameters are extracted from the input model and stored in *param*.  This is where the layer parameters in *param* may be retrieved and used as needed.  For the *cosh* custom layer, the "*op*" attribute is simply set to the name of the operation extension used.
 ```python
         proto_layer = node.pb
         param = proto_layer.attr
@@ -301,7 +299,7 @@ class coshFrontExtractor(FrontExtractorOp):
             'op': __class__.op
         }
 ```
-4. The attributes for the specific node are updated.  This is where modifying or creating attributes in *attrs* may be done before updating *node* with the results and the *enabled* class variable is returned.
+4. The attributes for the specific node are updated.  This is where we can modify or create attributes in *attrs* before updating *node* with the results and the *enabled* class variable is returned.
 
 ```python
         # update the attributes of the node
@@ -311,14 +309,14 @@ class coshFrontExtractor(FrontExtractorOp):
 ```
 ### Edit the Operation Extension Template File
 
-For the *cosh* custom layer, the generated operation extension does not need to be modified because the shape (i.e. dimensions) of the layer output is the same as the input shape.  Below is a walkthrough of the Python code for the operation extension that appears in the file  *$CLWS/cl_cosh/user_mo_extensions/ops/cosh.py*.
-1. Using your favorite text editor, open the operation extension source file *$CLWS/cl_cosh/user_mo_extensions/ops/cosh.py*
-2. The class is defined with the unique name *coshOp* that inherits from the base operation *Op* class.  The class variable *op* is set to "*cosh*", the name of the layer operation
+For the *cosh* custom layer, the generated operation extension does not need to be modified because the shape (i.e., dimensions) of the layer output is the same as the input shape.  Below is a walkthrough of the Python code for the operation extension that appears in the file  *$CLWS/cl_cosh/user_mo_extensions/ops/cosh.py*.
+1. Using your favorite text editor, open the operation extension source file *$CLWS/cl_cosh/user_mo_extensions/ops/cosh.py* 
+2. The class is defined with the unique name *coshOp* that inherits from the base operation *Op* class.  The class variable *op* is set to "*cosh*", the name of the layer operation.
 ```python
 class coshOp(Op):
     op = 'cosh'
 ```
-2. The *coshOp* class initializer *\__init__* function will be called for each layer created.  The initializer must initialize the super class *Op* by passing the *graph* and *attrs* arguments along with a dictionary of the mandatory properties for the *cosh* operation layer that define the type (*type*), operation (*op*), and inference function (*infer*).   This is where any other initialization needed by the *coshOP* operation may also be done.
+2. The *coshOp* class initializer *\__init__* function will be called for each layer created.  The initializer must initialize the super class *Op* by passing the *graph* and *attrs* arguments along with a dictionary of the mandatory properties for the *cosh* operation layer that define the type (*type*), operation (*op*), and inference function (*infer*).  This is where any other initialization needed by the *coshOP* operation can be specified.
 ```python
     def __init__(self, graph, attrs):
         mandatory_props = dict(
@@ -348,22 +346,23 @@ With the extensions now complete, we use the Model Optimizer to convert and opti
 
 - --input_meta_graph model.ckpt.meta
   
-   - Specifies the model input file  
+   - Specifies the model input file.  
    
 - --batch 1
   
    - Explicitly sets the batch size to 1 because the example model has an input dimension of "-1".  TensorFLow allows "-1" as a variable indicating "to be filled in later", however the Model Optimizer requires explicit information for the optimization process.  
+
 - --output "ModCosh/Activation_8/softmax_output"
 
-   - The full name of the final output layer of the model
+   - The full name of the final output layer of the model.
 
 - --extensions $CLWS/cl_cosh/user_mo_extensions 
 
-   - Location of the extractor and operation extensions for the custom layer to be used by the Model Optimizer during model extraction and optimization 
+   - Location of the extractor and operation extensions for the custom layer to be used by the Model Optimizer during model extraction and optimization. 
 
 - --output_dir $CLWS/cl_ext_cosh
 
-   - Location to write the output IR files
+   - Location to write the output IR files.
 
    To create the model IR files that will include the *cosh* custom layer, we run the commands:
 
@@ -371,7 +370,7 @@ With the extensions now complete, we use the Model Optimizer to convert and opti
    cd $CLWS/tf_model
    mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions $CLWS/cl_cosh/user_mo_extensions --output_dir $CLWS/cl_ext_cosh
    ```
-    On success, the output will appear similar to:
+    The output will appear similar to:
     ```
     [ SUCCESS ] Generated IR model.
     [ SUCCESS ] XML file: /home/<user>/cl_tutorial/cl_ext_cosh/model.ckpt.xml
@@ -381,15 +380,15 @@ With the extensions now complete, we use the Model Optimizer to convert and opti
 
 # Inference Engine Custom Layer Implementation for the Intel® CPU
 
-We will now use the generated CPU extension with the Inference Engine to execute the custom layer on the CPU.  The necessary steps that will be covered are:
+We will now use the generated CPU extension with the Inference Engine to execute the custom layer on the CPU.  The steps are:
 
-1. Edit the CPU extension template files
-2. Compile the CPU extension library
-3. Execute the Model with the custom layer
+1. Edit the CPU extension template files.
+2. Compile the CPU extension library.
+3. Execute the Model with the custom layer.
 
 ## Edit the CPU Extension Template Files
 
-The generated CPU extension includes the template file *ext_cosh.cpp* that must be edited to fill-in the functionality of the *cosh* custom layer for when it is executed by the Inference Engine.  The *CMakeLists.txt* file will also need to be edited to add any header file or library dependencies required to compile the CPU extension.  In the next sections, we will edit and walk through these files.
+The generated CPU extension includes the template file *ext_cosh.cpp* that must be edited to fill-in the functionality of the *cosh* custom layer for execution by the Inference Engine.  We also need to edit the *CMakeLists.txt* file to add any header file or library dependencies required to compile the CPU extension.  In the next sections, we will walk through and edit these files.
 
 **Note:** For reference, or to copy to make the changes quicker, pre-edited *CMakeLists.txt* and *ext_cosh.cpp* files are provided by the tutorial in the "$CLT" directory.
 
@@ -397,9 +396,9 @@ The generated CPU extension includes the template file *ext_cosh.cpp* that must 
 
 We will now edit the *ext_cosh.cpp* by walking through the code and making the necessary changes for the *cosh* custom layer along the way.
 
-1. Using your favorite text editor, open the CPU extension source file *$CLWS/cl_cosh/user_ie_extensions/cpu/ext_cosh.cpp*
+1. Using your favorite text editor, open the CPU extension source file *$CLWS/cl_cosh/user_ie_extensions/cpu/ext_cosh.cpp*.
 
-2. To implement the *cosh* function to efficiently execute in parallel, the code will use the parallel processing supported by the Inference Engine through the use of the Intel® Threading Building Blocks library.  To use the library, at the top we must include the necessary header [ie_parallel.hpp](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) file by adding the *#include* line as shown below.
+2. To implement the *cosh* function to efficiently execute in parallel, the code will use the parallel processing supported by the Inference Engine through the use of the Intel® Threading Building Blocks library.  To use the library, at the top we must include the header [ie_parallel.hpp](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) file by adding the *#include* line as shown below.
 
    Before:
 
@@ -421,14 +420,14 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
    public:
    ```
    
-4. The *coshImpl* constructor is passed the *layer* object that it is associated with to provide access to any layer parameters that may need to be read or set when implementing the specific instance of the custom layer.    
+4. The *coshImpl* constructor is passed the *layer* object that it is associated with to provide access to any layer parameters that may be needed when implementing the specific instance of the custom layer.    
    ```cpp
        explicit coshImpl(const CNNLayer* layer) {
            try {
               ...
    ```
    
-5. The main responsibility of the *coshImpl* constructor is to configure the input and output data layout for the custom layer by calling *addConfig()*.  In the template file, the line is commented-out and we will replace it to indicate that *layer* uses *DataConfigurator(ConfLayout::PLN)* (plain, or linear) data for both input and output.
+5. The *coshImpl* constructor configures the input and output data layout for the custom layer by calling *addConfig()*.  In the template file, the line is commented-out and we will replace it to indicate that *layer* uses *DataConfigurator(ConfLayout::PLN)* (plain or linear) data for both input and output.
    
    Before:
    
@@ -452,7 +451,7 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
        }
    ```
 
-7. The *execute* method is overridden to implement the functionality of the *cosh* custom layer.  The *inputs* and *outputs* are the data buffers passed as [Blob](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Memory_primitives.html) objects. The template file will simply return *NOT_IMPLEMENTED* by default.  To calculate the *cosh* custom layer, we will replace the *execute* method with the necessary code to efficiently calculate the *cosh* function in parallel using the [parallel_for3d](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) function.
+7. The *execute* method is overridden to implement the functionality of the *cosh* custom layer.  The *inputs* and *outputs* are the data buffers passed as [Blob](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Memory_primitives.html) objects.  The template file will simply return *NOT_IMPLEMENTED* by default.  To calculate the *cosh* custom layer, we will replace the *execute* method with the code needed to calculate the *cosh* function in parallel using the [parallel_for3d](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) function.
    
    Before:
    
@@ -498,10 +497,10 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
 
 #### Edit *CMakeLists.txt*
 
-Because the implementation of the *cosh* custom layer makes use of the parallel processing supported by the Inference Engine, we need to add the Intel® Threading Building Blocks dependency to *CMakeLists.txt* before being able to compile.  To do this we will add paths to the header and library files and add the Intel® Threading Building Blocks library to the list of link libraries.  We will also rename the *.so* along the way.
+Because the implementation of the *cosh* custom layer makes use of the parallel processing supported by the Inference Engine, we need to add the Intel® Threading Building Blocks dependency to *CMakeLists.txt* before compiling.  We will add paths to the header and library files and add the Intel® Threading Building Blocks library to the list of link libraries.  We will also rename the *.so*.
 
-1. Using your favorite text editor, open the CPU extension CMake file *$CLWS/cl_cosh/user_ie_extensions/cpu/CMakeLists.txt*
-2. At the top, rename the *TARGET_NAME* so that the compiled library will be named "libcosh_cpu_extension.so":
+1. Using your favorite text editor, open the CPU extension CMake file *$CLWS/cl_cosh/user_ie_extensions/cpu/CMakeLists.txt*.
+2. At the top, rename the *TARGET_NAME* so that the compiled library is named "libcosh_cpu_extension.so":
 
    Before:
    
@@ -514,7 +513,7 @@ Because the implementation of the *cosh* custom layer makes use of the parallel 
    set(TARGET_NAME "cosh_cpu_extension")
    ```
 
-3. We modify the *include_directories* to add the header include path for the Intel® Threading Building Blocks library located in the Intel® Distribution of OpenVINO™ toolkit installation at */opt/intel/openvino/deployment_tools/inference_engine/external/tbb/include*:
+3. We modify the *include_directories* to add the header include path for the Intel® Threading Building Blocks library located in */opt/intel/openvino/deployment_tools/inference_engine/external/tbb/include*:
 
    Before:
    
@@ -533,7 +532,7 @@ Because the implementation of the *cosh* custom layer makes use of the parallel 
       "/opt/intel/openvino/deployment_tools/inference_engine/external/tbb/include"
    )
    ```
-4. We need to add the *link_directories* with the path to the Intel® Threading Building Blocks library binaries at */opt/intel/openvino/deployment_tools/inference_engine/external/tbb/lib*
+4. We add the *link_directories* with the path to the Intel® Threading Building Blocks library binaries at */opt/intel/openvino/deployment_tools/inference_engine/external/tbb/lib*:
 
    Before:
    
@@ -565,7 +564,7 @@ Because the implementation of the *cosh* custom layer makes use of the parallel 
 
 ## Compile the Extension Library
 
-To run the custom layer on the CPU during inference, the edited extension C++ source code must be compiled to create a *.so* shared library to be used by the Inference Engine.  In the following steps, we will now compile the extension C++ library.
+To run the custom layer on the CPU during inference, the edited extension C++ source code must be compiled to create a *.so* shared library used by the Inference Engine.  In the following steps, we will now compile the extension C++ library.
 
 1. First, we run the following commands to use CMake to setup for compiling:
 
@@ -576,7 +575,7 @@ To run the custom layer on the CPU during inference, the edited extension C++ so
       cmake ..
       ```
       
-      On success, the output will appear similar to:     
+      The output will appear similar to:     
 
       ```
       -- Generating done
@@ -588,7 +587,7 @@ To run the custom layer on the CPU during inference, the edited extension C++ so
       ```bash
       make -j $(nproc)
       ```
-      On success, the output will appear similar to: 
+      The output will appear similar to: 
       ```
       [100%] Linking CXX shared library libcosh_cpu_extension.so
       [100%] Built target cosh_cpu_extension
@@ -604,7 +603,7 @@ First, we will try running the C++ sample without including the *cosh* extension
 ~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU
 ```
 
-On failure, the error will be reported similar to:
+The error output will be similar to:
 
 ```
 [ ERROR ] Unsupported primitive of type: cosh name: ModCosh/cosh/Cosh
@@ -616,7 +615,7 @@ We will now run the command again, this time with the *cosh* extension library s
 ~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so
 ```
 
-On success, the output will appear similar to:
+The output will appear similar to:
 
 ```
 Image /home/<user>/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp
@@ -641,7 +640,7 @@ First, we will try running the Python sample without including the *cosh* extens
 ```bash
 python3 /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU
 ```
-On failure, the error will be reported similar to:
+The error output will be similar to:
 ```
 [ INFO ] Loading network files:
            /home/<user>/cl_tutorial/cl_ext_cosh/model.ckpt.xml
@@ -655,7 +654,7 @@ We will now run the command again, this time with the *cosh* extension library s
 python3 /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so -d CPU
 ```
 
-On success, the output will appear similar to:
+The output will appear similar to:
 ```
 Image /home/<user>/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp
 
@@ -667,31 +666,31 @@ classid probability
 
 # Inference Engine Custom Layer Implementation for the Intel® Integrated GPU
 
-We will now use the generated GPU extension with the Inference Engine to execute the custom layer on the GPU.  The necessary steps that will be covered are:
+We will now use the generated GPU extension with the Inference Engine to execute the custom layer on the GPU.  The steps are:
 
-1. Edit the GPU extension template files
-2. Execute the Model with the custom layer
+1. Edit the GPU extension template files.
+2. Execute the Model with the custom layer.
 
 ## Edit the GPU Extension Template Files
 
-The generated GPU extension includes the source template file *cosh_kernel.cl* that must be edited to fill-in the functionality of the *cosh* custom layer kernel for when it is executed by the Inference Engine.  The *cosh_kernel.xml* file will also need to be edited to correctly describe the kernel for it to be used by the GPU Plugin for the Inference Engine.  In the next sections, we will edit and walk through these files.
+The generated GPU extension includes the source template file *cosh_kernel.cl*.  We will edit this file to fill-in the functionality of the *cosh* custom layer kernel for execution by the Inference Engine and to correctly describe the kernel for the GPU Plugin of the Inference Engine.  In the next sections, we will walk through and edit these files.
 
 **Note:** For reference, or to copy to make the changes quicker, pre-edited *cosh_kernel.cl* and *cosh_kernel.xml* files are provided by the tutorial in the "$CLT" directory.
 
 ### Edit *cosh_kernel.cl*
 
-We will now edit the *cosh_kernel.cl* by walking through the code and making the necessary changes for the *cosh* custom layer kernel along the way.
+We will now edit the *cosh_kernel.cl* by walking through the code and making the necessary changes for the *cosh* custom layer kernel.
 
-1. Using your favorite text editor, open the GPU extension source file *$CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.cl*
+1. Using your favorite text editor, open the GPU extension source file *$CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.cl*.
 
-2. To *cosh_kernel* kernel implements the functionality of the *cosh* custom layer.  The kernel arguments need to be added for each input and output and the body of the kernel filled-in with the layer functionality.  To calculate the *cosh* custom layer, we will replace the kernel arguments and body with the necessary code to calculate the *cosh* function as shown.
+2. To *cosh_kernel* kernel implements the functionality of the *cosh* custom layer.  The kernel arguments need to be added for each input and output and the body of the kernel filled-in with the layer functionality.  To calculate the *cosh* custom layer, we will replace the kernel arguments and body with the necessary code as shown.
 
    Before:
 
    ```c
    __kernel void cosh_kernel(
         // insert pointers to inputs, outputs as arguments here
-        // if your layer have one input and one output, argumants will be:
+        // if your layer has one input and one output, argumants will be:
         //     const __global INPUT0_TYPE*  input0, __global OUTPUT0_TYPE* output
         )
    {
@@ -727,15 +726,15 @@ We will now edit the *cosh_kernel.cl* by walking through the code and making the
 
 For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more detail is needed which is contained in the *cosh_kernel.xml*.  We will now walk through and edit the *cosh_kernel.xml* to describe the kernel in *cosh_kernel.cl*.
 
-1. Using your favorite text editor, open the GPU extension source file *$CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml*
+1. Using your favorite text editor, open the GPU extension source file *$CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml*.
 
-2. The kernel description starts with the *CustomLayer* element with the *name* attribute specifying the name of the custom layer and the *type* attribute specifying the type of layer.
+2. The kernel description starts with the *CustomLayer* element.  The *name* attribute specifies the name of the custom layer and the *type* attribute specifies the type of layer.
    
    ```xml
    <CustomLayer name="cosh" type="SimpleGPU" version="1">
    ```
    
-3. The *Kernel* element indicates the name of the kernel function, the file the kernel is located in, and any parameter descriptions if needed.  The *Kernel* element's *entry* attribute specifies the name of the kernel function.  The *Source* child-element's *filename* attribute then specifies the file containing the kernel.
+3. The *Kernel* element indicates the name of the kernel function, the file the kernel is located in, and any parameter descriptions needed.  The *Kernel* element's *entry* attribute specifies the name of the kernel function.  The *Source* child-element's *filename* attribute specifies the file containing the kernel.
    ```xml
    <Kernel entry="cosh_kernel">
         <Source filename="cosh_kernel.cl"/>
@@ -748,9 +747,9 @@ For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more 
    - *arg-index* =  Argument position in the kernel's argument list starting from 0
    - *type* = Whether the argument is "input" (read-only) or "output" (writeable)
    - *port-index* = Which memory port of the device the argument should use
-   - *format* = Data format (i.e. dimensions) of argument in memory, for *cosh* we use the simple "*BFXY*"
+   - *format* = Data format (i.e. dimensions) of argument in memory; for *cosh* we use the simple "*BFXY*"
    
-   For the *cosh* kernel, we make the changes as shown:
+   For the *cosh* kernel, we make these changes:
    
    Before:
    
@@ -769,7 +768,7 @@ For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more 
        </Buffers>
    ```
    
-5. The *CompilerOptions* element specifies the compiler options for when the kernel source code is compiled.  By default, the "-cl-mad-enable" (allow multiply-then-add replacement with lower-precision "mad" operator) option is enabled.
+5. The *CompilerOptions* element specifies the compiler options for the kernel source code.  By default, the "-cl-mad-enable" (allow multiply-then-add replacement with lower-precision "mad" operator) option is enabled.
    ```xml
        <CompilerOptions options="-cl-mad-enable"/>
    ```
@@ -806,7 +805,7 @@ First, we will try running the C++ sample specifying the GPU implementation with
 ~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU
 ```
 
-On failure, the error will be reported similar to:
+The error output will be similar to:
 
 ```
 [ ERROR ] Unknown Layer Type: cosh
@@ -817,7 +816,7 @@ We will now run the command again, this time with the *cosh* extension kernel sp
 ```bash
 ~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU -c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml
 ```
-On success, the output will appear similar to:
+The output will be similar to:
 
 ```
 Image /home/<user>/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp
@@ -839,5 +838,5 @@ Throughput: xx.xxxxxxx FPS
 
 Thank you for taking the time to follow this tutorial.  Your feedback answering this brief survey will help us to improve.
 
-Those respondents who leave their info will be entered in a drawing for a **Neural Compute Stick 2** (2 being given away) or a **$25 Gift Certificate** (5 being given away):
+Respondents who leave their info will be entered in a drawing for a **Neural Compute Stick 2** (2 being given away) or a **$25 Gift Certificate** (5 being given away):
 [Intel Custom Layer Survey](https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX)
