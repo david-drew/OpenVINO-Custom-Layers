@@ -141,9 +141,9 @@ As a function that calculates a value for the given value *x*, the *cosh* functi
 
 To begin, always ensure that your environment is properly setup for working with the Intel® Distribution of OpenVINO™ toolkit by running the command:
 
-   ```bash
-   "C:\Program Files (x86)\IntelSWTools\openvino\bin\setupvars.bat"
-   ```
+```bash
+"C:\Program Files (x86)\IntelSWTools\openvino\bin\setupvars.bat"
+```
 
 ## Installing Prerequisites
 
