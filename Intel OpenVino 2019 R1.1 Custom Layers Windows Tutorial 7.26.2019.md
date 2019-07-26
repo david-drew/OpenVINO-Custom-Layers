@@ -149,15 +149,15 @@ To begin, always ensure that your environment is properly setup for working with
 
 1. The Model Extension Generator makes use of *Cog* which is a content generator allowing the execution of embedded Python code to generate code within source files.  Install *Cog* (*cogapp*) using the command:
 
-   ```bash
-   pip3 install cogapp
-   ```
+```bash
+pip3 install cogapp
+```
    
 2. This tutorial will be running a Python sample from the Intel® Distribution of OpenVINO™ toolkit which requires the OpenCV library.  Install the OpenCV library using the command:
 
-   ```bash
-   pip3 install opencv-python
-   ```
+```bash
+pip3 install opencv-python
+```
 
 ## Downloading and Setting Up the Tutorial
 
@@ -165,35 +165,35 @@ The first steps we will take are to create a place for the tutorial and then dow
 
 Downloading and Setting Up the Tutorial
 
-    1. In Explorer, create this directory:
-        ```bash
-        C:\Dev\cl_tutorial
-        ```
+1. In Explorer, create this directory:
+```bash
+C:\Dev\cl_tutorial
+```
 
-    2. git clone or download files into: 
-        ```bash
-        C:\Dev\cl_tutorial
-        ```
+2. git clone or download files into: 
+```bash
+C:\Dev\cl_tutorial
+```
 
-    3. Create environment variables as shorter, more convenient names to the directories that we will use often:
-        ```bash           
-        set CLWS=C:\Dev\cl_tutorial
-        cet CLT=C:\Dev\cl_tutorial\OpenVINO-Custom-Layers-master\2019.r1.1
-        ```
-    From here on, we will use "$CLWS" to reference the "cl_tutorial" workspace directory and "$CLT" to reference the directory containing the files for this tutorial.
+3. Create environment variables as shorter, more convenient names to the directories that we will use often:
+```bash           
+set CLWS=C:\Dev\cl_tutorial
+cet CLT=C:\Dev\cl_tutorial\OpenVINO-Custom-Layers-master\2019.r1.1
+```
+From here on, we will use "$CLWS" to reference the "cl_tutorial" workspace directory and "$CLT" to reference the directory containing the files for this tutorial.
 
 ## Create the Example TensorFlow Model (Weights, Graphs, Checkpoints):
 
 We will use the supplied *build_cosh_model.py* script to create a simple TensorFlow model that contains the *cosh* custom layer.  The weights are random and untrained, but sufficient for demonstrating a simple custom layer implementation.  To create the model and store it in the "$CLWS/tf_model" directory, run the commands: 
 
-        ```bash
-        mkdir %CLWS%\tf_model
-        %CLT%\..\create_tf_model\build_cosh_model.py %CLWS%\tf_model
-        ```                      
-        The last line of successful output will be similar to:
-        ```bash
-        Model saved in path: C:\Dev\cl_tutorial/tf_model/model.ckpt
-        ```
+```bash
+mkdir %CLWS%\tf_model
+%CLT%\..\create_tf_model\build_cosh_model.py %CLWS%\tf_model
+```                      
+The last line of successful output will be similar to:
+```bash
+Model saved in path: C:\Dev\cl_tutorial/tf_model/model.ckpt
+```
 # Creating the *cosh* Custom Layer
 
 ## Generate the Extension Template Files Using the Model Extension Generator
