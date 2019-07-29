@@ -196,6 +196,16 @@ We will use the supplied *build_cosh_model.py* script to create a simple TensorF
         ```
 # Creating the *cosh* Custom Layer
 
+## Copy Extension Source Code to the IE Extension Source Directory
+
+Using admin privileges, copy ext_cosh.cpp to the directory OpenVINO uses for buiding the libinference_engine dll.
+
+```bash
+copy %CLWS%\2019.r1.1\ext_cosh.cpp C:\Program Files (x86)\IntelSWTools\openvino\deployment_tools\inference_engine\src\extension
+```
+
+NOTE:  There are multiple ways to do this.  The tutorial chooses the most simple method by using the OpenVINO infrastructure, which results in adding the cosh layer to the libcpu_extention dll.  The library may alternately be compiled as a separate dll through creating a Visual Studio project, a script that calls MSBuild, or your preferred method.
+
 ## Generate the Extension Template Files Using the Model Extension Generator
 
 We will use the Model Extension Generator tool to automatically create templates for all the extensions needed by the Model Optimizer to convert and the Inference Engine to execute the custom layer.  The extension template files will be partially replaced by Python and C++ code to implement the functionality of *cosh* as needed by the different tools.  To create the four extensions for the *cosh* custom layer, we run the Model Extension Generator with the following options:
