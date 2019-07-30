@@ -733,7 +733,7 @@ The error output will be similar to:
 We will now run the command again, this time with the *cosh* extension kernel specified using the "*-c %CLWS%\cl_cosh\user_ie_extensions\gpu\cosh_kernel.xml*" option to point to the *cosh* kernel in the command:
 
 ```bash
-C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d GPU -c %CLT%\cosh_kernel.xml
+%userprofile%\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d GPU -c %CLT%\cosh_kernel.xml
 ```
 The output will be similar to:
 
@@ -752,8 +752,3 @@ Throughput: xx.xxxxxxx FPS
 [ INFO ] Execution successful
 ```
 
-# Please Complete the Survey
-
-Thank you for taking the time to follow this tutorial.  Your feedback answering this brief survey will help us to improve.
-
-[Intel Custom Layer Survey](https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX)
