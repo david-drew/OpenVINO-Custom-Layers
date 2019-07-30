@@ -510,8 +510,7 @@ To run the custom layer on the CPU during inference, the edited extension C++ so
 1. Move to the Inference Engine samples directory.
       
    Either navigate through explorer or change directory on the CLI to move to the top of the OpenVINO samples directory
-      
-
+    
 ```bash
 cd %OV%\deployment_tools\inference_engine\samples
 ```
@@ -519,7 +518,7 @@ cd %OV%\deployment_tools\inference_engine\samples
 2. Run the build samples script:
       
 ```
-build_samples_msvc
+build_samples_msvc.bat
 ```
       
 This will take a few minutes, and build several samples and the libcpu_extension dll.  The dll now includes the cosh extension.
@@ -528,7 +527,6 @@ This will take a few minutes, and build several samples and the libcpu_extension
 %userprofile%\documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\cpu_extension.dll
 ```
 
-
 ## Execute the Model with the Custom Layer
 
 ### Using a C++ Sample
@@ -536,26 +534,12 @@ This will take a few minutes, and build several samples and the libcpu_extension
 First, we will try running the C++ sample without including the *cosh* extension library to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU
-```
-
-The error output will be similar to:
-
-```
-[ ERROR ] Unsupported primitive of type: cosh name: ModCosh/cosh/Cosh
-```
-
-We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so*" option in the command:
-
-```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so
+%userprofile%\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU
 ```
 
 The output will appear similar to:
 
 ```
-Image /home/<user>/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp
-
 classid probability
 ------- -----------
 0       0.9308984  
