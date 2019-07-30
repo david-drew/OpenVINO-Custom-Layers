@@ -217,7 +217,6 @@ We will use the Model Extension Generator tool to automatically create templates
 - --output_dir = set the output directory.  Here we are using *$CLWS/cl_cosh* as the target directory to store the output from the Model Extension Generator.
 
 To create the four extension templates for the *cosh* custom layer, we run the command:
-
 ```bash
 python %OV%\deployment_tools\tools\extension_generator\extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --ie-gpu-ext --output_dir=$CLWS\cl_cosh
 ```
@@ -261,21 +260,21 @@ Stub files for the Inference Engine GPU extension are in /home/<user>/cl_tutoria
 Template files (containing source code stubs) that may need to be edited have just been created in the following locations:
 
 - TensorFlow Model Optimizer extractor extension: 
-   - $CLWS/cl_cosh/user_mo_extensions/front/tf/
+   - %CLWS%/cl_cosh/user_mo_extensions/front/tf/
       - cosh_ext.py
 - Model Optimizer operation extension:
-   - $CLWS/cl_cosh/user_mo_extensions/ops
+   - %CLWS%/cl_cosh/user_mo_extensions/ops
       - cosh.py
 - Inference Engine CPU extension:
-   - $CLWS/cl_cosh/user_ie_extensions/cpu
+   - %CLWS%/cl_cosh/user_ie_extensions/cpu
       - ext_cosh.cpp
       - CMakeLists.txt
 - Inference Engine GPU extension:
-   - $CLWS/cl_cosh/user_ie_extensions/gpu
+   - %CLWS%/cl_cosh/user_ie_extensions/gpu
       - cosh_kernel.cl
       - cosh_kernel.xml
 
-Instructions on editing the template files are provided in later parts of this tutorial.  For reference, or to copy to make the changes quicker, pre-edited template files are provided by the tutorial in the "$CLT" directory.
+Instructions on editing the template files are provided in later parts of this tutorial.  For reference, or to copy to make the changes quicker, pre-edited template files are provided by the tutorial in the "%CLT%" directory.
 
 ## Using Model Optimizer to Generate IR Files Containing the Custom Layer 
 
@@ -287,8 +286,8 @@ We will now use the generated extractor and operation extensions with the Model 
 
 ### Edit the Extractor Extension Template File
 
-For the *cosh* custom layer, the generated extractor extension does not need to be modified because the layer parameters are used without modification.  Below is a walkthrough of the Python code for the extractor extension that appears in the file  *$CLWS/cl_cosh/user_mo_extensions/front/tf/cosh_ext.py*.
-1. Using your favorite text editor, open the extractor extension source file *$CLWS/cl_cosh/user_mo_extensions/front/tf/cosh_ext.py*.
+For the *cosh* custom layer, the generated extractor extension does not need to be modified because the layer parameters are used without modification.  Below is a walkthrough of the Python code for the extractor extension that appears in the file  *%CLWS%\cl_cosh\user_mo_extensions\front\tf\cosh_ext.py*.
+1. Using your favorite text editor, open the extractor extension source file *%CLWS%\cl_cosh\user_mo_extensions\front\tf\cosh_ext.py*.
 2. The class is defined with the unique name *coshFrontExtractor* that inherits from the base extractor *FrontExtractorOp* class.  The class variable *op* is set to the name of the layer operation and *enabled* is set to tell the Model Optimizer to use (*True*) or exclude (*False*) the layer during processing.
 ```python
 class coshFrontExtractor(FrontExtractorOp):
@@ -319,8 +318,8 @@ class coshFrontExtractor(FrontExtractorOp):
 ```
 ### Edit the Operation Extension Template File
 
-For the *cosh* custom layer, the generated operation extension does not need to be modified because the shape (i.e., dimensions) of the layer output is the same as the input shape.  Below is a walkthrough of the Python code for the operation extension that appears in the file  *$CLWS/cl_cosh/user_mo_extensions/ops/cosh.py*.
-1. Using your favorite text editor, open the operation extension source file *$CLWS/cl_cosh/user_mo_extensions/ops/cosh.py* 
+For the *cosh* custom layer, the generated operation extension does not need to be modified because the shape (i.e., dimensions) of the layer output is the same as the input shape.  Below is a walkthrough of the Python code for the operation extension that appears in the file  *%CLWS%\cl_cosh\user_mo_extensions\ops\cosh.py*.
+1. Using your favorite text editor, open the operation extension source file *%CLWS%\cl_cosh\user_mo_extensions\ops\cosh.py* 
 2. The class is defined with the unique name *coshOp* that inherits from the base operation *Op* class.  The class variable *op* is set to "*cosh*", the name of the layer operation.
 ```python
 class coshOp(Op):
@@ -366,19 +365,19 @@ With the extensions now complete, we use the Model Optimizer to convert and opti
 
    - The full name of the final output layer of the model.
 
-- --extensions $CLWS/cl_cosh/user_mo_extensions 
+- --extensions %CLWS%\cl_cosh\user_mo_extensions 
 
    - Location of the extractor and operation extensions for the custom layer to be used by the Model Optimizer during model extraction and optimization. 
 
-- --output_dir $CLWS/cl_ext_cosh
+- --output_dir %CLWS%\cl_ext_cosh
 
    - Location to write the output IR files.
 
-   To create the model IR files that will include the *cosh* custom layer, we run the commands:
+To create the model IR files that will include the *cosh* custom layer, we run the commands:
 
    ```bash
-   cd $CLWS/tf_model
-   mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions $CLWS/cl_cosh/user_mo_extensions --output_dir $CLWS/cl_ext_cosh
+   cd %CLWS%\tf_model
+   %OV%\deployment_tools\model_optimizer\mo_tf.py --input_meta_graph model.ckpt.meta --batch 1 --output "ModCosh/Activation_8/softmax_output" --extensions %CLWS%\cl_cosh\user_mo_extensions --output_dir %CLWS%\cl_ext_cosh
    ```
     The output will appear similar to:
     ```
