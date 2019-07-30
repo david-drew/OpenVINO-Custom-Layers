@@ -74,7 +74,7 @@ Using answers to interactive questions or a *.json* configuration file, the Mode
 The Model Extension Generator is included in the Intel® Distribution of OpenVINO™ toolkit installation and is run using the command (here with the "--help" option):
 
 ```bash
-python3 /opt/intel/openvino/deployment_tools/tools/extension_generator/extgen.py new --help
+python %ov%\deployment_tools\tools\extension_generator\extgen.py new --help
 ```
 
 where the output will appear similar to:
@@ -165,22 +165,23 @@ The first steps we will take are to create a place for the tutorial and then dow
 
 Downloading and Setting Up the Tutorial
 
-    1. In Explorer, create this directory:
-        ```bash
-        C:\Dev\cl_tutorial
-        ```
+1. In Explorer, create this directory:
+```bash
+C:\Dev\cl_tutorial
+```
 
-    2. git clone or download files into: 
-        ```bash
-        C:\Dev\cl_tutorial
-        ```
+2. git clone or download files into: 
+```bash
+C:\Dev\cl_tutorial
+```
 
-    3. Create environment variables as shorter, more convenient names to the directories that we will use often:
-        ```bash           
-        set CLWS=C:\Dev\cl_tutorial
-        cet CLT=C:\Dev\cl_tutorial\OpenVINO-Custom-Layers-master\2019.r1.1
-        ```
-    From here on, we will use "$CLWS" to reference the "cl_tutorial" workspace directory and "$CLT" to reference the directory containing the files for this tutorial.
+3. Create environment variables as shorter, more convenient names to the directories that we will use often:
+```bash           
+set CLWS=C:\Dev\cl_tutorial
+set CLT=C:\Dev\cl_tutorial\OpenVINO-Custom-Layers-master\2019.r1.1
+set ov="C:\Program Files (x86)\IntelSWTools\openvino"
+```
+From here on, we will use "$CLWS" to reference the "cl_tutorial" workspace directory and "$CLT" to reference the directory containing the files for this tutorial.
 
 ## Create the Example TensorFlow Model (Weights, Graphs, Checkpoints):
 
