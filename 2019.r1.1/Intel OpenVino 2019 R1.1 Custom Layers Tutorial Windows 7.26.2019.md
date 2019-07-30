@@ -576,7 +576,6 @@ python %OV%\deployment_tools\inference_engine\samples\python_samples\classificat
 
 The output will appear similar to:
 ```
-Image /home/<user>/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp
 
 classid probability
 ------- -----------
