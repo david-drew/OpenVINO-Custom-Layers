@@ -1,4 +1,4 @@
-# OpenVINO 2019 R1 Custom Layer Implementation Tutorial for Linux* 
+# OpenVINO 2019 R1.1 Custom Layer Implementation Tutorial for Linux* 
 **Note:** This tutorial has been tested and confirmed on Ubuntu 16.04 LTS using the Intel® Distribution of OpenVINO™ toolkit 2019 R1.1.  Using this tutorial with any other versions may not work correctly.
 
 # Introduction
