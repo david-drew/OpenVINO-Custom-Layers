@@ -594,13 +594,13 @@ We will now use the generated GPU extension with the Inference Engine to execute
 
 The generated GPU extension includes the source template file *cosh_kernel.cl*.  We will edit this file to fill-in the functionality of the *cosh* custom layer kernel for execution by the Inference Engine and to correctly describe the kernel for the GPU Plugin of the Inference Engine.  In the next sections, we will walk through and edit these files.
 
-**Note:** For reference, or to copy to make the changes quicker, pre-edited *cosh_kernel.cl* and *cosh_kernel.xml* files are provided by the tutorial in the "$CLT" directory.
+**Note:** For reference, or to copy to make the changes quicker, pre-edited *cosh_kernel.cl* and *cosh_kernel.xml* files are provided by the tutorial in the "%CLT%" directory.
 
 ### Edit *cosh_kernel.cl*
 
 We will now edit the *cosh_kernel.cl* by walking through the code and making the necessary changes for the *cosh* custom layer kernel.
 
-1. Using your favorite text editor, open the GPU extension source file *$CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.cl*.
+1. Using your favorite text editor, open the GPU extension source file *%CLWS%\cl_cosh\user_ie_extensions\gpu\cosh_kernel.cl*.
 
 2. To *cosh_kernel* kernel implements the functionality of the *cosh* custom layer.  The kernel arguments need to be added for each input and output and the body of the kernel filled-in with the layer functionality.  To calculate the *cosh* custom layer, we will replace the kernel arguments and body with the necessary code as shown.
 
@@ -645,7 +645,7 @@ We will now edit the *cosh_kernel.cl* by walking through the code and making the
 
 For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more detail is needed which is contained in the *cosh_kernel.xml*.  We will now walk through and edit the *cosh_kernel.xml* to describe the kernel in *cosh_kernel.cl*.
 
-1. Using your favorite text editor, open the GPU extension source file *$CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml*.
+1. Using your favorite text editor, open the GPU extension source file *%CLWS%\cl_cosh\user_ie_extensions\gpu\cosh_kernel.xml*.
 
 2. The kernel description starts with the *CustomLayer* element.  The *name* attribute specifies the name of the custom layer and the *type* attribute specifies the type of layer.
    
@@ -721,7 +721,7 @@ For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more 
 First, we will try running the C++ sample specifying the GPU implementation without including the *cosh* kernel to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU
+C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d GPU
 ```
 
 The error output will be similar to:
@@ -733,12 +733,11 @@ The error output will be similar to:
 We will now run the command again, this time with the *cosh* extension kernel specified using the "*-c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml*" option to point to the *cosh* kernel in the command:
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU -c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml
+C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d GPU -c %CLT%\cosh_kernel.xml
 ```
 The output will be similar to:
 
 ```
-Image /home/<user>/cl_tutorial/OpenVINO-Custom-Layers/pics/dog.bmp
 
 classid probability
 ------- -----------
@@ -757,5 +756,4 @@ Throughput: xx.xxxxxxx FPS
 
 Thank you for taking the time to follow this tutorial.  Your feedback answering this brief survey will help us to improve.
 
-Respondents who leave their info will be entered in a drawing for a **Neural Compute Stick 2** (2 being given away) or a **$25 Gift Certificate** (5 being given away):
 [Intel Custom Layer Survey](https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX)
