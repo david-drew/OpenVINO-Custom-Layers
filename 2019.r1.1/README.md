@@ -838,5 +838,4 @@ Throughput: xx.xxxxxxx FPS
 
 Thank you for taking the time to follow this tutorial.  Your feedback answering this brief survey will help us to improve.
 
-Respondents who leave their info will be entered in a drawing for a **Neural Compute Stick 2** (2 being given away) or a **$25 Gift Certificate** (5 being given away):
 [Intel Custom Layer Survey](https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX)
