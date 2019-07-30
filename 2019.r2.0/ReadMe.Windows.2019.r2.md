@@ -546,12 +546,7 @@ classid probability
 ------- -----------
 0       0.9308984  
 1       0.0691015
-
-total inference time: xx.xxxxxxx
-Average running time of one iteration: xx.xxxxxxx ms
-    
-Throughput: xx.xxxxxxx FPS
-    
+ 
 [ INFO ] Execution successful
 ```
 
@@ -581,8 +576,10 @@ The output will appear similar to:
 
 classid probability
 ------- -----------
-   0      0.9308984
-   1      0.0691015
+0      0.9308984
+1      0.0691015
+   
+[ INFO ] Execution successful
 ```
 
 # Inference Engine Custom Layer Implementation for the Intel® Integrated GPU
@@ -740,17 +737,11 @@ We will now run the command again, this time with the *cosh* extension kernel sp
 The output will be similar to:
 
 ```
-
 classid probability
 ------- -----------
-0       0.8941712  
-1       0.1058289
-
-total inference time: xx.xxxxxxx
-Average running time of one iteration: xx.xxxxxxx ms
-
-Throughput: xx.xxxxxxx FPS
-
+0      0.9308984
+1      0.0691015
+   
 [ INFO ] Execution successful
 ```
 
