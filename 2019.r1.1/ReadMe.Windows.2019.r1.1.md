@@ -752,8 +752,4 @@ Throughput: xx.xxxxxxx FPS
 [ INFO ] Execution successful
 ```
 
-# Please Complete the Survey
-
-Thank you for taking the time to follow this tutorial.  Your feedback answering this brief survey will help us to improve.
-
-[Intel Custom Layer Survey](https://intelemployee.az1.qualtrics.com/jfe/form/SV_1ZjOKaEIQUM5FpX)
+# Thank you for completing the tutorial on Custom Layers in OpenVINO.
