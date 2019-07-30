@@ -143,9 +143,7 @@ To begin, always ensure that your environment is properly setup for working with
 
    ```bash
    "C:\Program Files (x86)\IntelSWTools\openvino\bin\setupvars.bat"
-   ```
-
-## Installing Prerequisites
+   ```## Installing Prerequisites
 
 1. The Model Extension Generator makes use of *Cog* which is a content generator allowing the execution of embedded Python code to generate code within source files.  Install *Cog* (*cogapp*) using the command:
 
@@ -179,7 +177,7 @@ C:\Dev\cl_tutorial
 ```bash           
 set CLWS=C:\Dev\cl_tutorial
 set CLT=C:\Dev\cl_tutorial\OpenVINO-Custom-Layers-master\2019.r1.1
-set ov="C:\Program Files (x86)\IntelSWTools\openvino"
+set OV="C:\Program Files (x86)\IntelSWTools\openvino"
 ```
 From here on, we will use "$CLWS" to reference the "cl_tutorial" workspace directory and "$CLT" to reference the directory containing the files for this tutorial.
 
@@ -187,13 +185,13 @@ From here on, we will use "$CLWS" to reference the "cl_tutorial" workspace direc
 
 We will use the supplied *build_cosh_model.py* script to create a simple TensorFlow model that contains the *cosh* custom layer.  The weights are random and untrained, but sufficient for demonstrating a simple custom layer implementation.  To create the model and store it in the "$CLWS/tf_model" directory, run the commands: 
 
-        ```bash
-        mkdir %CLWS%\tf_model
-        %CLT%\..\create_tf_model\build_cosh_model.py %CLWS%\tf_model
-        ```                      
-        The last line of successful output will be similar to:
-        ```bash
-        Model saved in path: C:\Dev\cl_tutorial/tf_model/model.ckpt
+```bash
+mkdir %CLWS%\tf_model
+%CLT%\..\create_tf_model\build_cosh_model.py %CLWS%\tf_model
+```                      
+The last line of successful output will be similar to:
+```bash
+Model saved in path: C:\Dev\cl_tutorial/tf_model/model.ckpt
         ```
 # Creating the *cosh* Custom Layer
 
