@@ -1,9 +1,9 @@
+python %OV%\deployment_tools\tools\extension_generator\extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --ie-gpu-ext --output_dir=$CLWS\cl_cosh
 
-copy %CLT%\ext_cosh.cpp %OV%\deployment_tools\inference_engine\src\extension
-
-
+<br><br>
 DONE
 ...done, I say!
+<br>
 
 Requirements (New Env Vars):
 
@@ -11,3 +11,6 @@ Requirements (New Env Vars):
   
 
 python %OV%\deployment_tools\tools\extension_generator\extgen.py new --help
+
+copy %CLT%\ext_cosh.cpp %OV%\deployment_tools\inference_engine\src\extension
+
