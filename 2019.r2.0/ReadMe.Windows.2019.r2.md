@@ -143,7 +143,9 @@ To begin, always ensure that your environment is properly setup for working with
 
 ```bash
 "C:\Program Files (x86)\IntelSWTools\openvino\bin\setupvars.bat"
-```## Installing Prerequisites
+```
+
+## Installing Prerequisites
 
 1. The Model Extension Generator makes use of *Cog* which is a content generator allowing the execution of embedded Python code to generate code within source files.  Install *Cog* (*cogapp*) using the command:
 
