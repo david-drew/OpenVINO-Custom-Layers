@@ -1,5 +1,5 @@
 # OpenVINO Custom Layer Tutorials for Linux
-This tutorials have been tested on Ubuntu 16.04.
+
 
 ## Before You Start
 It's assumed that you've installed the appropriate version of OpenVINO, including the Model Optimizer, in the default /opt/intel directory.  If you've installed to a different directory you may need to change the directory pathways in the commands below.
