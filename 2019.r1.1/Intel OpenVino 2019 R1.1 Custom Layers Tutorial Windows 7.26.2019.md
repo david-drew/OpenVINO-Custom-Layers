@@ -507,18 +507,16 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
 
 To run the custom layer on the CPU during inference, the edited extension C++ source code must be compiled to create a *.so* shared library used by the Inference Engine.  In the following steps, we will now compile the extension C++ library.
 
-1. First, we run the following commands to use CMake to setup for compiling:
-
-Move to the Inference Engine samples directory.
+1. Move to the Inference Engine samples directory.
       
-Either navigate through explorer or change directory on the CLI to move to the top of the OpenVINO samples directory
+   Either navigate through explorer or change directory on the CLI to move to the top of the OpenVINO samples directory
       
 
 ```bash
 cd %OV%\deployment_tools\inference_engine\samples
 ```
       
-Then run the build samples script:
+2. Run the build samples script:
       
 ```
 build_samples_msvc
