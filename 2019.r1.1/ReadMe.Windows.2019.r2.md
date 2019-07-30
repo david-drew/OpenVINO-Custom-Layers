@@ -1,4 +1,4 @@
-# Custom Layer Implementation Tutorial for Windows* 
+# OpenVINO 2019 R1.1 Custom Layer Implementation Tutorial for Windows* 
 **Note:** This tutorial has been tested and confirmed on Microsoft Windows 10® using the Intel® Distribution of OpenVINO™ toolkit 2019 R1.1.  Using this tutorial with any other versions may not work correctly.
 
 # Introduction
