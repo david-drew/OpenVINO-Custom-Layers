@@ -257,6 +257,11 @@ Stub file for TensorFlow Model Optimizer extractor is in /home/<user>/cl_tutoria
 Stub file for the Model Optimizer operation is in /home/<user>/cl_tutorial/cl_cosh/user_mo_extensions/ops folder
 Stub files for the Inference Engine CPU extension are in /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/cpu folder
 Stub files for the Inference Engine GPU extension are in /home/<user>/cl_tutorial/cl_cosh/user_ie_extensions/gpu folder
+
+Stub file for TensorFlow Model Optimizer extractor is in C:\Users\<user>\Documents\Intel\OpenVINO\inference_engine_demos_build\intel64\Release\$CLWS\cl_cosh\user_mo_extensions\front\tf folder
+Stub file for the Model Optimizer operation is in C:\Users\<user>\Documents\Intel\OpenVINO\inference_engine_demos_build\intel64\Release\$CLWS\cl_cosh\user_mo_extensions\ops folder
+Stub files for the Inference Engine CPU extension are in C:\Users\<user>\Documents\Intel\OpenVINO\inference_engine_demos_build\intel64\Release\$CLWS\cl_cosh\user_ie_extensions\cpu folder
+Stub files for the Inference Engine GPU extension are in C:\Users\<user>\Documents\Intel\OpenVINO\inference_engine_demos_build\intel64\Release\$CLWS\cl_cosh\user_ie_extensions\gpu folder
 ```
 
 Template files (containing source code stubs) that may need to be edited have just been created in the following locations:
