@@ -566,9 +566,9 @@ The error output will be similar to:
     ModCosh/cosh/Cosh, ModCosh/cosh_1/Cosh, ModCosh/cosh_2/Cosh
 [ ERROR ] Please try to specify cpu extensions library path in sample's command line parameters using -l or --cpu_extension command line argument
 ```
-We will now run the command again, this time with the *cosh* extension library specified using the "*-l C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\cpu_extension.dll*" option in the command:
+We will now run the command again, this time with the *cosh* extension library specified using the "*-l %userprofile%\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\cpu_extension.dll*" option in the command:
 ```bash
-python %OV%\deployment_tools\inference_engine\samples\python_samples\classification_sample\classification_sample.py -i %CLT%..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU -l C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\cpu_extension.dll
+python %OV%\deployment_tools\inference_engine\samples\python_samples\classification_sample\classification_sample.py -i %CLT%..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU -l %userprofile%\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\cpu_extension.dll
 ```
 
 The output will appear similar to:
