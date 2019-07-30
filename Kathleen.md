@@ -1,6 +1,5 @@
-python %OV%\deployment_tools\inference_engine\samples\python_samples\classification_sample\classification_sample.py -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU
 
-python %OV%\deployment_tools\inference_engine\samples\python_samples\classification_sample\classification_sample.py -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU -l C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\cpu_extension.dll
+C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d GPU -c  %CLT%\cosh_kernel.xml
 
 
 <br><br><b>
@@ -32,3 +31,7 @@ Samples Dir r2
 	%userprofile%\Documents\Intel\OpenVINO\inference_engine_demos_build\intel64\Release
 
 %userprofile%\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU
+
+python %OV%\deployment_tools\inference_engine\samples\python_samples\classification_sample\classification_sample.py -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU
+
+python %OV%\deployment_tools\inference_engine\samples\python_samples\classification_sample\classification_sample.py -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU -l C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\cpu_extension.dll
