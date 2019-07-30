@@ -509,26 +509,26 @@ To run the custom layer on the CPU during inference, the edited extension C++ so
 
 1. First, we run the following commands to use CMake to setup for compiling:
 
-      Move to the Inference Engine samples directory.
+Move to the Inference Engine samples directory.
       
 Either navigate through explorer or change directory on the CLI to move to the top of the OpenVINO samples directory
       
 
-      ```bash
-      cd %OV%\deployment_tools\inference_engine\samples
-      ```
+```bash
+cd %OV%\deployment_tools\inference_engine\samples
+```
       
-      Then run the build samples script:
+Then run the build samples script:
       
-      ```
-      build_samples_msvc
-      ```
+```
+build_samples_msvc
+```
       
-      This will take a few minutes, and build several samples and the libcpu_extension dll.  The dll now includes the cosh extension.
+This will take a few minutes, and build several samples and the libcpu_extension dll.  The dll now includes the cosh extension.
 
-      ```
-      %userprofile%\documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\cpu_extension.dll
-      ```
+```
+%userprofile%\documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\cpu_extension.dll
+```
 
 
 ## Execute the Model with the Custom Layer
