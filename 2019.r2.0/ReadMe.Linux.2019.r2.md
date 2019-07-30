@@ -600,7 +600,7 @@ To run the custom layer on the CPU during inference, the edited extension C++ so
 First, we will try running the C++ sample without including the *cosh* extension library to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU
+~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/tf_model/model.ckpt.xml -d CPU
 ```
 
 The error output will be similar to:
@@ -612,7 +612,7 @@ The error output will be similar to:
 We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so*" option in the command:
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so
+~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/tf_model/model.ckpt.xml -d CPU -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so
 ```
 
 The output will appear similar to:
@@ -643,15 +643,15 @@ python3 /opt/intel/openvino/deployment_tools/inference_engine/samples/python_sam
 The error output will be similar to:
 ```
 [ INFO ] Loading network files:
-           /home/<user>/cl_tutorial/cl_ext_cosh/model.ckpt.xml
-           /home/<user>/cl_tutorial/cl_ext_cosh/model.ckpt.bin
+           /home/<user>/cl_tutorial/tf_model/model.ckpt.xml
+           /home/<user>/cl_tutorial/tf_model/model.ckpt.bin
 [ ERROR ] Following layers are not supported by the plugin for specified device CPU:
     ModCosh/cosh/Cosh, ModCosh/cosh_1/Cosh, ModCosh/cosh_2/Cosh
 [ ERROR ] Please try to specify cpu extensions library path in sample's command line parameters using -l or --cpu_extension command line argument
 ```
 We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so*" option in the command:
 ```bash
-python3 /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so -d CPU
+python3 /opt/intel/openvino/deployment_tools/inference_engine/samples/python_samples/classification_sample/classification_sample.py -i $CLT/../pics/dog.bmp -m $CLWS/tf_model/model.ckpt.xml -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so -d CPU
 ```
 
 The output will appear similar to:
@@ -802,7 +802,7 @@ For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more 
 First, we will try running the C++ sample specifying the GPU implementation without including the *cosh* kernel to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU
+~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/tf_model/model.ckpt.xml -d GPU
 ```
 
 The error output will be similar to:
@@ -814,7 +814,7 @@ The error output will be similar to:
 We will now run the command again, this time with the *cosh* extension kernel specified using the "*-c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml*" option to point to the *cosh* kernel in the command:
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU -c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml
+~/inference_engine_samples_build/intel64/Release/classification_sample -i $CLT/../pics/dog.bmp -m $CLWS/tf_model/model.ckpt.xml -d GPU -c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml
 ```
 The output will be similar to:
 
