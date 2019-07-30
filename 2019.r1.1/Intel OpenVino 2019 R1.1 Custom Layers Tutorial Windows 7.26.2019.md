@@ -453,10 +453,10 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
    
 6. The construct is now complete, catching and reporting certain exceptions that may have been thrown before exiting.
    ```cpp
-   } catch (InferenceEngine::details::InferenceEngineException &ex) {
-      errorMsg = ex.what();
+      } catch (InferenceEngine::details::InferenceEngineException &ex) {
+         errorMsg = ex.what();
+      }
    }
-}
    ```
 
 7. The *execute* method is overridden to implement the functionality of the *cosh* custom layer.  The *inputs* and *outputs* are the data buffers passed as [Blob](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Memory_primitives.html) objects.  The template file will simply return *NOT_IMPLEMENTED* by default.  To calculate the *cosh* custom layer, we will replace the *execute* method with the code needed to calculate the *cosh* function in parallel using the [parallel_for3d](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) function.
