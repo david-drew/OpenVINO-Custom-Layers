@@ -1,8 +1,8 @@
 python %OV%\deployment_tools\tools\extension_generator\extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --ie-gpu-ext --output_dir=%CLWS%\cl_cosh
 
-<br><br>
+<br><br><b>
 DONE
-...done, I say!
+...done, I say!</b>
 <br>
 
 Requirements (New Env Vars):
