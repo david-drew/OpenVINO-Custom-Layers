@@ -141,21 +141,21 @@ As a function that calculates a value for the given value *x*, the *cosh* functi
 
 To begin, always ensure that your environment is properly setup for working with the Intel® Distribution of OpenVINO™ toolkit by running the command:
 
-   ```bash
-   "C:\Program Files (x86)\IntelSWTools\openvino\bin\setupvars.bat"
-   ```## Installing Prerequisites
+```bash
+"C:\Program Files (x86)\IntelSWTools\openvino\bin\setupvars.bat"
+```## Installing Prerequisites
 
 1. The Model Extension Generator makes use of *Cog* which is a content generator allowing the execution of embedded Python code to generate code within source files.  Install *Cog* (*cogapp*) using the command:
 
-   ```bash
-   pip3 install cogapp
-   ```
+```bash
+pip3 install cogapp
+```
    
 2. This tutorial will be running a Python sample from the Intel® Distribution of OpenVINO™ toolkit which requires the OpenCV library.  Install the OpenCV library using the command:
 
-   ```bash
-   pip3 install opencv-python
-   ```
+```bash
+pip3 install opencv-python
+```
 
 ## Downloading and Setting Up the Tutorial
 
@@ -192,7 +192,7 @@ mkdir %CLWS%\tf_model
 The last line of successful output will be similar to:
 ```bash
 Model saved in path: C:\Dev\cl_tutorial/tf_model/model.ckpt
-        ```
+```
 # Creating the *cosh* Custom Layer
 
 ## Copy Extension Source Code to the IE Extension Source Directory
