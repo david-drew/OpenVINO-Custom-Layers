@@ -6,6 +6,9 @@ Samples Dir r2
 	%userprofile%\Documents\Intel\OpenVINO\inference_engine_demos_build\intel64\Release
 
 
+%userprofile%\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU
+
+
 <br><br><b>
 DONE
 ...done, I say!</b>
