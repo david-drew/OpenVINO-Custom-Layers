@@ -1,5 +1,5 @@
-# OpenVINO 2019 R1 Custom Layer Implementation Tutorial for Windows* 
-**Note:** This tutorial has been tested and confirmed on Microsoft Windows 10® using the Intel® Distribution of OpenVINO™ toolkit 2019 R1.1.  Using this tutorial with any other versions may not work correctly.
+# OpenVINO 2019 R2 Custom Layer Implementation Tutorial for Windows* 
+**Note:** This tutorial has been tested and confirmed on Microsoft Windows 10® using the Intel® Distribution of OpenVINO™ toolkit 2019 R2.4.  Using this tutorial with any other versions may not work correctly.
 
 # Introduction
 
@@ -14,23 +14,23 @@ Currently, this tutorial and the Model Extension Generator tool support creating
 
 # Before You Start
 
-## Installation of the Intel® Distribution of OpenVINO™ toolkit 2019 R1.1 for Windows* 
+## Installation of the Intel® Distribution of OpenVINO™ toolkit 2019 R2 for Windows* 
 
-This tutorial assumes that you have already installed the [Intel® Distribution of OpenVINO™ toolkit 2019 R1.1 for Windows*](https://software.intel.com/openvino-toolkit/choose-download/free-download-windows) into the default */opt/intel/openvino* directory.  If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory. 
+This tutorial assumes that you have already installed the [Intel® Distribution of OpenVINO™ toolkit 2019 R2 for Windows*](https://software.intel.com/openvino-toolkit/choose-download/free-download-windows) into the default */opt/intel/openvino* directory.  If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory. 
 
-The Intel® Distribution of OpenVINO™ toolkit includes the [Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html).  This tutorial uses a TensorFlow framework model and assumes that you have already configured the Model Optimizer for use with TensorFlow.  If you did not configure the Model Optimizer for all the frameworks or not for TensorFlow explicitly during installation, be sure to do so following the steps for [Configuring the Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Config_Model_Optimizer.html) before proceeding.
+The Intel® Distribution of OpenVINO™ toolkit includes the [Model Optimizer](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html).  This tutorial uses a TensorFlow framework model and assumes that you have already configured the Model Optimizer for use with TensorFlow.  If you did not configure the Model Optimizer for all the frameworks or not for TensorFlow explicitly during installation, be sure to do so following the steps for [Configuring the Model Optimizer](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_prepare_model_Config_Model_Optimizer.html) before proceeding.
 
 After installing the Intel® Distribution of OpenVINO™ toolkit, the *classification_sample* executable binary will be located in the directory *~/inference_engine_samples_build/intel64/Release*.  This tutorial will use the *classification_sample* executable to run the example model.
 
 # Custom Layers
 Custom layers are neural network model layers that are not natively supported by a given model framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you to plug in your own implementation for existing or completely new layers.
 
-Additional information on custom layers and the Intel® Distribution of OpenVINO™ toolkit can be found in [Customize Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html) and [Inference Engine Kernels Extensibility](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Integrate_your_kernels_into_IE.html).
+Additional information on custom layers and the Intel® Distribution of OpenVINO™ toolkit can be found in [Customize Model Optimizer](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html) and [Inference Engine Kernels Extensibility](https://docs.openvinotoolkit.org/2019_R2/_docs_IE_DG_Integrate_your_kernels_into_IE.html).
 
-The [Model Optimizer](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html) searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model, and producing the Intermediate Representation files.  If your topology contains layers that are not in the list of known layers for the supported model framework, the Model Optimizer considers the layers to be custom.  The list of known layers is different for each specific supported model framework.  To see the framework layers that are supported by the Model Optimizer, refer to [Supported Frameworks Layers](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html).
+The [Model Optimizer](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html) searches the list of known layers for each layer contained in the input model topology before building the model's internal representation, optimizing the model, and producing the Intermediate Representation files.  If your topology contains layers that are not in the list of known layers for the supported model framework, the Model Optimizer considers the layers to be custom.  The list of known layers is different for each specific supported model framework.  To see the framework layers that are supported by the Model Optimizer, refer to [Supported Frameworks Layers](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html).
 
-The [Inference Engine](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Deep_Learning_Inference_Engine_DevGuide.html) loads the layers from the input model IR files into the specified device plugin, which will search a list of known layer implementations for the device.  If your topology contains layers that are not in the list of known layers for the device, the Inference Engine considers the layer to be unsupported and reports an error.  To see the layers that are supported by each device plugin for the Inference Engine, refer to the [Supported Devices](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_supported_plugins_Supported_Devices.html) documentation.  
-**Note:** Unsupported layers for a device does not necessarily mean that a custom layer is required.  The [Heterogeneous Plugin](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_supported_plugins_HETERO.html) may be used to run an inference model on multiple devices allowing the unsupported layers on one device to "fallback" to run on another device (e.g., CPU) that does support those layers.
+The [Inference Engine](https://docs.openvinotoolkit.org/2019_R2/_docs_IE_DG_Deep_Learning_Inference_Engine_DevGuide.html) loads the layers from the input model IR files into the specified device plugin, which will search a list of known layer implementations for the device.  If your topology contains layers that are not in the list of known layers for the device, the Inference Engine considers the layer to be unsupported and reports an error.  To see the layers that are supported by each device plugin for the Inference Engine, refer to the [Supported Devices](https://docs.openvinotoolkit.org/2019_R2/_docs_IE_DG_supported_plugins_Supported_Devices.html) documentation.  
+**Note:** Unsupported layers for a device does not necessarily mean that a custom layer is required.  The [Heterogeneous Plugin](https://docs.openvinotoolkit.org/2019_R2/_docs_IE_DG_supported_plugins_HETERO.html) may be used to run an inference model on multiple devices allowing the unsupported layers on one device to "fallback" to run on another device (e.g., CPU) that does support those layers.
 
 ## The Custom Layer Implementation Workflow
 When implementing a custom layer for your pre-trained model in the Intel® Distribution of OpenVINO™ toolkit, you will need to add extensions to both the Model Optimizer and the Inference Engine.  
@@ -45,7 +45,7 @@ The following figure shows the basic processing steps for the Model Optimizer hi
 
 The Model Optimizer first extracts information from the input model which includes the topology of the model layers along with parameters, input and output format, etc., for each layer.  The model is then optimized from the various known characteristics of the layers, interconnects, and data flow which partly comes from the layer operation providing details including the shape of the output for each layer.  Finally, the optimized model is output to the model IR files needed by the Inference Engine to run the model.  
 
-The Model Optimizer starts with a library of known extractors and operations for each [supported model framework](https://docs.openvinotoolkit.org/2019_R1.1/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html) which must be extended to use each unknown custom layer.  The custom layer extensions needed by the Model Optimizer are:
+The Model Optimizer starts with a library of known extractors and operations for each [supported model framework](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html) which must be extended to use each unknown custom layer.  The custom layer extensions needed by the Model Optimizer are:
 
 - Custom Layer Extractor
    - Responsible for identifying the custom layer operation and extracting the parameters for each instance of the custom layer.  The layer parameters are stored per instance and used by the layer operation before finally appearing in the output IR.  Typically the input layer parameters are unchanged, which is the case covered by this tutorial. 
@@ -176,7 +176,7 @@ C:\Dev\cl_tutorial
 3. Create environment variables as shorter, more convenient names to the directories that we will use often:
 ```bash           
 set CLWS=C:\Dev\cl_tutorial
-set CLT=C:\Dev\cl_tutorial\OpenVINO-Custom-Layers-master\2019.r1.1
+set CLT=C:\Dev\cl_tutorial\OpenVINO-Custom-Layers-master\2019.r2
 set OV="C:\Program Files (x86)\IntelSWTools\openvino"
 ```
 From here on, we will use "$CLWS" to reference the "cl_tutorial" workspace directory and "$CLT" to reference the directory containing the files for this tutorial.
@@ -406,7 +406,7 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
 
 1. Using your favorite text editor, open the CPU extension source file *%CLWS%\cl_cosh\user_ie_extensions\cpu/ext_cosh.cpp*.
 
-2. To implement the *cosh* function to efficiently execute in parallel, the code will use the parallel processing supported by the Inference Engine through the use of the Intel® Threading Building Blocks library.  To use the library, at the top we must include the header [ie_parallel.hpp](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) file by adding the *#include* line as shown below.
+2. To implement the *cosh* function to efficiently execute in parallel, the code will use the parallel processing supported by the Inference Engine through the use of the Intel® Threading Building Blocks library.  To use the library, at the top we must include the header [ie_parallel.hpp](https://docs.openvinotoolkit.org/2019_R2/ie__parallel_8hpp.html) file by adding the *#include* line as shown below.
 
    Before:
 
@@ -459,7 +459,7 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
    }
    ```
 
-7. The *execute* method is overridden to implement the functionality of the *cosh* custom layer.  The *inputs* and *outputs* are the data buffers passed as [Blob](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Memory_primitives.html) objects.  The template file will simply return *NOT_IMPLEMENTED* by default.  To calculate the *cosh* custom layer, we will replace the *execute* method with the code needed to calculate the *cosh* function in parallel using the [parallel_for3d](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) function.
+7. The *execute* method is overridden to implement the functionality of the *cosh* custom layer.  The *inputs* and *outputs* are the data buffers passed as [Blob](https://docs.openvinotoolkit.org/2019_R2/_docs_IE_DG_Memory_primitives.html) objects.  The template file will simply return *NOT_IMPLEMENTED* by default.  To calculate the *cosh* custom layer, we will replace the *execute* method with the code needed to calculate the *cosh* function in parallel using the [parallel_for3d](https://docs.openvinotoolkit.org/2019_R2/ie__parallel_8hpp.html) function.
    
    Before:
    
