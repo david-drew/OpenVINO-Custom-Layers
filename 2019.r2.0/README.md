@@ -1,4 +1,4 @@
-# OpenVINO Custom Layer Tutorials for Linux
+# OpenVINO Custom Layer Tutorials for Linux and Windows
 
 
 ## Before You Start
