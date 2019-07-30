@@ -181,6 +181,7 @@ set OV="C:\Program Files (x86)\IntelSWTools\openvino"
 ```
 From here on, we will use "$CLWS" to reference the "cl_tutorial" workspace directory and "$CLT" to reference the directory containing the files for this tutorial.
 
+
 ## Create the Example TensorFlow Model (Weights, Graphs, Checkpoints):
 
 We will use the supplied *build_cosh_model.py* script to create a simple TensorFlow model that contains the *cosh* custom layer.  The weights are random and untrained, but sufficient for demonstrating a simple custom layer implementation.  To create the model and store it in the "$CLWS/tf_model" directory, run the commands: 
@@ -200,7 +201,7 @@ Model saved in path: C:\Dev\cl_tutorial/tf_model/model.ckpt
 Using admin privileges, copy ext_cosh.cpp to the directory OpenVINO uses for buiding the libinference_engine dll.
 
 ```bash
-copy %CLWS%\2019.r1.1\ext_cosh.cpp C:\Program Files (x86)\IntelSWTools\openvino\deployment_tools\inference_engine\src\extension
+copy %CLT%\ext_cosh.cpp %OV%\deployment_tools\inference_engine\src\extension
 ```
 
 NOTE:  There are multiple ways to do this.  The tutorial chooses the most simple method by using the OpenVINO infrastructure, which results in adding the cosh layer to the libcpu_extention dll.  The library may alternately be compiled as a separate dll through creating a Visual Studio project, a script that calls MSBuild, or your preferred method.
@@ -218,7 +219,7 @@ We will use the Model Extension Generator tool to automatically create templates
 To create the four extension templates for the *cosh* custom layer, we run the command:
 
 ```bash
-python3 /opt/intel/openvino/deployment_tools/tools/extension_generator/extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --ie-gpu-ext --output_dir=$CLWS/cl_cosh
+python %OV%\deployment_tools\tools\extension_generator\extgen.py new --mo-tf-ext --mo-op --ie-cpu-ext --ie-gpu-ext --output_dir=$CLWS\cl_cosh
 ```
 
 The Model Extension Generator will start in interactive mode and prompt us with questions about the custom layer to be generated.  Use the text between the []'s to answer each of the Model Extension Generator questions as follows:
