@@ -372,7 +372,6 @@ With the extensions now complete, we use the Model Optimizer to convert and opti
 - --output_dir %CLWS%\cl_ext_cosh
 
    - Location to write the output IR files.
-
 To create the model IR files that will include the *cosh* custom layer, we run the commands:
 
    ```bash
@@ -399,13 +398,13 @@ We will now use the generated CPU extension with the Inference Engine to execute
 
 The generated CPU extension includes the template file *ext_cosh.cpp* that must be edited to fill-in the functionality of the *cosh* custom layer for execution by the Inference Engine.  We also need to edit the *CMakeLists.txt* file to add any header file or library dependencies required to compile the CPU extension.  In the next sections, we will walk through and edit these files.
 
-**Note:** For reference, or to copy to make the changes quicker, pre-edited *CMakeLists.txt* and *ext_cosh.cpp* files are provided by the tutorial in the "$CLT" directory.
+**Note:** For reference, or to copy to make the changes quicker, pre-edited *CMakeLists.txt* and *ext_cosh.cpp* files are provided by the tutorial in the "%CLT%" directory.
 
 #### Edit *ext_cosh.cpp*
 
 We will now edit the *ext_cosh.cpp* by walking through the code and making the necessary changes for the *cosh* custom layer along the way.
 
-1. Using your favorite text editor, open the CPU extension source file *$CLWS/cl_cosh/user_ie_extensions/cpu/ext_cosh.cpp*.
+1. Using your favorite text editor, open the CPU extension source file *%CLWS%\cl_cosh\user_ie_extensions\cpu/ext_cosh.cpp*.
 
 2. To implement the *cosh* function to efficiently execute in parallel, the code will use the parallel processing supported by the Inference Engine through the use of the Intel® Threading Building Blocks library.  To use the library, at the top we must include the header [ie_parallel.hpp](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) file by adding the *#include* line as shown below.
 
@@ -431,9 +430,9 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
    
 4. The *coshImpl* constructor is passed the *layer* object that it is associated with to provide access to any layer parameters that may be needed when implementing the specific instance of the custom layer.    
    ```cpp
-       explicit coshImpl(const CNNLayer* layer) {
-           try {
-              ...
+   explicit coshImpl(const CNNLayer* layer) {
+      try {
+   ...
    ```
    
 5. The *coshImpl* constructor configures the input and output data layout for the custom layer by calling *addConfig()*.  In the template file, the line is commented-out and we will replace it to indicate that *layer* uses *DataConfigurator(ConfLayout::PLN)* (plain or linear) data for both input and output.
@@ -441,23 +440,23 @@ We will now edit the *ext_cosh.cpp* by walking through the code and making the n
    Before:
    
    ```cpp
-               ...
-               // addConfig({DataConfigurator(ConfLayout::PLN), DataConfigurator(ConfLayout::PLN)}, {DataConfigurator(ConfLayout::PLN)});
+   ...
+   // addConfig({DataConfigurator(ConfLayout::PLN), DataConfigurator(ConfLayout::PLN)}, {DataConfigurator(ConfLayout::PLN)});
    
    ```
    
    After:
    
    ```cpp
-               addConfig(layer, { DataConfigurator(ConfLayout::PLN) }, { DataConfigurator(ConfLayout::PLN) });
+   addConfig(layer, { DataConfigurator(ConfLayout::PLN) }, { DataConfigurator(ConfLayout::PLN) });
    ```
    
 6. The construct is now complete, catching and reporting certain exceptions that may have been thrown before exiting.
    ```cpp
-           } catch (InferenceEngine::details::InferenceEngineException &ex) {
-               errorMsg = ex.what();
-           }
-       }
+   } catch (InferenceEngine::details::InferenceEngineException &ex) {
+      errorMsg = ex.what();
+   }
+}
    ```
 
 7. The *execute* method is overridden to implement the functionality of the *cosh* custom layer.  The *inputs* and *outputs* are the data buffers passed as [Blob](https://docs.openvinotoolkit.org/2019_R1.1/_docs_IE_DG_Memory_primitives.html) objects.  The template file will simply return *NOT_IMPLEMENTED* by default.  To calculate the *cosh* custom layer, we will replace the *execute* method with the code needed to calculate the *cosh* function in parallel using the [parallel_for3d](https://docs.openvinotoolkit.org/2019_R1.1/ie__parallel_8hpp.html) function.
