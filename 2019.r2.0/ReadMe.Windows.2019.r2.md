@@ -1,5 +1,5 @@
 # OpenVINO 2019 R2 Custom Layer Implementation Tutorial for Windows* 
-**Note:** This tutorial has been tested and confirmed on Microsoft Windows 10® using the Intel® Distribution of OpenVINO™ toolkit 2019 R2.4.  Using this tutorial with any other versions may not work correctly.
+**Note:** This tutorial has been tested and confirmed on Microsoft Windows 10® using the Intel® Distribution of OpenVINO™ toolkit 2019 R2.0.  Using this tutorial with any other versions may not work correctly.
 
 # Introduction
 
@@ -558,7 +558,7 @@ Throughput: xx.xxxxxxx FPS
 First, we will try running the Python sample without including the *cosh* extension library to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
-python %OV%\deployment_tools\inference_engine\samples\python_samples\classification_sample\classification_sample.py -i %CLT%..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU
+python %OV%\deployment_tools\inference_engine\samples\python_samples\classification_sample\classification_sample.py -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d CPU
 ```
 The error output will be similar to:
 ```
@@ -721,7 +721,7 @@ For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more 
 First, we will try running the C++ sample specifying the GPU implementation without including the *cosh* kernel to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
-C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d GPU
+%userprofile%\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d GPU
 ```
 
 The error output will be similar to:
@@ -730,10 +730,10 @@ The error output will be similar to:
 [ ERROR ] Unknown Layer Type: cosh
 ```
 
-We will now run the command again, this time with the *cosh* extension kernel specified using the "*-c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml*" option to point to the *cosh* kernel in the command:
+We will now run the command again, this time with the *cosh* extension kernel specified using the "*-c %CLWS%\cl_cosh\user_ie_extensions\gpu\cosh_kernel.xml*" option to point to the *cosh* kernel in the command:
 
 ```bash
-C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d GPU -c %CLT%\cosh_kernel.xml
+C:\Users\vino\Documents\Intel\OpenVINO\inference_engine_samples_build\intel64\Release\classification_sample_async.exe -i %CLT%\..\pics\dog.bmp -m %CLWS%\cl_ext_cosh\model.ckpt.xml -d GPU -c %CLT%\cosh_kernel.xml
 ```
 The output will be similar to:
 
