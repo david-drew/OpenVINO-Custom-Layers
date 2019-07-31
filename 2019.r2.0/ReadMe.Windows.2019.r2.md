@@ -750,3 +750,5 @@ classid probability
 [ INFO ] Execution successful
 ```
 
+## Thank you for completing this tutorial! <br>
+For more information on Custom Layers in OpenVINO see [Custom Layers Guide](https://docs.openvinotoolkit.org/2019_R2/_docs_HOWTO_Custom_Layers_Guide.html)
