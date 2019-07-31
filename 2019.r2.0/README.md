@@ -2,18 +2,12 @@
 
 
 ## Before You Start
-It's assumed that you've installed the appropriate version of OpenVINO, including the Model Optimizer, in the default /opt/intel directory.  If you've installed to a different directory you may need to change the directory pathways in the commands below.
+It's assumed that you've installed the appropriate version of OpenVINO, including the Model Optimizer, in the default /opt/intel directory.  If you've installed to a different directory you may need to change the directory pathways in the tutorial commands.
 
-If you're using an earlier version, refer to this [document](./README.md). 
+Select the tutorial for your operating system.
 
-Use the appropriate directory and tutorial for the version of OpenVINO you've installed.
+[OpenVINO 2019 R2.0 Custom Layer Implementation Tutorial for Linux](https://github.com/david-drew/OpenVINO-Custom-Layers/blob/master/2019.r2.0/ReadMe.Linux.2019.r2.md)
 
-[Latest - OpenVINO 2019.r2](https://github.com/david-drew/OpenVINO-Custom-Layers/tree/master/2019.r2.0/README.md)
+[OpenVINO 2019 R2 Custom Layer Implementation Tutorial for Windows](https://github.com/david-drew/OpenVINO-Custom-Layers/blob/master/2019.r2.0/ReadMe.Windows.2019.r2.md)
 
-[OpenVINO 2019.r1.1](https://github.com/david-drew/OpenVINO-Custom-Layers/tree/master/2019.r1.1/README.md)
-
-[OpenVINO 2019.r1.0](https://github.com/david-drew/OpenVINO-Custom-Layers/tree/master/2019.r1.0/README.md)
-
-[OpenVINO 2018.r5](https://github.com/david-drew/OpenVINO-Custom-Layers/tree/master/2018.r5/README.md)
-
-[OpenVINO 2018.r4](https://github.com/david-drew/OpenVINO-Custom-Layers/tree/master/2018.r4/README.md)
+If you're using an earlier version, refer to this [link](https://github.com/david-drew/OpenVINO-Custom-Layers). 
