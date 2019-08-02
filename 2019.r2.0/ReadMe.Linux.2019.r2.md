@@ -118,7 +118,7 @@ The workflow for each generated extension follows the same basic steps:
 
 **Step 2:** Edit the Custom Layer Template Files as necessary to create the specialized Custom Layer Extension Source Code.
 
-**Step 3:** Compile/Deploy the Custom Layer Extension Source Code as the Custom Layer Extension to be used by the Model Optimizer or Inference Engine.
+**Step 3:** Specify the custom layer extension locations to be used by the Model Optimizer or Inference Engine.
 
 Later in this tutorial, we will go through the workflow for four extensions needed by the example model:
 
