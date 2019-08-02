@@ -1,7 +1,8 @@
+
 # OpenVINO 2019 R2 Custom Layer Implementation Tutorial for Windows* 
 **Note:** This tutorial has been tested and confirmed on Microsoft Windows 10® using the Intel® Distribution of OpenVINO™ toolkit 2019 R2.0.  Using this tutorial with any other versions may not work correctly.
 
-You must be logged in to your Windows system as Administrator to successfully follow the steps in this tutorial.
+To successfully follow the steps in this tutorial, you will need to run the console with administrator privileges.
 
 # Introduction
 
