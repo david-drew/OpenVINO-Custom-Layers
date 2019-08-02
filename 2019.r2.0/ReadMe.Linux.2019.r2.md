@@ -803,7 +803,7 @@ For the Inference Engine to run the *cosh* custom layer kernel on the GPU, more 
 First, we will try running the C++ sample specifying the GPU implementation without including the *cosh* kernel to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample_async -i $CLT/../pics/dog.bmp -m $CLWS/tf_model/model.ckpt.xml -d GPU
+~/inference_engine_samples_build/intel64/Release/classification_sample_async -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU
 ```
 
 The error output will be similar to:
@@ -815,7 +815,7 @@ The error output will be similar to:
 We will now run the command again, this time with the *cosh* extension kernel specified using the "*-c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml*" option to point to the *cosh* kernel in the command:
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample_async -i $CLT/../pics/dog.bmp -m $CLWS/tf_model/model.ckpt.xml -d GPU -c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml
+~/inference_engine_samples_build/intel64/Release/classification_sample_async -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d GPU -c $CLWS/cl_cosh/user_ie_extensions/gpu/cosh_kernel.xml
 ```
 The output will be similar to:
 
