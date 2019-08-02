@@ -52,7 +52,8 @@ The Model Optimizer starts with a library of known extractors and operations for
 - Custom Layer Extractor
    - Responsible for identifying the custom layer operation and extracting the parameters for each instance of the custom layer.  The layer parameters are stored per instance and used by the layer operation before finally appearing in the output IR.  Typically the input layer parameters are unchanged, which is the case covered by this tutorial. 
 - Custom Layer Operation
-   - Responsible for specifying the attributes that are supported by the custom layer and computing the output shape for each instance of the custom layer from its parameters.  
+   - Responsible for specifying the attributes that are supported by the custom layer and computing the output shape for each instance of the custom layer from its parameters. 
+<br> The `--mo-op` command-line argument shown in the examples below generates a custom layer operation for the Model Optimizer.   
 
 ## Custom Layer Extensions for the Inference Engine 
 
@@ -120,7 +121,7 @@ The workflow for each generated extension follows the same basic steps:
 
 **Step 2:** Edit the Custom Layer Template Files as necessary to create the specialized Custom Layer Extension Source Code.
 
-**Step 3:** Compile/Deploy the Custom Layer Extension Source Code as the Custom Layer Extension to be used by the Model Optimizer or Inference Engine.
+**Step 3:** Specify the custom layer extension locations to be used by the Model Optimizer or Inference Engine.
 
 Later in this tutorial, we will go through the workflow for four extensions needed by the example model:
 
