@@ -26,6 +26,7 @@ After installing the Intel® Distribution of OpenVINO™ toolkit, the *classific
 </details>
 <details>
    <summary>Click to see background information</summary>
+   
 # Custom Layers
 Custom layers are neural network model layers that are not natively supported by a given model framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you to plug in your own implementation for existing or completely new layers.
 
