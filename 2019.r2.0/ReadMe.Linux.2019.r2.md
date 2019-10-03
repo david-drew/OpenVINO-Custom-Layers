@@ -17,15 +17,15 @@ Currently, this tutorial and the Model Extension Generator tool support creating
 ## Installation of the Intel® Distribution of OpenVINO™ toolkit 2019 R2.0 for Linux* 
 
 <details>
-   <summary>Click to see details</summary>
-This tutorial assumes that you have already installed the [Intel® Distribution of OpenVINO™ toolkit 2019 R2.0 for Linux*](https://software.intel.com/openvino-toolkit/choose-download/free-download-linux) into the default */opt/intel/openvino* directory.  If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory. 
-   
-
+   <summary>Click to expand</summary>
+This tutorial assumes that you have already installed the [Intel® Distribution of OpenVINO™ toolkit 2019 R2.0 for Linux*](https://software.intel.com/openvino-toolkit/choose-download/free-download-linux) into the default */opt/intel/openvino* directory.  If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory. <br> 
+ 
 The Intel® Distribution of OpenVINO™ toolkit includes the [Model Optimizer](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html).  This tutorial uses a TensorFlow framework model and assumes that you have already configured the Model Optimizer for use with TensorFlow.  If you did not configure the Model Optimizer for all the frameworks or not for TensorFlow explicitly during installation, be sure to do so following the steps for [Configuring the Model Optimizer](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_prepare_model_Config_Model_Optimizer.html) before proceeding.
 
 After installing the Intel® Distribution of OpenVINO™ toolkit, the *classification_sample_async* executable binary will be located in the directory *~/inference_engine_samples_build/intel64/Release*.  This tutorial will use the *classification_sample_async* executable to run the example model.
 </details>
-
+<details>
+   <summary>Click to see background information</summary>
 # Custom Layers
 Custom layers are neural network model layers that are not natively supported by a given model framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you to plug in your own implementation for existing or completely new layers.
 
@@ -49,6 +49,8 @@ The following figure shows the basic processing steps for the Model Optimizer hi
 
 The Model Optimizer first extracts information from the input model which includes the topology of the model layers along with parameters, input and output format, etc., for each layer.  The model is then optimized from the various known characteristics of the layers, interconnects, and data flow which partly comes from the layer operation providing details including the shape of the output for each layer.  Finally, the optimized model is output to the model IR files needed by the Inference Engine to run the model.  
 
+<details>
+   <summary>Click to read more</summary>
 The Model Optimizer starts with a library of known extractors and operations for each [supported model framework](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html) which must be extended to use each unknown custom layer.  The custom layer extensions needed by the Model Optimizer are:
 
 - Custom Layer Extractor
@@ -56,6 +58,7 @@ The Model Optimizer starts with a library of known extractors and operations for
 - Custom Layer Operation
    - Responsible for specifying the attributes that are supported by the custom layer and computing the output shape for each instance of the custom layer from its parameters. 
 <br> The `--mo-op` command-line argument shown in the examples below generates a custom layer operation for the Model Optimizer. 
+</details>
 
 ## Custom Layer Extensions for the Inference Engine 
 
@@ -131,6 +134,7 @@ Later in this tutorial, we will go through the workflow for four extensions need
 - Custom layer operation extension (--mo-op)
 - Custom layer Inference Engine CPU extension (--ie-cpu-ext)
 - Custom layer Inference Engine GPU extension (--ie-gpu-ext)
+</details>
 
 # Example Custom Layer: The Hyperbolic Cosine (*cosh*) Function 
 
