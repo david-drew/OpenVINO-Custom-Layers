@@ -16,9 +16,11 @@ Currently, this tutorial and the Model Extension Generator tool support creating
 
 ## Installation of the Intel® Distribution of OpenVINO™ toolkit 2019 R2.0 for Linux* 
 
+This tutorial assumes that you have already installed the [Intel® Distribution of OpenVINO™ toolkit 2019 R2.0 for Linux*](https://software.intel.com/openvino-toolkit/choose-download/free-download-linux) into the default */opt/intel/openvino* directory.  If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory. <br>
+
 <details>
    <summary>Click to expand</summary>
-This tutorial assumes that you have already installed the [Intel® Distribution of OpenVINO™ toolkit 2019 R2.0 for Linux*](https://software.intel.com/openvino-toolkit/choose-download/free-download-linux) into the default */opt/intel/openvino* directory.  If you are using a different version, please refer to the top [README.md](../README.md) to find the correct tutorial.  If you have installed the toolkit to a different directory, you will need to change the directory paths that include "*/opt/intel/openvino*" in the commands below to point to your installation directory. <br> 
+ 
  
 The Intel® Distribution of OpenVINO™ toolkit includes the [Model Optimizer](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html).  This tutorial uses a TensorFlow framework model and assumes that you have already configured the Model Optimizer for use with TensorFlow.  If you did not configure the Model Optimizer for all the frameworks or not for TensorFlow explicitly during installation, be sure to do so following the steps for [Configuring the Model Optimizer](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_prepare_model_Config_Model_Optimizer.html) before proceeding.
 
