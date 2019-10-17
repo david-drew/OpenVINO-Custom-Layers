@@ -26,10 +26,11 @@ The Intel® Distribution of OpenVINO™ toolkit includes the [Model Optimizer](h
 
 After installing the Intel® Distribution of OpenVINO™ toolkit, the *classification_sample_async* executable binary will be located in the directory *~/inference_engine_samples_build/intel64/Release*.  This tutorial will use the *classification_sample_async* executable to run the example model.
 </details>
-<details>
-   <summary>Click to see background information</summary>
-   
+
 # Custom Layers
+<details>
+   <summary>Click to see more information on Custom Layers</summary>
+
 Custom layers are neural network model layers that are not natively supported by a given model framework.  This tutorial demonstrates how to run inference on topologies featuring custom layers allowing you to plug in your own implementation for existing or completely new layers.
 
 Additional information on custom layers and the Intel® Distribution of OpenVINO™ toolkit can be found in [Customize Model Optimizer](https://docs.openvinotoolkit.org/2019_R2/_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html) and [Inference Engine Kernels Extensibility](https://docs.openvinotoolkit.org/2019_R2/_docs_IE_DG_Integrate_your_kernels_into_IE.html).
