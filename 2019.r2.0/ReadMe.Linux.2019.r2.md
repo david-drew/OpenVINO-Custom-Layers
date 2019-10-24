@@ -613,7 +613,7 @@ To run the custom layer on the CPU during inference, the edited extension C++ so
 First, we will try running the C++ sample without including the *cosh* extension library to see the error describing the unsupported *cosh* operation using the command:  
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample_async -i $CLT/../pics/dog.bmp -m $CLWS/tf_model/model.ckpt.xml -d CPU
+~/inference_engine_samples_build/intel64/Release/classification_sample_async -i $CLT/../pics/dog.bmp -m $CLWS/cl_ext_cosh/model.ckpt.xml -d CPU
 ```
 
 The error output will be similar to:
@@ -625,7 +625,8 @@ The error output will be similar to:
 We will now run the command again, this time with the *cosh* extension library specified using the "*-l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so*" option in the command:
 
 ```bash
-~/inference_engine_samples_build/intel64/Release/classification_sample_async -i $CLT/../pics/dog.bmp -m $CLWS/tf_model/model.ckpt.xml -d CPU -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so
+~/inference_engine_samples_build/intel64/Release/classification_sample_async -i $CLT/../pics/dog.bmp -m
+$CLWS/cl_ext_cosh/model.ckpt.xml -d CPU -l $CLWS/cl_cosh/user_ie_extensions/cpu/build/libcosh_cpu_extension.so
 ```
 
 The output will appear similar to:
